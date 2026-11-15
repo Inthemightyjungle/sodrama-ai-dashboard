@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stage lab</title>
+<!--
+  A workbench for the 3D stage, not part of the live site.
+
+  Open with a local server from the repository root, for example:
+    tools/stage-lab.html?bay=3&t=6           one still of bay 3, six seconds in
+    tools/stage-lab.html?bay=1&t=6&poster=1  centred, as used for the fallback pictures
+    tools/stage-lab.html?live=1&p=2.5        running, part-way between bays 2 and 3
+-->
+<style>
+  @font-face { font-family: "Archivo"; src: url("../assets/fonts/archivo-var.woff") format("woff"); font-weight: 400 900; font-stretch: 62% 100%; }
+  html, body { margin: 0; height: 100%; background: #0c0a10; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+<script type="module">
+  import { createStage } from '../assets/js/stage3d.js';
+  const q = new URLSearchParams(location.search);
+  const num = (key, fallback) => (q.has(key) ? parseFloat(q.get(key)) : fallback);
+  const poster = q.has('poster');
+  const stage = await createStage(document.getElementById('stage'), {
+    preserve: true,
+    maxPixelRatio: num('dpr', 2),
+    framing: poster ? { right: num('right', 0), up: num('up', 0.04), fillHeight: num('fill', 0.8), fillWidth: num('fillw', 0.86) } : null,
+  });
+  if (q.has('live')) {
+    stage.setProgress(num('p', 0));
+    stage.run(true);
+  } else {
+    stage.still(num('bay', 0), num('t', 6), num('clock', 2.4));
+  }
+  window.stage = stage;
+  window.ready = true;
+</script>
+</body>
+</html>

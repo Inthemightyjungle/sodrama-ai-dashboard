@@ -1,11 +1,10 @@
 /*
-  Apps shown in section 03. Add an object to list a new app; the filter tabs
-  are built from the categories automatically.
+  The apps shown under "Our apps". Add an object to list a new app; the filter
+  tabs are built from the categories automatically.
 
   cover types:
-  - { type: 'image', src, position, pixelated }    one image filling the cover
+  - { type: 'image', src, position, pixelated }     one image filling the cover
   - { type: 'layers', background, logo, pixelated } a background with a logo on top
-  - { type: 'declare' }                             the built-in declaration cover art
 */
 window.SD_APPS = [
   {
@@ -15,7 +14,7 @@ window.SD_APPS = [
     description: 'The form behind step 1.',
     action: 'Open form',
     url: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=rcy329-Y_kaUIVobvsyr0TBFYZVJ-u1FmQ3PZtT_HmlUNFlVNjJPVjcwTFJTTjVITE5IQVpZUTNYOSQlQCN0PWcu',
-    cover: { type: 'declare' }
+    cover: { type: 'image', src: 'assets/img/posters/cover-declare.webp' }
   },
   {
     name: 'Dealproof',
