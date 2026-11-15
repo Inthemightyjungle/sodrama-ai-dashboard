@@ -1094,8 +1094,10 @@ export async function createStage(canvas, options = {}) {
     setPointer(x, y) { state.pointerX = clamp(x, -1, 1); state.pointerY = clamp(y, -1, 1); },
     setFraming(framing) { state.framing = framing; resize(true); },
     jump() { state.progress = state.target; },
-    // Skips ahead in the set that is on stage (used when taking pictures of the page).
+    // Two helpers for taking pictures and recordings of the page:
+    // skip ahead in the set that is on stage, or draw exactly one frame.
     settle(seconds) { sets.forEach((set, i) => { if (Math.abs(state.target - i) < 0.3) set.time = seconds; }); },
+    advance(dt) { resize(false); frame(dt); },
     resize() { resize(true); },
     run(on) {
       if (on === state.running) return;
