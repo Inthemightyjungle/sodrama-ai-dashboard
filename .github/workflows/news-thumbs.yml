@@ -1,0 +1,62 @@
+name: News thumbnails
+
+# Whenever the news list changes, copy each story's preview image into the
+# site so the AI Dispatch never depends on another website to show pictures.
+on:
+  push:
+    branches: [main, news-draft]
+    paths:
+      - assets/data/news.js
+      - tools/news_thumbs.py
+      - tools/check_news.py
+      - .github/workflows/news-thumbs.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: news-thumbs-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  thumbnails:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Pillow
+        run: python3 -m pip install --quiet --disable-pip-version-check pillow
+
+      - name: Check the news list
+        run: python3 tools/check_news.py
+
+      - name: Fetch thumbnails
+        run: python3 tools/news_thumbs.py
+
+      - name: Save them to the repository
+        id: save
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A assets/img/news assets/data/news-thumbs.js
+          if git diff --cached --quiet; then
+            echo "Nothing changed."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "Update news thumbnails"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      # A push made by this workflow does not always start a Pages build,
+      # so ask for one when the live branch changed.
+      - name: Rebuild the live site
+        if: steps.save.outputs.changed == 'true' && github.ref_name == 'main'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds"
