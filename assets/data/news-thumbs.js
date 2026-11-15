@@ -1,48 +1,48 @@
 window.SD_NEWS_THUMBS = {
-  "_for": "53941b269832dd0b",
-  "adobe-creative-agents": {
-    "src": "assets/img/news/adobe-creative-agents.jpg",
+  "_for": "6955fd5973d4ea75",
+  "disney-ozzy-fox-ai-animation": {
+    "src": "assets/img/news/disney-ozzy-fox-ai-animation.jpg",
     "w": 960,
-    "h": 673,
-    "v": "d7e6b259",
-    "page": "https://news.adobe.com/news/2026/11/adobe-powers-new-era-of-creativity",
+    "h": 537,
+    "v": "017551eb",
+    "page": "https://www.cnet.com/tech/services-and-software/animaj-ozzy-fox-series-disney-plus-ai-agentic-animation/",
     "wanted": "",
-    "image": "https://news.adobe.com/news/2026/11/media_194f62215cc674a3099d1a6f6b08199d16183a1ba.jpg?width=1200&format=pjpg&optimize=medium"
+    "image": "https://www.cnet.com/wp-content/uploads/sites/2/Screenshot-2026-11-11-at-9.53.14-AM.png"
   },
-  "grok-build-open-apps": {
-    "src": "assets/img/news/grok-build-open-apps.jpg",
+  "facestealer-fake-video-calls": {
+    "src": "assets/img/news/facestealer-fake-video-calls.jpg",
     "w": 960,
     "h": 540,
-    "v": "c10b0968",
-    "page": "https://thenextweb.com/news/grok-build-apps-exposed-claroc-spacexsi",
+    "v": "425208c5",
+    "page": "https://www.bbc.co.uk/news/articles/cqdj1ellpd70o",
     "wanted": "",
-    "image": "https://media.thenextweb.com/2026/10/grok-logo-smartphone-laptop-keyboard.jpg"
+    "image": "https://ichef.bbci.co.uk/ace/branded_news/1200/cpsprodpb/c16a/live/65ee22f0-df02-11f1-b6e1-5b169363fed4.jpg"
   },
-  "chatgpt-wallet": {
-    "src": "assets/img/news/chatgpt-wallet.jpg",
+  "avid-ready-to-play": {
+    "src": "assets/img/news/avid-ready-to-play.jpg",
     "w": 960,
-    "h": 583,
-    "v": "cf5361e8",
-    "page": "https://techcrunch.com/2026/11/13/chatgpts-new-wallet-lets-ai-agents-shop-and-check-out-for-you/",
+    "h": 540,
+    "v": "15e0bab7",
+    "page": "https://www.avid.com/press-room/2026/11/avid-launches-ready-to-play-putting-new-ai-creative-capabilities-into-editors-hands",
     "wanted": "",
-    "image": "https://techcrunch.com/wp-content/uploads/2026/11/chatgpt-wallet.jpg?resize=1200,729"
+    "image": "https://edge.sitecorecloud.io/avidtech-d6a2e9a9/media/images/press-room-archive/2026/11/media-composer-ready-to-play-app-perspective-1080p.jpg?h=1080&iar=0&w=1920"
   },
-  "fireworks-notion-breach": {
-    "src": "assets/img/news/fireworks-notion-breach.jpg",
-    "w": 900,
-    "h": 470,
-    "v": "9e8f2889",
-    "page": "https://thehackernews.com/2026/11/fireworks-ai-breach-widens-to-expose.html",
+  "world-labs-atlas-open": {
+    "src": "assets/img/news/world-labs-atlas-open.jpg",
+    "w": 960,
+    "h": 540,
+    "v": "2e7c2f8d",
+    "page": "https://worldlabs.ai/atlas",
     "wanted": "",
-    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg-mBJN_E4CjW3MXyjYYdeCGcyR052aVnG3uUWjaEfafvPAdatcJhn9LbtngqXBb5JsVwJVoorc8i41nTbYR9UcwVrwWNzU-WAfVk2yL32hYW1elVMJtwauW53nhRG37EwbovnFCW8InensI8tKoR9pqcWnZx54t6xOU_HsjjR9KWTLwVr_MBcknFeGShZU/s1700-nu-rw-lo-l85-e365/fire.jpg"
+    "image": "https://worldlabs.ai/images/blog/atlas-ga.jpg"
   },
-  "ai-music-awards": {
-    "src": "assets/img/news/ai-music-awards.jpg",
-    "w": 800,
-    "h": 533,
-    "v": "e6b687c2",
-    "page": "https://www.thestar.com.my/tech/tech-news/2026/11/14/new-awards-show-celebrates-ai-music-and-its-creators",
+  "gemini-4-hydrogen": {
+    "src": "assets/img/news/gemini-4-hydrogen.jpg",
+    "w": 960,
+    "h": 540,
+    "v": "2566a79c",
+    "page": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
     "wanted": "",
-    "image": "https://apicms.thestar.com.my/uploads/images/2026/11/14/4212388.jpg"
+    "image": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/gemini-4-hydrogen__key-art__lockup__16-9.width-1300.jpg"
   }
 };
