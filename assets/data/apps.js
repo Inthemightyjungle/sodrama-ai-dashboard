@@ -18,6 +18,15 @@ window.SD_APPS = [
     cover: { type: 'declare' }
   },
   {
+    name: 'Dealproof',
+    category: 'Tools',
+    meta: 'Opens in Claude',
+    description: 'Finds the cheapest price you can trust across Singapore stores, scores each seller and watches prices for you.',
+    action: 'Open',
+    url: 'https://claude.ai/artifact/SKMjwY78gmTy2m6M7CGs2Q',
+    cover: { type: 'image', src: 'assets/img/dealproof-cover.webp' }
+  },
+  {
     name: 'Pipe Rush',
     category: 'Games',
     meta: 'Plays in your browser',
@@ -34,5 +43,32 @@ window.SD_APPS = [
     action: 'Play',
     url: 'https://inthemightyjungle.github.io/Lion-Strike/',
     cover: { type: 'image', src: 'assets/img/lionstrike-icon.webp', position: 'center 40%', pixelated: true }
+  },
+  {
+    name: 'Haze Squad v02',
+    category: 'Games',
+    meta: 'Plays in your browser',
+    description: 'A 16-bit game about haze in Singapore: clean the air zone by zone with Grandpa’s vacuum and your squad.',
+    action: 'Play',
+    url: 'https://claude.ai/artifact/Hf9pbNEHTjvMk2Z3bEoRDb',
+    cover: { type: 'image', src: 'assets/img/haze-squad-cover.webp' }
+  },
+  {
+    name: 'Fall In: IPPT Challenge',
+    category: 'Games',
+    meta: 'Plays in your browser',
+    description: 'Push-ups, sit-ups and the run, with a sergeant counting you through.',
+    action: 'Play',
+    url: 'https://claude.ai/artifact/VGzVALhJGMuZUsKkbwQjj8',
+    cover: { type: 'image', src: 'assets/img/ippt-cover.webp' }
+  },
+  {
+    name: 'My Grandmother Can Run Faster Than You!',
+    category: 'Games',
+    meta: 'Plays in your browser',
+    description: 'Run Ah Ma down the MRT tracks: dress her up, dodge the trains, and don’t let the Police Aunty catch you.',
+    action: 'Play',
+    url: 'https://claude.ai/artifact/12XfM12MWm13Bi8JAjDpZH',
+    cover: { type: 'image', src: 'assets/img/grandma-cover.webp' }
   }
 ];

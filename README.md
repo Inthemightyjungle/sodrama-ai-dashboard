@@ -3,7 +3,7 @@
 One page for everything AI at So Drama!:
 
 1. **Declare an AI tool**: the big button opens the AI tool declaration form (Microsoft Forms).
-2. **How it works**: the four steps, declare → AAGB security review and approval → purchase request → acquire and use.
+2. **How it works**: the four steps, declare → AAGB security review and approval → purchase request with AAGB approval → acquire and use.
 3. **The AI Dispatch**: a short pick of AI news, with at least one word of caution.
 4. **Apps**: everything we've built, filterable by category.
 
