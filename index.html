@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI Solutions Dashboard · So Drama! Entertainment</title>
-<meta name="description" content="Declare the AI tools you use, see how approval works, catch up on AI news and open the apps we have built.">
+<meta name="description" content="Catch up on AI news, open the apps we have built, and see how to declare the AI tools you use.">
 <meta name="theme-color" content="#0c0a10">
 <meta property="og:type" content="website">
 <meta property="og:title" content="AI Solutions Dashboard · So Drama! Entertainment">
-<meta property="og:description" content="Declare the AI tools you use, see how approval works, catch up on AI news and open the apps we have built.">
+<meta property="og:description" content="Catch up on AI news, open the apps we have built, and see how to declare the AI tools you use.">
 <meta property="og:url" content="https://inthemightyjungle.github.io/sodrama-ai-dashboard/">
 <meta property="og:image" content="https://inthemightyjungle.github.io/sodrama-ai-dashboard/assets/img/og.png">
 <link rel="icon" href="assets/img/favicon.png">
@@ -17,19 +17,36 @@
 <link rel="preload" href="assets/fonts/archivo-var.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="assets/css/site.css">
 <script>
-  // Decide before the first paint whether the 3D stage can run on this device.
+  // Before the first paint: which page to open on, and whether the 3D stage should start.
   (function () {
     var root = document.documentElement;
     root.className = 'js';
     var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var wantStill = /[?&]still\b/.test(location.search);
-    var force = /[?&]3d\b/.test(location.search);
-    var gl = false;
-    // A computer with no graphics chip can still draw the stage, but far too slowly.
-    // The option below tells the browser not to offer that, so those computers get the still pictures.
-    try { gl = !!(window.WebGL2RenderingContext && document.createElement('canvas').getContext('webgl2', force ? {} : { failIfMajorPerformanceCaveat: true })); } catch (e) {}
     if (calm) root.className += ' calm';
-    if (gl && !calm && !wantStill) {
+
+    // The four steps are the front page the first time someone opens the site.
+    // After that it opens on the AI news, and the steps are the third tab.
+    var seen = false;
+    try { seen = window.localStorage.getItem('sd-intro-seen') === '1'; } catch (e) {}
+    var home = seen ? 'news' : 'how';
+    var hash = location.hash.slice(1);
+    var view = hash === 'news' || hash === 'apps' ? hash : /^(how|process|top|next|step-[1-4])$/.test(hash) ? 'how' : home;
+    root.setAttribute('data-home', home);
+    root.setAttribute('data-view', view);
+
+    // Can this device run the 3D stage? Worked out once, the first time the steps are shown.
+    var can = null;
+    window.SD_CAN_STAGE = function () {
+      if (can !== null) return can;
+      can = false;
+      if (calm || /[?&]still\b/.test(location.search)) return can;
+      var force = /[?&]3d\b/.test(location.search);
+      // A computer with no graphics chip can still draw the stage, but far too slowly.
+      // The option below tells the browser not to offer that, so those computers get the still pictures.
+      try { can = !!(window.WebGL2RenderingContext && document.createElement('canvas').getContext('webgl2', force ? {} : { failIfMajorPerformanceCaveat: true })); } catch (e) {}
+      return can;
+    };
+    if (view === 'how' && window.SD_CAN_STAGE()) {
       root.className += ' stage-pending';
       // Start fetching the 3D code now, all of it at once, instead of one file after another.
       ['assets/js/stage3d.js', 'assets/js/pace.js', 'assets/vendor/three/RoundedBoxGeometry.js', 'assets/vendor/three/three.module.min.js', 'assets/vendor/three/three.core.min.js'].forEach(function (href) {
@@ -56,30 +73,30 @@
 <div class="progress" aria-hidden="true"><span data-progress></span></div>
 
 <header class="top" data-top>
-  <a class="brand" href="#top" aria-label="So Drama! Entertainment, AI Solutions Dashboard. Back to the top.">
+  <a class="brand" href="#news" aria-label="So Drama! Entertainment, AI Solutions Dashboard. Go to the AI news.">
     <img class="brand-logo" src="assets/img/logo-white.png" alt="" width="648" height="296">
     <span class="brand-text">
       <span class="brand-name">So Drama! Entertainment</span>
       <span class="brand-title">AI Solutions Dashboard</span>
     </span>
   </a>
-  <nav class="nav" aria-label="Sections">
-    <a href="#process" data-nav="process">How it works</a>
+  <nav class="nav" aria-label="Pages">
     <a href="#news" data-nav="news">AI news</a>
     <a href="#apps" data-nav="apps">Apps</a>
+    <a href="#how" data-nav="how">How it works</a>
   </nav>
   <a class="btn btn-mini" data-mini-cta href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=rcy329-Y_kaUIVobvsyr0TBFYZVJ-u1FmQ3PZtT_HmlUNFlVNjJPVjcwTFJTTjVITE5IQVpZUTNYOSQlQCN0PWcu" target="_blank" rel="noopener">Declare a tool<span class="sr-only"> (opens the form in a new tab)</span></a>
 </header>
 
-<nav class="cues" data-cues aria-label="Where you are on this page">
+<!-- Only shown beside the four steps. -->
+<nav class="cues" data-cues aria-label="Where you are in the four steps">
   <span class="cues-fill" data-cues-fill aria-hidden="true"></span>
   <a href="#top" data-cue><span class="cue-label">Start</span><span class="cue-dot"></span></a>
   <a href="#step-1" data-cue><span class="cue-label">1 Declare</span><span class="cue-dot"></span></a>
   <a href="#step-2" data-cue><span class="cue-label">2 Review</span><span class="cue-dot"></span></a>
   <a href="#step-3" data-cue><span class="cue-label">3 Purchase</span><span class="cue-dot"></span></a>
   <a href="#step-4" data-cue><span class="cue-label">4 Use</span><span class="cue-dot"></span></a>
-  <a href="#news" data-cue><span class="cue-label">AI news</span><span class="cue-dot"></span></a>
-  <a href="#apps" data-cue><span class="cue-label">Apps</span><span class="cue-dot"></span></a>
+  <a href="#next" data-cue><span class="cue-label">What’s next</span><span class="cue-dot"></span></a>
 </nav>
 
 <div class="chip" data-chip aria-hidden="true">
@@ -88,92 +105,14 @@
 </div>
 
 <main id="main">
-  <div class="act" data-act>
 
-    <section class="hero" id="top" data-scene>
-      <div class="wrap">
-        <div class="hero-body" data-scene-body>
-          <h1 class="hero-title">Got a new <span class="nowrap">AI tool?</span></h1>
-          <p class="hero-lede">Declare it first. AAGB checks the security risk, then you can buy it and start using it.</p>
-          <div class="hero-actions">
-            <a class="cta" data-cta href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=rcy329-Y_kaUIVobvsyr0TBFYZVJ-u1FmQ3PZtT_HmlUNFlVNjJPVjcwTFJTTjVITE5IQVpZUTNYOSQlQCN0PWcu" target="_blank" rel="noopener">
-              <span class="cta-label">Declare an AI tool</span>
-              <span class="cta-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"></path></svg></span>
-              <span class="sr-only"> (opens the form in a new tab)</span>
-            </a>
-            <p class="cta-note">Opens the declaration form in Microsoft Forms.</p>
-          </div>
-        </div>
-        <figure class="poster" aria-hidden="true"><img src="assets/img/posters/bay-0.webp" alt="" width="1200" height="1200" loading="lazy" decoding="async"></figure>
-      </div>
-      <a class="scroll-cue" href="#step-1">
-        <span class="scroll-cue-track" aria-hidden="true"><span></span></span>
-        Scroll for the four steps
-      </a>
-    </section>
-
-    <section class="steps" id="process" aria-labelledby="process-title">
-      <h2 class="sr-only" id="process-title">How it works, in four steps</h2>
-
-      <article class="step" id="step-1" data-scene>
-        <div class="wrap">
-          <div class="step-body" data-scene-body>
-            <p class="step-count"><span class="step-num" aria-hidden="true">1</span><span class="step-of">Step 1 of 4</span></p>
-            <h3 class="step-title">Declare your AI tools</h3>
-            <p class="step-desc">Fill in the form for every AI tool you use, or want to use.</p>
-            <p class="step-who"><span class="who who-you">You do this</span></p>
-            <a class="btn btn-ghost" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=rcy329-Y_kaUIVobvsyr0TBFYZVJ-u1FmQ3PZtT_HmlUNFlVNjJPVjcwTFJTTjVITE5IQVpZUTNYOSQlQCN0PWcu" target="_blank" rel="noopener">Open the form<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"></path></svg><span class="sr-only"> (opens in a new tab)</span></a>
-          </div>
-          <figure class="poster" aria-hidden="true"><img src="assets/img/posters/bay-1.webp" alt="" width="1200" height="1200" loading="lazy" decoding="async"></figure>
-        </div>
-      </article>
-
-      <article class="step" id="step-2" data-scene>
-        <div class="wrap">
-          <div class="step-body" data-scene-body>
-            <p class="step-count"><span class="step-num" aria-hidden="true">2</span><span class="step-of">Step 2 of 4</span></p>
-            <h3 class="step-title">Security review and approval</h3>
-            <p class="step-desc">AAGB checks each declared tool for risk before anything is bought.</p>
-            <p class="step-who"><span class="who who-board">AAGB does this</span></p>
-          </div>
-          <figure class="poster" aria-hidden="true"><img src="assets/img/posters/bay-2.webp" alt="" width="1200" height="1200" loading="lazy" decoding="async"></figure>
-        </div>
-      </article>
-
-      <article class="step" id="step-3" data-scene>
-        <div class="wrap">
-          <div class="step-body" data-scene-body>
-            <p class="step-count"><span class="step-num" aria-hidden="true">3</span><span class="step-of">Step 3 of 4</span></p>
-            <h3 class="step-title">Request the purchase with AAGB approval</h3>
-            <p class="step-desc">No approval, no purchase.</p>
-            <p class="step-who"><span class="who who-you">You do this</span></p>
-          </div>
-          <figure class="poster" aria-hidden="true"><img src="assets/img/posters/bay-3.webp" alt="" width="1200" height="1200" loading="lazy" decoding="async"></figure>
-        </div>
-      </article>
-
-      <article class="step" id="step-4" data-scene>
-        <div class="wrap">
-          <div class="step-body" data-scene-body>
-            <p class="step-count"><span class="step-num" aria-hidden="true">4</span><span class="step-of">Step 4 of 4</span></p>
-            <h3 class="step-title">Acquire it and start using it</h3>
-            <p class="step-desc">From here, it’s yours to use in your work.</p>
-            <p class="step-who"><span class="who who-live">Showtime</span></p>
-          </div>
-          <figure class="poster" aria-hidden="true"><img src="assets/img/posters/bay-4.webp" alt="" width="1200" height="1200" loading="lazy" decoding="async"></figure>
-        </div>
-      </article>
-    </section>
-
-  </div>
-
-  <div class="sheet">
-
+  <!-- Page 1: AI news. The site opens here from the second visit on. -->
+  <div class="view view-page" id="news">
     <div class="ticker" data-ticker="-1" aria-hidden="true">
       <div class="ticker-row"><span>Fresh every morning at 7</span><span>The AI Dispatch</span><span>Fresh every morning at 7</span><span>The AI Dispatch</span><span>Fresh every morning at 7</span><span>The AI Dispatch</span><span>Fresh every morning at 7</span><span>The AI Dispatch</span></div>
     </div>
 
-    <section class="news" id="news" data-section>
+    <section class="news" data-section>
       <div class="wrap">
         <header class="section-head">
           <h2 class="section-title" data-reveal>The AI Dispatch</h2>
@@ -186,12 +125,15 @@
         <noscript><p class="plain-note">The news list needs JavaScript. It lives in <a href="assets/data/news.js">assets/data/news.js</a>.</p></noscript>
       </div>
     </section>
+  </div>
 
+  <!-- Page 2: the apps. -->
+  <div class="view view-page" id="apps">
     <div class="ticker" data-ticker="1" aria-hidden="true">
       <div class="ticker-row"><span>Now showing</span><span>Built in-house</span><span>Now showing</span><span>Built in-house</span><span>Now showing</span><span>Built in-house</span><span>Now showing</span><span>Built in-house</span><span>Now showing</span><span>Built in-house</span></div>
     </div>
 
-    <section class="apps" id="apps" data-section>
+    <section class="apps" data-section>
       <div class="wrap">
         <header class="section-head">
           <h2 class="section-title" data-reveal>Our apps</h2>
@@ -204,15 +146,133 @@
         <noscript><p class="plain-note">The app list needs JavaScript. It lives in <a href="assets/data/apps.js">assets/data/apps.js</a>.</p></noscript>
       </div>
     </section>
-
-    <footer class="foot">
-      <div class="wrap foot-inner">
-        <p class="foot-brand"><img src="assets/img/logo-white.png" alt="" width="648" height="296" loading="lazy"><span>So Drama! Entertainment<br>AI Solutions Dashboard</span></p>
-        <a class="btn btn-ghost" href="#top">Back to the top<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></a>
-      </div>
-    </footer>
-
   </div>
+
+  <!-- Page 3: how it works, the four steps on the 3D stage. It is the front page on a first visit. -->
+  <div class="view" id="how">
+    <div class="act" data-act>
+
+      <section class="hero" id="top" data-scene>
+        <div class="wrap">
+          <div class="hero-body" data-scene-body>
+            <h1 class="hero-title">Got a new <span class="nowrap">AI tool?</span></h1>
+            <p class="hero-lede">Declare it first. AAGB checks the security risk, then you can buy it and start using it.</p>
+            <div class="hero-actions">
+              <a class="cta" data-cta href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=rcy329-Y_kaUIVobvsyr0TBFYZVJ-u1FmQ3PZtT_HmlUNFlVNjJPVjcwTFJTTjVITE5IQVpZUTNYOSQlQCN0PWcu" target="_blank" rel="noopener">
+                <span class="cta-label">Declare an AI tool</span>
+                <span class="cta-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"></path></svg></span>
+                <span class="sr-only"> (opens the form in a new tab)</span>
+              </a>
+              <p class="cta-note">Opens the declaration form in Microsoft Forms.</p>
+            </div>
+          </div>
+          <figure class="poster" aria-hidden="true"><img src="assets/img/posters/bay-0.webp" alt="" width="1200" height="1200" loading="lazy" decoding="async"></figure>
+        </div>
+        <a class="scroll-cue" href="#step-1">
+          <span class="scroll-cue-track" aria-hidden="true"><span></span></span>
+          Scroll for the four steps
+        </a>
+      </section>
+
+      <section class="steps" aria-labelledby="process-title">
+        <h2 class="sr-only" id="process-title">How it works, in four steps</h2>
+
+        <article class="step" id="step-1" data-scene>
+          <div class="wrap">
+            <div class="step-body" data-scene-body>
+              <p class="step-count"><span class="step-num" aria-hidden="true">1</span><span class="step-of">Step 1 of 4</span></p>
+              <h3 class="step-title">Declare your AI tools</h3>
+              <p class="step-desc">Fill in the form for every AI tool you use, or want to use.</p>
+              <p class="step-who"><span class="who who-you">You do this</span></p>
+              <a class="btn btn-ghost" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=rcy329-Y_kaUIVobvsyr0TBFYZVJ-u1FmQ3PZtT_HmlUNFlVNjJPVjcwTFJTTjVITE5IQVpZUTNYOSQlQCN0PWcu" target="_blank" rel="noopener">Open the form<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"></path></svg><span class="sr-only"> (opens in a new tab)</span></a>
+            </div>
+            <figure class="poster" aria-hidden="true"><img src="assets/img/posters/bay-1.webp" alt="" width="1200" height="1200" loading="lazy" decoding="async"></figure>
+          </div>
+        </article>
+
+        <article class="step" id="step-2" data-scene>
+          <div class="wrap">
+            <div class="step-body" data-scene-body>
+              <p class="step-count"><span class="step-num" aria-hidden="true">2</span><span class="step-of">Step 2 of 4</span></p>
+              <h3 class="step-title">Security review and approval</h3>
+              <p class="step-desc">AAGB checks each declared tool for risk before anything is bought.</p>
+              <p class="step-who"><span class="who who-board">AAGB does this</span></p>
+            </div>
+            <figure class="poster" aria-hidden="true"><img src="assets/img/posters/bay-2.webp" alt="" width="1200" height="1200" loading="lazy" decoding="async"></figure>
+          </div>
+        </article>
+
+        <article class="step" id="step-3" data-scene>
+          <div class="wrap">
+            <div class="step-body" data-scene-body>
+              <p class="step-count"><span class="step-num" aria-hidden="true">3</span><span class="step-of">Step 3 of 4</span></p>
+              <h3 class="step-title">Request the purchase with AAGB approval</h3>
+              <p class="step-desc">No approval, no purchase.</p>
+              <p class="step-who"><span class="who who-you">You do this</span></p>
+            </div>
+            <figure class="poster" aria-hidden="true"><img src="assets/img/posters/bay-3.webp" alt="" width="1200" height="1200" loading="lazy" decoding="async"></figure>
+          </div>
+        </article>
+
+        <article class="step" id="step-4" data-scene>
+          <div class="wrap">
+            <div class="step-body" data-scene-body>
+              <p class="step-count"><span class="step-num" aria-hidden="true">4</span><span class="step-of">Step 4 of 4</span></p>
+              <h3 class="step-title">Acquire it and start using it</h3>
+              <p class="step-desc">From here, it’s yours to use in your work.</p>
+              <p class="step-who"><span class="who who-live">Showtime</span></p>
+            </div>
+            <figure class="poster" aria-hidden="true"><img src="assets/img/posters/bay-4.webp" alt="" width="1200" height="1200" loading="lazy" decoding="async"></figure>
+          </div>
+        </article>
+      </section>
+
+    </div>
+
+    <!-- After the four steps: on to the rest of the site. -->
+    <div class="sheet" data-finale>
+      <section class="outro" id="next" aria-labelledby="next-title">
+        <div class="wrap">
+          <header class="section-head">
+            <h2 class="section-title" id="next-title" data-reveal>What’s next</h2>
+            <div class="section-side" data-reveal>
+              <p class="section-lede">That’s all four steps. Catch up on today’s AI news, or open the apps we’ve built.</p>
+              <a class="btn btn-solid" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=rcy329-Y_kaUIVobvsyr0TBFYZVJ-u1FmQ3PZtT_HmlUNFlVNjJPVjcwTFJTTjVITE5IQVpZUTNYOSQlQCN0PWcu" target="_blank" rel="noopener">Declare an AI tool<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"></path></svg><span class="sr-only"> (opens the form in a new tab)</span></a>
+            </div>
+          </header>
+          <div class="doors">
+            <a class="door door-news" href="#news" data-reveal style="--rd:0s">
+              <span class="door-kicker">Fresh every morning at 7</span>
+              <span class="door-title">The AI Dispatch</span>
+              <span class="door-desc">Five AI stories a day. At least one is a word of caution.</span>
+              <span class="btn btn-solid">Read the news<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+            </a>
+            <a class="door door-apps" href="#apps" data-reveal style="--rd:.06s">
+              <span class="door-kicker">Built in-house</span>
+              <span class="door-title">Our apps</span>
+              <span class="door-desc">Everything we’ve built, in one place.</span>
+              <span class="btn btn-solid">Open the apps<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <div class="wrap foot-inner">
+      <p class="foot-brand"><img src="assets/img/logo-white.png" alt="" width="648" height="296" loading="lazy"><span>So Drama! Entertainment<br>AI Solutions Dashboard</span></p>
+      <a class="btn btn-ghost" href="#main" data-to-top>Back to the top<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></a>
+    </div>
+  </footer>
+
 </main>
+
+<!-- The same three pages as the top bar, as a tab bar along the bottom on small screens. -->
+<nav class="tabbar" aria-label="Pages">
+  <a href="#news" data-nav="news"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h12v14H6.5A2.5 2.5 0 0 1 4 16.5zM16 9h4v7.5a2.5 2.5 0 0 1-2.5 2.5M7.5 9h5M7.5 12.5h5M7.5 16h3"></path></svg>AI news</a>
+  <a href="#apps" data-nav="apps"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.6"></rect><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.6"></rect><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.6"></rect><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.6"></rect></svg>Apps</a>
+  <a href="#how" data-nav="how"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 6h10M10 12h10M10 18h10"></path><circle cx="5" cy="6" r="1.3"></circle><circle cx="5" cy="12" r="1.3"></circle><circle cx="5" cy="18" r="1.3"></circle></svg>How it works</a>
+</nav>
 </body>
 </html>

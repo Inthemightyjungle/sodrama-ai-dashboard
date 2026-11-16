@@ -150,6 +150,7 @@
       filter(b.getAttribute('data-cat'));
     });
     movePill(current(), true);
+    placeAppTabs = function () { movePill(current(), true); };
     window.addEventListener('resize', function () { movePill(current(), true); });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { movePill(current(), true); });
 
@@ -198,6 +199,72 @@
     items.forEach(function (el) { io.observe(el); });
   }
 
+  /* ---------- the three pages ---------- */
+
+  /*
+    The site is three pages in one file: AI news, Apps and How it works (the
+    four steps on the 3D stage). Only one shows at a time. The address ends in
+    #news, #apps or #how, so each page can be linked to and the Back button
+    works.
+
+    The steps are the front page the first time someone opens the site. From
+    then on it opens on the news (the script in index.html decides, before the
+    first paint) and the steps are the third tab.
+  */
+
+  var HOW_LINKS = /^(how|process|top|next|step-[1-4])$/;   // addresses that belong to "How it works"
+  var view = root.getAttribute('data-view') || 'how';
+  var home = root.getAttribute('data-home') || 'news';    // the page shown when the address names none
+  var keptScroll = {};                                     // how far down each page was left
+  var placeAppTabs = null;                                 // set by renderApps
+
+  function viewOf(hash) {
+    if (hash === 'news' || hash === 'apps') return hash;
+    return HOW_LINKS.test(hash) ? 'how' : '';
+  }
+
+  // What has to happen whenever a page comes on screen, including the first one.
+  function enter(name) {
+    els.nav.forEach(function (link) {
+      var on = link.getAttribute('data-nav') === name;
+      link.classList.toggle('is-active', on);
+      if (on) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current');
+    });
+    if (name === 'how') {
+      // The steps have now been the front page once.
+      try { window.localStorage.setItem('sd-intro-seen', '1'); } catch (e) { /* private browsing: they will simply show again */ }
+      bootStage();
+    }
+    if (name === 'apps' && placeAppTabs) placeAppTabs();
+  }
+
+  function show(name, anchor) {
+    if (name === view) return;
+    keptScroll[view] = window.pageYOffset;
+    view = name;
+    root.setAttribute('data-view', name);
+    state.cue = -1;
+    state.chipOn = state.hasCta = null;
+    enter(name);
+    measure();
+    var to = keptScroll[name] || 0;
+    if (anchor === 'top') to = 0;
+    else if (anchor === 'next') to = m.finale;
+    else if (anchor) to = (scenes[+anchor.slice(5)] || { focus: 0 }).focus;
+    window.scrollTo({ top: to, behavior: 'instant' });
+    state.y = -1;
+    update();
+  }
+
+  function route() {
+    var hash = location.hash.slice(1);
+    var name = hash ? viewOf(hash) : home;
+    if (!name) return;                       // an ordinary link to somewhere on the page
+    var anchor = name === 'how' && hash !== 'how' && hash !== 'process' ? hash : '';
+    if (name !== view) show(name, anchor);
+    else if (!anchor) window.scrollTo({ top: 0, behavior: calm ? 'auto' : 'smooth' });
+  }
+
   /* ---------- scrolling: one place that works out where you are ---------- */
 
   /*
@@ -208,16 +275,17 @@
     the entire page again on every frame.
   */
 
-  var CUE_NAMES = ['Start', 'Step 1 of 4', 'Step 2 of 4', 'Step 3 of 4', 'Step 4 of 4', 'AI news', 'Apps'];
+  var CUE_NAMES = ['Start', 'Step 1 of 4', 'Step 2 of 4', 'Step 3 of 4', 'Step 4 of 4', 'What’s next'];
   var stage = null;
   var staged = false;      // true once the 3D stage is drawing
   var scenes = [];
   var tickers = [];
-  var m = { vh: 1, max: 1, news: 0, apps: 0, cta: 0 };
+  var m = { vh: 1, max: 1, finale: 0, cta: 0 };
   var state = { p: 0, cue: -1, y: -1, drift: 0, last: 0, chipOn: null, stuck: null, hasCta: null };
   var els = {};
   var measureQueued = false;
   var chipQuery = window.matchMedia ? window.matchMedia('(max-width: 1000px)') : { matches: true };
+  var barQuery = window.matchMedia ? window.matchMedia('(max-width: 860px)') : { matches: false };   // the tab bar along the bottom is showing
 
   function docTop(el) { return el ? el.getBoundingClientRect().top + window.pageYOffset : 0; }
   // Where an element sits on the page, not counting any shift this script has given it.
@@ -231,23 +299,25 @@
     measureQueued = false;
     m.vh = window.innerHeight;
     m.max = Math.max(1, document.documentElement.scrollHeight - m.vh);
-    scenes = $$('[data-scene]').map(function (el, i) {
-      var r = el.getBoundingClientRect();
-      var body = $('[data-scene-body]', el);
-      var was = scenes[i] || {};
-      return {
-        body: body,
-        focus: i === 0 ? 0 : r.top + window.pageYOffset + r.height / 2 - m.vh / 2,
-        top: body ? layoutTop(body) : 0,
-        height: body ? body.offsetHeight : 0,
-        o: was.o,
-        ty: was.ty,
-      };
-    });
-    m.news = docTop($('#news'));
-    m.apps = docTop($('#apps'));
-    var cta = $('[data-cta]');
-    m.cta = cta ? docTop(cta) + cta.offsetHeight : 0;
+    if (view === 'how') {
+      scenes = $$('[data-scene]').map(function (el, i) {
+        var r = el.getBoundingClientRect();
+        var body = $('[data-scene-body]', el);
+        var was = scenes[i] || {};
+        return {
+          body: body,
+          focus: i === 0 ? 0 : r.top + window.pageYOffset + r.height / 2 - m.vh / 2,
+          top: body ? layoutTop(body) : 0,
+          height: body ? body.offsetHeight : 0,
+          o: was.o,
+          ty: was.ty,
+        };
+      });
+      var finale = $('[data-finale]');
+      m.finale = finale ? docTop(finale) : m.max + m.vh;
+      var cta = $('[data-cta]');
+      m.cta = cta ? docTop(cta) + cta.offsetHeight : 0;
+    }
     tickers.forEach(function (t) {
       t.top = docTop(t.el);
       t.loop = t.row.scrollWidth / Math.max(1, t.row.children.length / 2);
@@ -267,6 +337,15 @@
     state.y = y;
     var along = clamp(y / m.max, 0, 1);
     if (els.bar) els.bar.style.transform = 'scaleX(' + along.toFixed(4) + ')';
+    var stuck = y > 14;
+    if (stuck !== state.stuck) { state.stuck = stuck; if (els.top) els.top.classList.toggle('is-stuck', stuck); }
+
+    // On the news and the apps, the small "Declare a tool" button is always in the top bar.
+    // On "How it works" it appears once the big one has scrolled away.
+    var hasCta = view !== 'how' || y > m.cta - 70;
+    if (hasCta !== state.hasCta) { state.hasCta = hasCta; if (els.top) els.top.classList.toggle('has-cta', hasCta); }
+    if (view !== 'how') return;
+
     if (els.arc && chipQuery.matches) els.arc.style.strokeDashoffset = (100 - along * 100).toFixed(1);
 
     // Which set is on stage: 0 is the opening screen, 1 to 4 are the steps.
@@ -302,13 +381,12 @@
       }
     }
 
-    // The rail on the right, the chip on small screens and the menu at the top.
+    // The rail on the right and the chip on small screens: the opening screen, the four steps, then "What's next".
     var last = scenes.length ? scenes[scenes.length - 1].focus : 0;
-    var newsAt = Math.max(last + 1, m.news - m.vh * 0.5);
-    var appsAt = Math.max(newsAt + 1, m.apps - m.vh * 0.5);
-    var where = y >= appsAt ? 6 : y >= newsAt ? 5 + (y - newsAt) / (appsAt - newsAt) : y > last ? 4 + (y - last) / (newsAt - last) : p;
-    var cue = y >= appsAt ? 6 : y >= newsAt ? 5 : Math.round(p);
-    if (els.fill) els.fill.style.transform = 'scaleY(' + (where / 6).toFixed(4) + ')';
+    var nextAt = Math.max(last + 1, m.finale - m.vh * 0.5);
+    var where = y >= nextAt ? 5 : y > last ? 4 + (y - last) / (nextAt - last) : p;
+    var cue = y >= nextAt ? 5 : Math.round(p);
+    if (els.fill) els.fill.style.transform = 'scaleY(' + (where / 5).toFixed(4) + ')';
     if (cue !== state.cue) {
       state.cue = cue;
       els.cues.forEach(function (c, n) {
@@ -318,17 +396,9 @@
       });
       if (els.rail) els.rail.classList.toggle('is-quiet', cue >= 5);
       if (els.chipText) els.chipText.textContent = CUE_NAMES[cue];
-      els.nav.forEach(function (link) {
-        var key = link.getAttribute('data-nav');
-        link.classList.toggle('is-active', (key === 'process' && cue >= 1 && cue <= 4) || (key === 'news' && cue === 5) || (key === 'apps' && cue === 6));
-      });
     }
-    var chipOn = y > 60 && y < m.max - 30;
+    var chipOn = y > 60 && cue < 5;
     if (chipOn !== state.chipOn) { state.chipOn = chipOn; if (els.chip) els.chip.classList.toggle('is-on', chipOn); }
-    var stuck = y > 14;
-    if (stuck !== state.stuck) { state.stuck = stuck; if (els.top) els.top.classList.toggle('is-stuck', stuck); }
-    var hasCta = y > m.cta - 70;
-    if (hasCta !== state.hasCta) { state.hasCta = hasCta; if (els.top) els.top.classList.toggle('has-cta', hasCta); }
   }
 
   // The two bands of big type drift on their own and run faster while you scroll.
@@ -383,16 +453,17 @@
   // For testing: ?3d keeps the stage on, at full sharpness, even on a device that draws it slowly.
   var force3d = /[?&]3d\b/.test(location.search);
 
+  // Where the set sits in the picture. On phones it sits a little higher and smaller, to leave room for the tab bar.
   function frameStage() {
     if (!stage) return;
-    stage.setFraming(tallQuery.matches
-      ? { right: 0, up: 0.2, fillHeight: 0.42, fillWidth: 0.96 }
-      : { right: 0.225, up: -0.02, fillHeight: 0.66, fillWidth: 0.5 });
+    stage.setFraming(!tallQuery.matches ? { right: 0.225, up: -0.02, fillHeight: 0.66, fillWidth: 0.5 }
+      : barQuery.matches ? { right: 0, up: 0.245, fillHeight: 0.4, fillWidth: 0.96 }
+      : { right: 0, up: 0.2, fillHeight: 0.42, fillWidth: 0.96 });
   }
 
   // Swaps the 3D stage for still pictures. With keepPlace, the reader stays at the step they were on.
   function goStill(keepPlace) {
-    var here = keepPlace && staged && window.pageYOffset < m.news - m.vh ? Math.round(state.p) : 0;
+    var here = keepPlace && staged && view === 'how' && window.pageYOffset < m.finale - m.vh ? Math.round(state.p) : 0;
     staged = false;
     if (stage) { stage.run(false); stage = null; }
     root.classList.remove('stage-pending', 'stage-on');
@@ -411,7 +482,7 @@
     var canvas = $('[data-stage]');
     var act = $('[data-act]');
     var onStage = true;
-    function sync() { if (stage) stage.run(onStage && !document.hidden); }
+    function sync() { if (stage) stage.run(onStage && view === 'how' && !document.hidden); }
 
     api.createStage(canvas, {
       adaptive: !force3d,
@@ -433,6 +504,7 @@
       stage.jump();
       state.y = -1;
       update();
+      // The stage only draws while the steps are on screen: not behind the news or the apps, and not in a hidden tab.
       if ('IntersectionObserver' in window && act) {
         new IntersectionObserver(function (entries) { onStage = entries[0].isIntersecting; sync(); }, { rootMargin: '10% 0px 10% 0px' }).observe(act);
       }
@@ -442,6 +514,7 @@
       canvas.addEventListener('webglcontextlost', function () { lostTimer = setTimeout(goStill, 4000); });
       canvas.addEventListener('webglcontextrestored', function () { clearTimeout(lostTimer); });
       if (tallQuery.addEventListener) tallQuery.addEventListener('change', function () { frameStage(); requestMeasure(); });
+      if (barQuery.addEventListener) barQuery.addEventListener('change', frameStage);
       if (finePointer) {
         window.addEventListener('pointermove', function (e) {
           if (stage) stage.setPointer((e.clientX / window.innerWidth) * 2 - 1, (e.clientY / window.innerHeight) * 2 - 1);
@@ -454,19 +527,28 @@
     });
   }
 
+  // Called the first time "How it works" is shown: straight away on a first visit,
+  // otherwise only when someone opens that tab. Until then none of the 3D code is fetched.
+  var booted = false;
   function bootStage() {
-    if (!root.classList.contains('stage-pending')) { goStill(); return; }
+    if (booted) return;
+    booted = true;
+    if (!window.SD_CAN_STAGE || !window.SD_CAN_STAGE()) { goStill(); return; }
+    root.classList.add('stage-pending');
     var settled = false;
-    function settle() {
+    function load() {
       if (settled) return;
       settled = true;
-      if (window.SD_STAGE && window.SD_STAGE.createStage) startStage(window.SD_STAGE);
-      else goStill();
+      window.SD_LOAD_STAGE().then(startStage, function (err) {
+        if (window.console) console.warn('The 3D stage could not load, showing still pictures instead.', err);
+        goStill();
+      });
     }
-    if (window.SD_STAGE !== undefined) settle();
+    if (window.SD_LOAD_STAGE) load();
     else {
-      document.addEventListener('sd-stage', settle);
-      setTimeout(settle, 15000);
+      // stage-boot.js has not run yet, or this browser is too old to run it.
+      document.addEventListener('sd-stage-loader', load);
+      setTimeout(function () { if (!settled) { settled = true; goStill(); } }, 15000);
     }
   }
 
@@ -491,8 +573,24 @@
     safely(renderNews);
     safely(renderApps);
     safely(setupReveal);
+    safely(function () { enter(view); });
     safely(measure);
     safely(watchTickers);
+
+    window.addEventListener('hashchange', route);
+    els.nav.forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        // A second click on the tab you are already on goes back to the top of that page.
+        if (link.getAttribute('href') !== location.hash) return;
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: calm ? 'auto' : 'smooth' });
+      });
+    });
+    var toTop = $('[data-to-top]');
+    if (toTop) toTop.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: calm ? 'auto' : 'smooth' });
+    });
 
     var ticking = false;
     window.addEventListener('scroll', function () {
@@ -510,10 +608,8 @@
     });
     window.addEventListener('load', requestMeasure);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(requestMeasure);
-    if ('ResizeObserver' in window) new ResizeObserver(requestMeasure).observe($('.sheet') || document.body);
+    if ('ResizeObserver' in window) new ResizeObserver(requestMeasure).observe($('main') || document.body);
     if (chipQuery.addEventListener) chipQuery.addEventListener('change', function () { state.y = -1; update(); });
-
-    safely(bootStage);
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
