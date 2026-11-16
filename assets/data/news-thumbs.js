@@ -1,13 +1,13 @@
 window.SD_NEWS_THUMBS = {
-  "_for": "09fe9a4fb305188d",
+  "_for": "0884e3e4b768254c",
   "ace-editors-ai-survey": {
     "src": "assets/img/news/ace-editors-ai-survey.jpg",
     "w": 960,
-    "h": 540,
-    "v": "d8ec0ce6",
-    "page": "https://variety.com/2026/biz/news/surveyed-ace-editors-using-ai-avid-data-finds-1236947004/",
+    "h": 536,
+    "v": "bc7fb98c",
+    "page": "https://www.vp-land.com/stories/77-5-of-ace-editors-in-avids-survey-use-ai-led-by-transcription-and-audio-cleanup",
     "wanted": "",
-    "image": "https://variety.com/wp-content/uploads/2026/11/Molly_Shock_ACE_17-1.jpg?w=1000&h=563&crop=1"
+    "image": "https://piqvbzhttirzocvnnlhc.supabase.co/storage/v1/object/public/story-images/thumbnails/3e8fbc7a-a51c-459b-a6d0-73b5cd78cacd/31d9ca15-56c6-49f4-b0a4-94c87139de74-1.jpg"
   },
   "eu-ai-label-guidelines": {
     "src": "assets/img/news/eu-ai-label-guidelines.jpg",
