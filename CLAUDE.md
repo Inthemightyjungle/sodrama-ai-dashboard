@@ -20,7 +20,7 @@ Live: https://inthemightyjungle.github.io/sodrama-ai-dashboard/
 
 ## What the owner has asked for (keep to these)
 
-- **The name is "AI Solutions Dashboard".** It was briefly renamed "AI Sandbox" and the owner asked to go back. The app icon reads "AI Dashboard" under the So Drama logo.
+- **The name is "AI Solutions Dashboard".** It was briefly renamed "AI Sandbox" and the owner asked to go back. The app icon is a 3D scene (curtain, lit stage, gold 3D letters reading "AI Dashboard") with the So Drama logo laid on top **exactly as it is**: never redraw, recolour or add effects to the logo.
 - **Three pages, in this order: AI news, Apps, How it works.** The four steps on the 3D stage ("How it works") are the front page only the first time someone opens the site. From the second visit on, the site opens on AI news and the steps are the third tab. The same three tabs sit in the top bar on wide screens and in a bar along the bottom on phones.
 - The look is a theatre with the house lights down: a real 3D revolving stage, velvet curtains, warm spotlight. Flat, hard-edged vector drawings were rejected as looking "like MS Paint".
 - Scrolling must be obvious: the stage turns, the progress bar and the rail on the right move, the big type bands slide.
@@ -45,6 +45,7 @@ Live: https://inthemightyjungle.github.io/sodrama-ai-dashboard/
 | `tools/check_news.py` | Validates `news.js`. |
 | `tools/news_thumbs.py` | Downloads thumbnails. Run by `.github/workflows/news-thumbs.yml` on pushes to `main` and `news-draft`. |
 | `tools/stage-lab.html` | Workbench for the stage. |
+| `tools/make_icon.py`, `tools/icon-lab.html` | Make the app icons. `icon-lab.html` draws the 3D scene; `make_icon.py` adds the logo file on top and writes every size. After a change, bump `?v=` on the icons in `manifest.webmanifest` so installed apps pick it up. |
 
 To look at the page locally: `python3 -m http.server 8000` in the repository root. The browser remembers that the steps have been shown in `localStorage` under `sd-intro-seen`; remove it (or use a private window) to see a first visit again. Add `?still` to see the version without 3D, or `?3d` to keep the stage on at full sharpness even where it draws slowly (needed when testing in a browser with no graphics chip).
 
