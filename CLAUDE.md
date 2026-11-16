@@ -10,12 +10,18 @@ Live: https://inthemightyjungle.github.io/sodrama-ai-dashboard/
 - **Commits:** author `Claude <noreply@anthropic.com>`. Never put the repository owner's personal email in a commit, a file or a request to another service.
 - **Pictures of people:** never use a photo of a public figure (politician, executive, celebrity, presenter) as a thumbnail or anywhere else on the site.
 - **Words:** plain, short sentences for staff who are not technical. Summaries are written in our own words, never copied from the source.
+- **Keep it smooth.** The owner asked for the page to be less laggy, and it was tuned on their laptop. Before adding an effect, check these still hold:
+  - Nothing compiles or uploads while the reader scrolls: the stage loads every shader, shape and picture before its first frame (`rehearse()` in `stage3d.js`).
+  - `update()` in `site.js` runs on every scroll frame. It must not read the layout (`getBoundingClientRect`, `offsetTop` and friends belong in `measure()`), and it must not set a CSS variable on `<html>` or `<body>`: either one makes the browser re-work the whole page on every frame.
+  - Animate only `transform` and `opacity`. No `backdrop-filter` or `mix-blend-mode` on anything that sits over the 3D stage, apart from the top bar.
+  - New lights, or materials of a new kind, in one bay only mean a second set of shaders: add them to the rehearsal.
 - Only `main` is published. `news-draft` is a scratch branch for the daily news job and gets overwritten.
 
 ## What the owner has asked for (keep to these)
 
 - The look is a theatre with the house lights down: a real 3D revolving stage, velvet curtains, warm spotlight. Flat, hard-edged vector drawings were rejected as looking "like MS Paint".
 - Scrolling must be obvious: the stage turns, the progress bar and the rail on the right move, the big type bands slide.
+- It must not feel laggy: the stage follows the scroll closely (`FOLLOW` in `stage3d.js`) and never stutters when a new set arrives.
 - The AI Dispatch always shows real thumbnails from the stories' own sources, and always includes at least one word of caution.
 - The purchase step is worded "Request the purchase with AAGB approval".
 
@@ -27,6 +33,7 @@ Live: https://inthemightyjungle.github.io/sodrama-ai-dashboard/
 | `assets/css/site.css` | All styles. |
 | `assets/js/site.js` | News and app lists, scroll indicators, starts the stage. |
 | `assets/js/stage3d.js` | The 3D revolving stage (three.js). `stage-boot.js` loads it. |
+| `assets/js/pace.js` | Softens the stage on devices that cannot keep up, and asks for still pictures if that is not enough. Tested by `node tools/test_pace.mjs`. |
 | `assets/data/news.js` | The five stories. **Strict JSON** inside `window.SD_NEWS = …;`. |
 | `assets/data/news-thumbs.js`, `assets/img/news/` | Thumbnails. Written by the workflow, never by hand. |
 | `assets/data/apps.js` | The apps list. |
@@ -35,7 +42,7 @@ Live: https://inthemightyjungle.github.io/sodrama-ai-dashboard/
 | `tools/news_thumbs.py` | Downloads thumbnails. Run by `.github/workflows/news-thumbs.yml` on pushes to `main` and `news-draft`. |
 | `tools/stage-lab.html` | Workbench for the stage. |
 
-To look at the page locally: `python3 -m http.server 8000` in the repository root. Add `?still` to see the version without 3D.
+To look at the page locally: `python3 -m http.server 8000` in the repository root. Add `?still` to see the version without 3D, or `?3d` to keep the stage on at full sharpness even where it draws slowly (needed when testing in a browser with no graphics chip).
 
 ## Daily job: refresh the AI Dispatch
 

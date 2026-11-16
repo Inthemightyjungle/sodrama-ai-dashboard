@@ -43,7 +43,7 @@
           '<span class="story-credit">' + esc(s.credit || ('Image: ' + s.source)) + '</span>'
         : '<img src="assets/img/posters/' + (caution ? 'news-caution' : 'news-update') + '.webp" width="960" height="600" alt="" loading="lazy" decoding="async">' +
           '<span class="story-stand">' + esc(s.source) + '</span>';
-      return '<article class="story' + (lead ? ' is-lead' : '') + (caution ? ' is-caution' : '') + '" data-reveal style="--rd:' + (lead ? 0 : (i - 1) * 0.08).toFixed(2) + 's">' +
+      return '<article class="story' + (lead ? ' is-lead' : '') + (caution ? ' is-caution' : '') + '" data-reveal style="--rd:' + (lead ? 0 : (i - 1) * 0.05).toFixed(2) + 's">' +
         '<div class="story-thumb">' + picture + '</div>' +
         '<div class="story-body">' +
           '<p class="story-tags">' + (caution ? '<span class="tag tag-caution">' + WARN + 'Word of caution</span>' : '') + '<span class="tag">' + esc(s.category) + '</span></p>' +
@@ -83,7 +83,7 @@
     if (!apps || !grid) return;
 
     grid.innerHTML = apps.map(function (a, i) {
-      return '<article class="app" data-cat="' + esc(a.category) + '" data-reveal style="--rd:' + ((i % 3) * 0.09).toFixed(2) + 's">' +
+      return '<article class="app" data-cat="' + esc(a.category) + '" data-reveal style="--rd:' + ((i % 3) * 0.06).toFixed(2) + 's">' +
         '<div class="app-cover" aria-hidden="true">' + coverHTML(a.cover) + '<span class="app-glare"></span></div>' +
         '<p class="app-kicker"><span class="app-type">' + esc(a.category) + '</span>' + esc(a.meta) + '</p>' +
         '<h3 class="app-name">' + esc(a.name) + '</h3>' +
@@ -192,7 +192,7 @@
         setTimeout(function () {
           el.removeAttribute('data-reveal');
           el.classList.remove('is-in');
-        }, 1900);
+        }, 1500);
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
     items.forEach(function (el) { io.observe(el); });
@@ -200,17 +200,32 @@
 
   /* ---------- scrolling: one place that works out where you are ---------- */
 
+  /*
+    update() runs on every scroll frame, so it only does sums. Everything it
+    needs to know about the layout is measured once, in measure(), and it
+    changes the style of one small element at a time. Reading the layout here,
+    or setting a variable on the whole page, would make the browser work out
+    the entire page again on every frame.
+  */
+
   var CUE_NAMES = ['Start', 'Step 1 of 4', 'Step 2 of 4', 'Step 3 of 4', 'Step 4 of 4', 'AI news', 'Apps'];
   var stage = null;
   var staged = false;      // true once the 3D stage is drawing
   var scenes = [];
   var tickers = [];
-  var m = { vh: 1, max: 1, news: 0, apps: 0 };
-  var state = { p: 0, cue: -1, y: -1, drift: 0, last: 0 };
+  var m = { vh: 1, max: 1, news: 0, apps: 0, cta: 0 };
+  var state = { p: 0, cue: -1, y: -1, drift: 0, last: 0, chipOn: null, stuck: null, hasCta: null };
   var els = {};
   var measureQueued = false;
+  var chipQuery = window.matchMedia ? window.matchMedia('(max-width: 1000px)') : { matches: true };
 
   function docTop(el) { return el ? el.getBoundingClientRect().top + window.pageYOffset : 0; }
+  // Where an element sits on the page, not counting any shift this script has given it.
+  function layoutTop(el) {
+    var y = 0;
+    while (el) { y += el.offsetTop; el = el.offsetParent; }
+    return y;
+  }
 
   function measure() {
     measureQueued = false;
@@ -218,15 +233,24 @@
     m.max = Math.max(1, document.documentElement.scrollHeight - m.vh);
     scenes = $$('[data-scene]').map(function (el, i) {
       var r = el.getBoundingClientRect();
-      return { body: $('[data-scene-body]', el), focus: i === 0 ? 0 : r.top + window.pageYOffset + r.height / 2 - m.vh / 2 };
+      var body = $('[data-scene-body]', el);
+      var was = scenes[i] || {};
+      return {
+        body: body,
+        focus: i === 0 ? 0 : r.top + window.pageYOffset + r.height / 2 - m.vh / 2,
+        top: body ? layoutTop(body) : 0,
+        height: body ? body.offsetHeight : 0,
+        o: was.o,
+        ty: was.ty,
+      };
     });
     m.news = docTop($('#news'));
     m.apps = docTop($('#apps'));
     var cta = $('[data-cta]');
     m.cta = cta ? docTop(cta) + cta.offsetHeight : 0;
-    tickers = $$('[data-ticker]').map(function (el) {
-      var row = $('.ticker-row', el);
-      return { row: row, top: docTop(el), dir: parseFloat(el.getAttribute('data-ticker')) || -1, loop: row.scrollWidth / Math.max(1, row.children.length / 2) };
+    tickers.forEach(function (t) {
+      t.top = docTop(t.el);
+      t.loop = t.row.scrollWidth / Math.max(1, t.row.children.length / 2);
     });
     state.y = -1;
     update();
@@ -239,87 +263,125 @@
 
   function update() {
     var y = window.pageYOffset;
-    var moved = y !== state.y;
+    if (y === state.y) return;
     state.y = y;
+    var along = clamp(y / m.max, 0, 1);
+    if (els.bar) els.bar.style.transform = 'scaleX(' + along.toFixed(4) + ')';
+    if (els.arc && chipQuery.matches) els.arc.style.strokeDashoffset = (100 - along * 100).toFixed(1);
 
-    if (moved) {
-      root.style.setProperty('--pp', clamp(y / m.max, 0, 1).toFixed(4));
+    // Which set is on stage: 0 is the opening screen, 1 to 4 are the steps.
+    var p = 0;
+    for (var i = 0; i < scenes.length - 1; i++) {
+      var a = scenes[i].focus;
+      var b = scenes[i + 1].focus;
+      if (y >= b) { p = i + 1; continue; }
+      if (y > a) p = i + (y - a) / (b - a);
+      break;
+    }
+    state.p = p;
+    if (stage) stage.setProgress(p);
 
-      // Which set is on stage: 0 is the opening screen, 1 to 4 are the steps.
-      var p = 0;
-      for (var i = 0; i < scenes.length - 1; i++) {
-        var a = scenes[i].focus;
-        var b = scenes[i + 1].focus;
-        if (y >= b) { p = i + 1; continue; }
-        if (y > a) p = i + (y - a) / (b - a);
-        break;
-      }
-      state.p = p;
-      if (stage) stage.setProgress(p);
-
-      // Words fade in as their set arrives and out as it leaves.
-      if (staged) {
-        var tall = tallQuery.matches;
-        scenes.forEach(function (s) {
-          if (!s.body) return;
-          var r = s.body.getBoundingClientRect();
-          if (r.bottom < -200 || r.top > m.vh + 200) return;
-          var mid = (r.top + r.height / 2) / m.vh;
-          var o = tall
-            ? smooth(1.06, 0.9, mid) * (1 - smooth(0.62, 0.44, mid))
-            : smooth(1.04, 0.82, mid) * (1 - smooth(0.24, 0.04, mid));
-          s.body.style.setProperty('--o', o.toFixed(3));
-          s.body.style.setProperty('--ty', ((0.5 - mid) * (tall ? 18 : 46)).toFixed(1) + 'px');
-        });
-      }
-
-      // The rail on the right, the chip on small screens and the menu at the top.
-      var last = scenes.length ? scenes[scenes.length - 1].focus : 0;
-      var newsAt = Math.max(last + 1, m.news - m.vh * 0.5);
-      var appsAt = Math.max(newsAt + 1, m.apps - m.vh * 0.5);
-      var along = y >= appsAt ? 6 : y >= newsAt ? 5 + (y - newsAt) / (appsAt - newsAt) : y > last ? 4 + (y - last) / (newsAt - last) : p;
-      var cue = y >= appsAt ? 6 : y >= newsAt ? 5 : Math.round(p);
-      root.style.setProperty('--cue', (along / 6).toFixed(4));
-      if (cue !== state.cue) {
-        state.cue = cue;
-        els.cues.forEach(function (c, n) {
-          c.classList.toggle('is-active', n === cue);
-          c.classList.toggle('is-done', n < cue);
-          if (n === cue) c.setAttribute('aria-current', 'true'); else c.removeAttribute('aria-current');
-        });
-        if (els.rail) els.rail.classList.toggle('is-quiet', cue >= 5);
-        if (els.chipText) els.chipText.textContent = CUE_NAMES[cue];
-        els.nav.forEach(function (link) {
-          var key = link.getAttribute('data-nav');
-          link.classList.toggle('is-active', (key === 'process' && cue >= 1 && cue <= 4) || (key === 'news' && cue === 5) || (key === 'apps' && cue === 6));
-        });
-      }
-      if (els.chip) els.chip.classList.toggle('is-on', y > 60 && y < m.max - 30);
-      if (els.top) {
-        els.top.classList.toggle('is-stuck', y > 14);
-        els.top.classList.toggle('has-cta', y > m.cta - 70);
+    // Words fade in as their set arrives and out as it leaves.
+    if (staged) {
+      var tall = tallQuery.matches;
+      var drift = tall ? 18 : 46;   // how far, in pixels, the words travel as they pass
+      for (var j = 0; j < scenes.length; j++) {
+        var s = scenes[j];
+        if (!s.body) continue;
+        var top = s.top - y;
+        if (top + s.height < -200 || top > m.vh + 200) continue;
+        // Where the middle of the words sits in the window: 0 at the top edge, 1 at the bottom,
+        // allowing for the little drift they are given below.
+        var mid = ((top + s.height / 2) / m.vh + 0.5 * drift / m.vh) / (1 + drift / m.vh);
+        var o = (tall
+          ? smooth(1.06, 0.9, mid) * (1 - smooth(0.62, 0.44, mid))
+          : smooth(1.04, 0.82, mid) * (1 - smooth(0.24, 0.04, mid))).toFixed(3);
+        var ty = ((0.5 - mid) * drift).toFixed(1);
+        if (o !== s.o) { s.o = o; s.body.style.opacity = o; }
+        if (ty !== s.ty) { s.ty = ty; s.body.style.transform = 'translate3d(0,' + ty + 'px,0)'; }
       }
     }
+
+    // The rail on the right, the chip on small screens and the menu at the top.
+    var last = scenes.length ? scenes[scenes.length - 1].focus : 0;
+    var newsAt = Math.max(last + 1, m.news - m.vh * 0.5);
+    var appsAt = Math.max(newsAt + 1, m.apps - m.vh * 0.5);
+    var where = y >= appsAt ? 6 : y >= newsAt ? 5 + (y - newsAt) / (appsAt - newsAt) : y > last ? 4 + (y - last) / (newsAt - last) : p;
+    var cue = y >= appsAt ? 6 : y >= newsAt ? 5 : Math.round(p);
+    if (els.fill) els.fill.style.transform = 'scaleY(' + (where / 6).toFixed(4) + ')';
+    if (cue !== state.cue) {
+      state.cue = cue;
+      els.cues.forEach(function (c, n) {
+        c.classList.toggle('is-active', n === cue);
+        c.classList.toggle('is-done', n < cue);
+        if (n === cue) c.setAttribute('aria-current', 'true'); else c.removeAttribute('aria-current');
+      });
+      if (els.rail) els.rail.classList.toggle('is-quiet', cue >= 5);
+      if (els.chipText) els.chipText.textContent = CUE_NAMES[cue];
+      els.nav.forEach(function (link) {
+        var key = link.getAttribute('data-nav');
+        link.classList.toggle('is-active', (key === 'process' && cue >= 1 && cue <= 4) || (key === 'news' && cue === 5) || (key === 'apps' && cue === 6));
+      });
+    }
+    var chipOn = y > 60 && y < m.max - 30;
+    if (chipOn !== state.chipOn) { state.chipOn = chipOn; if (els.chip) els.chip.classList.toggle('is-on', chipOn); }
+    var stuck = y > 14;
+    if (stuck !== state.stuck) { state.stuck = stuck; if (els.top) els.top.classList.toggle('is-stuck', stuck); }
+    var hasCta = y > m.cta - 70;
+    if (hasCta !== state.hasCta) { state.hasCta = hasCta; if (els.top) els.top.classList.toggle('has-cta', hasCta); }
   }
 
   // The two bands of big type drift on their own and run faster while you scroll.
-  function runTickers(now) {
-    var dt = Math.min(0.05, state.last ? (now - state.last) / 1000 : 0);
-    state.last = now;
-    if (!calm) {
-      state.drift += dt * 26;
-      var y = window.pageYOffset;
-      tickers.forEach(function (t) {
-        if (y + m.vh < t.top - 100 || y > t.top + 400 || !t.loop) return;
-        var travel = (state.drift + (y + m.vh - t.top) * 0.55) % t.loop;
-        var tx = t.dir < 0 ? -travel : travel - t.loop;
-        t.row.style.setProperty('--tx', tx.toFixed(1) + 'px');
-      });
+  // They only do any work while one of them is on screen.
+  var tickerFrame = 0;
+  function placeTickers() {
+    var y = state.y < 0 ? window.pageYOffset : state.y;
+    for (var i = 0; i < tickers.length; i++) {
+      var t = tickers[i];
+      if (!t.on || !t.loop) continue;
+      var travel = (state.drift + (y + m.vh - t.top) * 0.55) % t.loop;
+      if (travel < 0) travel += t.loop;
+      t.row.style.transform = 'translate3d(' + (t.dir < 0 ? -travel : travel - t.loop).toFixed(1) + 'px,0,0)';
     }
-    requestAnimationFrame(runTickers);
+  }
+  function runTickers(now) {
+    tickerFrame = 0;
+    var gap = state.last ? now - state.last : 0;
+    if (!state.last || gap >= 10.6) {     // on very fast screens every second refresh is plenty
+      state.drift += Math.min(0.05, gap / 1000) * 26;
+      state.last = now;
+      placeTickers();
+    }
+    wakeTickers();
+  }
+  function wakeTickers() {
+    if (tickerFrame || calm || document.hidden) return;
+    for (var i = 0; i < tickers.length; i++) {
+      if (tickers[i].on) { tickerFrame = requestAnimationFrame(runTickers); return; }
+    }
+    state.last = 0;
+  }
+  function watchTickers() {
+    if (calm) return;
+    if (!('IntersectionObserver' in window)) {
+      tickers.forEach(function (t) { t.on = true; });
+      wakeTickers();
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        tickers.forEach(function (t) { if (t.el === entry.target) t.on = entry.isIntersecting; });
+      });
+      wakeTickers();
+    }, { rootMargin: '120px 0px 120px 0px' });
+    tickers.forEach(function (t) { io.observe(t.el); });
+    document.addEventListener('visibilitychange', wakeTickers);
   }
 
   /* ---------- the 3D stage ---------- */
+
+  // For testing: ?3d keeps the stage on, at full sharpness, even on a device that draws it slowly.
+  var force3d = /[?&]3d\b/.test(location.search);
 
   function frameStage() {
     if (!stage) return;
@@ -328,12 +390,20 @@
       : { right: 0.225, up: -0.02, fillHeight: 0.66, fillWidth: 0.5 });
   }
 
-  function goStill() {
+  // Swaps the 3D stage for still pictures. With keepPlace, the reader stays at the step they were on.
+  function goStill(keepPlace) {
+    var here = keepPlace && staged && window.pageYOffset < m.news - m.vh ? Math.round(state.p) : 0;
     staged = false;
     if (stage) { stage.run(false); stage = null; }
     root.classList.remove('stage-pending', 'stage-on');
     root.classList.add('still');
-    $$('[data-scene-body]').forEach(function (b) { b.style.removeProperty('--o'); b.style.removeProperty('--ty'); });
+    $$('[data-scene-body]').forEach(function (b) { b.style.opacity = ''; b.style.transform = ''; });
+    scenes.forEach(function (s) { s.o = s.ty = undefined; });
+    if (here > 0) {
+      // The page is laid out differently without the stage.
+      var el = $$('[data-scene]')[here];
+      if (el) window.scrollTo({ top: Math.max(0, docTop(el) - 90), behavior: 'instant' });
+    }
     requestMeasure();
   }
 
@@ -344,9 +414,15 @@
     function sync() { if (stage) stage.run(onStage && !document.hidden); }
 
     api.createStage(canvas, {
+      adaptive: !force3d,
       onFirstFrame: function () {
         root.classList.add('stage-on');
         root.classList.remove('stage-pending');
+      },
+      onStruggle: function () {
+        if (force3d) return;
+        if (window.console) console.info('The 3D stage is too slow on this device, so the page is showing still pictures instead.');
+        setTimeout(function () { goStill(true); }, 0);
       },
     }).then(function (made) {
       stage = made;
@@ -368,7 +444,7 @@
       if (tallQuery.addEventListener) tallQuery.addEventListener('change', function () { frameStage(); requestMeasure(); });
       if (finePointer) {
         window.addEventListener('pointermove', function (e) {
-          stage.setPointer((e.clientX / window.innerWidth) * 2 - 1, (e.clientY / window.innerHeight) * 2 - 1);
+          if (stage) stage.setPointer((e.clientX / window.innerWidth) * 2 - 1, (e.clientY / window.innerHeight) * 2 - 1);
         }, { passive: true });
       }
       sync();
@@ -401,15 +477,22 @@
   function init() {
     els.cues = $$('[data-cue]');
     els.rail = $('[data-cues]');
+    els.fill = $('[data-cues-fill]');
     els.nav = $$('[data-nav]');
     els.chip = $('[data-chip]');
     els.chipText = $('[data-chip-text]');
+    els.arc = $('[data-chip-arc]');
     els.top = $('[data-top]');
+    els.bar = $('[data-progress]');
+    tickers = $$('[data-ticker]').map(function (el) {
+      return { el: el, row: $('.ticker-row', el), dir: parseFloat(el.getAttribute('data-ticker')) || -1, top: 0, loop: 0, on: false };
+    });
 
     safely(renderNews);
     safely(renderApps);
     safely(setupReveal);
     safely(measure);
+    safely(watchTickers);
 
     var ticking = false;
     window.addEventListener('scroll', function () {
@@ -428,8 +511,8 @@
     window.addEventListener('load', requestMeasure);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(requestMeasure);
     if ('ResizeObserver' in window) new ResizeObserver(requestMeasure).observe($('.sheet') || document.body);
+    if (chipQuery.addEventListener) chipQuery.addEventListener('change', function () { state.y = -1; update(); });
 
-    requestAnimationFrame(runTickers);
     safely(bootStage);
   }
 

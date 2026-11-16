@@ -40,8 +40,16 @@ Add an entry to [`assets/data/apps.js`](assets/data/apps.js) and put its cover i
 ## The 3D stage
 
 - [`assets/js/stage3d.js`](assets/js/stage3d.js) builds the revolving stage with [three.js](https://threejs.org) (a copy is in `assets/vendor/three/`).
-- Where 3D cannot run (no WebGL, or the visitor prefers reduced motion) the page shows still pictures from `assets/img/posters/` instead. Add `?still` to the address to see that version.
+- Where 3D cannot run (no WebGL, no graphics chip, or the visitor prefers reduced motion) the page shows still pictures from `assets/img/posters/` instead. Add `?still` to the address to see that version.
 - `tools/stage-lab.html` is a workbench for the stage, and `tools/make_posters.py` re-renders the still pictures after the stage changes.
+
+### Keeping it smooth
+
+- Every shader, shape and picture is loaded before the first frame, so nothing stalls the first time a set swings into view.
+- The stage never draws more than about 3 million pixels, and on screens faster than 90 Hz it draws every second or third refresh.
+- [`assets/js/pace.js`](assets/js/pace.js) watches how long frames really take. On a device that cannot keep up it draws the stage a little softer, and if that is still too slow the page swaps to the still pictures. `node tools/test_pace.mjs` checks that logic.
+- Scrolling only moves one small element at a time (see `update()` in [`assets/js/site.js`](assets/js/site.js)).
+- Add `?3d` to the address to keep the stage on at full sharpness whatever the device, for testing.
 
 ## Preview on your computer
 

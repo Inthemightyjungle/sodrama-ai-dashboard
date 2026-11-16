@@ -13,9 +13,17 @@
 
   The little violet tile with the sparkle is the "AI tool". It appears in every
   bay, so the four steps read as one journey.
+
+  Keeping it smooth (see also pace.js):
+  - every shader is made ready before the first frame, so nothing stalls the
+    first time a set swings into view;
+  - the picture is never drawn with more pixels than PIXEL_BUDGET, and with
+    fewer if this device cannot keep up;
+  - on very fast screens it draws every second or third refresh, not all of them.
 */
 import * as THREE from '../vendor/three/three.module.min.js';
 import { RoundedBoxGeometry } from '../vendor/three/RoundedBoxGeometry.js';
+import { createPace } from './pace.js';
 
 const TAU = Math.PI * 2;
 const SETS = 5;
@@ -28,7 +36,6 @@ const FOCUS = new THREE.Vector3(0, 1.3, RING);
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const lerp = (a, b, t) => a + (b - a) * t;
 const smooth = (a, b, v) => { const t = clamp((v - a) / (b - a)); return t * t * (3 - 2 * t); };
-const smoother = (t) => t * t * t * (t * (t * 6 - 15) + 10);
 const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
 const easeOutBack = (t) => 1 + 2.70158 * Math.pow(t - 1, 3) + 1.70158 * Math.pow(t - 1, 2);
 const pop = (t, start, length) => { const k = clamp((t - start) / length); return k <= 0 ? 0 : easeOutBack(k); };
@@ -694,6 +701,7 @@ function buildShowtime(M, G, glow) {
 
   return {
     group: g,
+    lamps: [screenLight, signLight],
     update(t, act, clock) {
       lid.rotation.x = lerp(1.5, -0.27, easeOutCubic(clamp((t - 0.1) / 0.9)));
       const boot = smooth(0.9, 1.3, t);
@@ -829,21 +837,25 @@ function buildRevolve(M, G, glow) {
   }
   lightBulbs(0, 0);
 
-  const builders = [buildIntro, buildDeclare, buildReview, buildPurchase, buildShowtime];
-  const sets = builders.map((build, i) => {
+  // The five sets are added one at a time (see createStage), so that building
+  // them never holds the page up for long.
+  const sets = [];
+  function addSet(build) {
     const set = build(M, G, glow);
     const slot = new THREE.Group();
-    const angle = i * STEP;
+    const angle = sets.length * STEP;
     slot.position.set(Math.sin(angle) * RING, 0, Math.cos(angle) * RING);
     slot.rotation.y = angle;
     slot.add(set.group);
     revolve.add(slot);
     set.time = 0;
-    return set;
-  });
+    sets.push(set);
+  }
 
-  return { revolve, sets, lightBulbs };
+  return { revolve, sets, lightBulbs, addSet };
 }
+
+const BUILDERS = [buildIntro, buildDeclare, buildReview, buildPurchase, buildShowtime];
 
 /* ---------- light, haze and dust ---------- */
 
@@ -939,14 +951,42 @@ function buildEnvironment(renderer) {
 
 /* ---------- the stage ---------- */
 
+const MIN_GAP = 10.6;        // ms between drawn frames: screens faster than about 90 Hz get every second or third refresh
+const PIXEL_BUDGET = 3.0e6;  // the most pixels the stage draws; a bigger window is drawn a little softer instead
+const SOFTEST = 0.6;         // how soft the stage may go on a device that cannot keep up
+const FOLLOW = 15;           // how tightly the stage follows the scroll (bigger is tighter)
+
+const breathe = () => new Promise((resolve) => setTimeout(resolve, 0));
+const mark = (name) => { try { performance.mark('sd-stage-' + name); } catch (e) { /* only for measuring */ } };
+
+// How sharply to draw: as sharp as the screen (up to twice), but within the pixel budget.
+function sharpness(width, height) {
+  const device = window.devicePixelRatio || 1;
+  const fit = Math.sqrt(PIXEL_BUDGET / Math.max(1, width * height));
+  return Math.max(Math.min(1, device), Math.min(device, 2, fit));
+}
+
+/*
+  options
+    framing       where the set sits in the frame (see resize)
+    onFirstFrame  called once, when the first frame has been drawn
+    onStruggle    called if this device cannot run the stage at a usable speed
+    pixelRatio    draw at exactly this sharpness (the lab and the poster tool use this)
+    adaptive      false to switch off the automatic softening (also for the lab)
+    preserve      keep the drawing after each frame, for screenshots
+*/
 export async function createStage(canvas, options = {}) {
+  mark('start');
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance', preserveDrawingBuffer: !!options.preserve });
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFShadowMap;
+  renderer.shadowMap.autoUpdate = false;   // frame() says when the shadows need redrawing
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.12;
-  let pixelRatio = Math.min(window.devicePixelRatio || 1, options.maxPixelRatio || 2);
-  renderer.setPixelRatio(pixelRatio);
+  const fixedRatio = options.pixelRatio || (options.maxPixelRatio ? Math.min(window.devicePixelRatio || 1, options.maxPixelRatio) : 0);
+  const adaptive = options.adaptive !== false && !fixedRatio;
+  let pixelRatio = fixedRatio || 1;
+  let pace = null;
 
   if (document.fonts && document.fonts.load) {
     try {
@@ -954,11 +994,14 @@ export async function createStage(canvas, options = {}) {
     } catch (e) { /* the labels fall back to a system face */ }
   }
 
+  // Building the scene is a lot of work, so it is done in several short
+  // sittings. Between them the page is free to scroll and paint.
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(HOUSE);
   scene.fog = new THREE.Fog(HOUSE, 16, 40);
   scene.environment = buildEnvironment(renderer);
   scene.environmentIntensity = 0.7;
+  await breathe();
 
   const M = makeMaterials();
   const G = makeGeometries();
@@ -974,8 +1017,13 @@ export async function createStage(canvas, options = {}) {
   const ground = mesh(new THREE.CircleGeometry(DISC * 1.9, 64), new THREE.MeshStandardMaterial({ color: 0x15101a, roughness: 0.9, envMapIntensity: 0, alphaMap: fade, transparent: true }), { pos: [0, -0.24, 0], rot: [-Math.PI / 2, 0, 0], cast: false });
   scene.add(ground);
 
-  const { revolve, sets, lightBulbs } = buildRevolve(M, G, glow);
+  const { revolve, sets, lightBulbs, addSet } = buildRevolve(M, G, glow);
   scene.add(revolve);
+  for (let i = 0; i < BUILDERS.length; i++) {
+    await breathe();
+    addSet(BUILDERS[i]);
+  }
+  await breathe();
 
   const lampAt = new THREE.Vector3(-3.4, 10.2, RING + 4.6);
   const lampTarget = new THREE.Vector3(0, 0.5, RING + 0.1);
@@ -983,12 +1031,12 @@ export async function createStage(canvas, options = {}) {
   key.position.copy(lampAt);
   key.target.position.copy(lampTarget);
   key.castShadow = true;
-  key.shadow.mapSize.set(2048, 2048);
+  key.shadow.mapSize.set(1536, 1536);
   key.shadow.camera.near = 4;
   key.shadow.camera.far = 24;
   key.shadow.bias = -0.0005;
   key.shadow.normalBias = 0.03;
-  key.shadow.radius = 5;
+  key.shadow.radius = 3.75;
   scene.add(key, key.target);
 
   const wash = new THREE.SpotLight(0xff8f6a, 85, 0, 0.62, 1, 2);
@@ -1009,16 +1057,21 @@ export async function createStage(canvas, options = {}) {
   const camera = new THREE.PerspectiveCamera(28, 1, 0.5, 80);
   const state = {
     target: 0, progress: 0, clock: 0, pointerX: 0, pointerY: 0, eyeX: 0, eyeY: 0,
-    framing: options.framing || null, distance: 10, running: false, frames: 0, slow: 0, width: 0, height: 0,
+    framing: options.framing || null, distance: 10, running: false, frames: 0, idle: 0, width: 0, height: 0, rehearse: false,
   };
 
   function resize(force) {
-    const width = canvas.clientWidth || canvas.width;
-    const height = canvas.clientHeight || canvas.height;
+    const width = canvas.clientWidth || (state.width ? 0 : canvas.width);
+    const height = canvas.clientHeight || (state.height ? 0 : canvas.height);
     if (!width || !height) return;
-    if (!force && width === state.width && height === state.height) return;
-    state.width = width;
-    state.height = height;
+    const sized = width !== state.width || height !== state.height;
+    if (!force && !sized) return;
+    if (sized) {
+      state.width = width;
+      state.height = height;
+      pixelRatio = fixedRatio || sharpness(width, height);
+      pace = adaptive ? createPace({ start: pixelRatio, floor: Math.min(pixelRatio, SOFTEST), onStruggle: options.onStruggle }) : null;
+    }
     renderer.setPixelRatio(pixelRatio);
     renderer.setSize(width, height, false);
     const aspect = width / height;
@@ -1034,29 +1087,37 @@ export async function createStage(canvas, options = {}) {
     camera.aspect = aspect;
     camera.setViewOffset(width, height, -f.right * width, f.up * height, width, height);
     camera.updateProjectionMatrix();
+    renderer.shadowMap.needsUpdate = true;
   }
 
-  function frame(dt) {
+  // `fresh` forces the shadows to be redrawn (stills and recordings always ask for it).
+  function frame(dt, fresh) {
     state.clock += dt;
-    state.progress += (state.target - state.progress) * (1 - Math.exp(-dt * 7));
+    const from = state.progress;
+    state.progress += (state.target - state.progress) * (1 - Math.exp(-dt * FOLLOW));
     if (Math.abs(state.target - state.progress) < 0.0005) state.progress = state.target;
     const p = clamp(state.progress, 0, SETS - 1);
     const whole = Math.min(Math.floor(p), SETS - 2);
     const part = p - whole;
-    const turn = whole + smoother(clamp((part - 0.16) / 0.68));
+    // The floor rests while a set is centre stage and turns in between.
+    const turn = whole + smooth(0.1, 0.9, part);
     revolve.rotation.y = -turn * STEP;
 
+    let performing = false;
     sets.forEach((set, i) => {
       const act = 1 - smooth(0.28, 0.6, Math.abs(p - i));
       if (act > 0.55) set.time += dt;
       else if (act < 0.02) set.time = 0;
       set.group.visible = Math.abs(p - i) < 0.97;
-      if (set.group.visible) set.update(set.time, act, state.clock);
+      if (set.group.visible) {
+        set.update(set.time, act, state.clock);
+        if (set.time > 0 && set.time < 3.8) performing = true;
+      }
     });
 
     dust.update(state.clock);
     const travelling = Math.sin(clamp(part) * Math.PI);
-    const lit = smooth(0.15, 1.7, state.clock);
+    const lit = smooth(0.1, 1.4, state.clock);
     lightBulbs(state.clock, travelling * lit + (lit - 1));
     key.intensity = 600 * lit;
     wash.intensity = 85 * (0.25 + 0.75 * lit);
@@ -1067,27 +1128,98 @@ export async function createStage(canvas, options = {}) {
     const d = state.distance * (1 + travelling * 0.045);   // the camera eases back a little while the stage turns
     camera.position.set(FOCUS.x + state.eyeX * 0.7, FOCUS.y + d * 0.19 - state.eyeY * 0.35, FOCUS.z + d * 0.982);
     camera.lookAt(FOCUS);
+
+    // Shadows are redrawn on every frame while something moves quickly (the
+    // floor turning, a set doing its piece, the lights coming up) and on every
+    // second frame while the scene only idles. Nobody can see the difference.
+    const quick = fresh || performing || state.progress !== from || lit < 1;
+    if (quick || (state.idle++ & 1) === 0) renderer.shadowMap.needsUpdate = true;
     renderer.render(scene, camera);
   }
 
-  let last = 0;
-  function tick(now) {
-    const dt = Math.min(0.1, last ? (now - last) / 1000 : 0.016);
-    last = now;
-    // If this device struggles, trade sharpness for smoothness.
-    if (dt > 0.034) state.slow++; else state.slow = Math.max(0, state.slow - 1);
-    if (state.slow > 45 && pixelRatio > 1) {
-      pixelRatio = Math.max(1, pixelRatio - 0.5);
-      state.slow = 0;
-      resize(true);
-    } else {
-      resize(false);
-    }
-    frame(dt);
-    if (!state.frames++ && options.onFirstFrame) options.onFirstFrame();
+  /*
+    Before the first frame, get every shape, picture and shader onto the
+    graphics card. Otherwise each set stalls the page for a moment the first
+    time it swings into view, and the last one stalls it longest: its two lamps
+    change the lighting sums for everything they reach, which needs a second
+    version of every shader.
+  */
+  const lamps = sets.reduce((all, set) => all.concat(set.lamps || []), []);
+  const overhead = new THREE.OrthographicCamera(-15, 15, 15, -15, 1, 90);
+  overhead.position.set(0, 45, 0);
+  overhead.up.set(0, 0, -1);
+  overhead.lookAt(0, 0, 0);
+
+  // One postage-stamp drawing of everything at once. It costs next to nothing
+  // and leaves every shape, picture and shader loaded and used once.
+  function rehearse() {
+    sets.forEach((set) => { set.group.visible = true; });
+    renderer.setViewport(0, 0, 4, 4);
+    renderer.setScissor(0, 0, 4, 4);
+    renderer.setScissorTest(true);
+    renderer.shadowMap.needsUpdate = true;
+    renderer.render(scene, overhead);
+    renderer.setScissorTest(false);
+    renderer.setViewport(0, 0, state.width, state.height);
+    renderer.shadowMap.needsUpdate = true;
   }
 
   resize(true);
+  mark('built');
+  try {
+    sets.forEach((set) => { set.group.visible = true; });
+    lamps.forEach((lamp) => { lamp.visible = false; });
+    // Where the browser can, the shaders are compiled in the background while the page carries on.
+    const background = renderer.extensions.has('KHR_parallel_shader_compile');
+    if (background) await renderer.compileAsync(scene, overhead); else renderer.compile(scene, overhead);
+    rehearse();
+    await breathe();
+    lamps.forEach((lamp) => { lamp.visible = true; });
+    if (background) {
+      let second = false;
+      const withLamps = renderer.compileAsync(scene, overhead).then(() => { second = true; });
+      await Promise.race([withLamps, new Promise((r) => setTimeout(r, 1000))]);
+      if (second) rehearse();
+      else withLamps.then(() => { state.rehearse = true; }, () => {});   // slow device: finish this at the first quiet moment
+    } else {
+      rehearse();
+    }
+  } catch (err) {
+    lamps.forEach((lamp) => { lamp.visible = true; });
+    if (window.console) console.warn('The stage could not be prepared ahead of time; it will load as it goes.', err);
+  }
+  mark('ready');
+
+  // The browser says when the canvas changes size, so nothing has to be measured on every frame.
+  const watched = typeof ResizeObserver !== 'undefined';
+  let sizeChanged = true;
+  if (watched) new ResizeObserver(() => { sizeChanged = true; }).observe(canvas);
+
+  let last = 0;    // when the screen last refreshed
+  let drawn = 0;   // when the stage was last drawn
+  function tick(now) {
+    if (last && pace) pace.tick(now - last);
+    last = now;
+    const gap = drawn ? now - drawn : 0;
+    if (drawn && gap < MIN_GAP) return;
+    drawn = now;
+    // If this device struggles, trade sharpness for smoothness (see pace.js).
+    const next = pace ? pace.frame(gap, now) : 0;
+    if (next) pixelRatio = next;
+    if (next || sizeChanged || !watched) {
+      sizeChanged = false;
+      resize(!!next);
+    }
+    if (state.rehearse && state.progress === state.target) {
+      state.rehearse = false;
+      rehearse();
+    }
+    frame(gap ? Math.min(0.1, gap / 1000) : 1 / 60);
+    if (!state.frames++) {
+      mark('first-frame');
+      if (options.onFirstFrame) options.onFirstFrame();
+    }
+  }
 
   return {
     setProgress(value) { state.target = clamp(value, 0, SETS - 1); },
@@ -1097,12 +1229,14 @@ export async function createStage(canvas, options = {}) {
     // Two helpers for taking pictures and recordings of the page:
     // skip ahead in the set that is on stage, or draw exactly one frame.
     settle(seconds) { sets.forEach((set, i) => { if (Math.abs(state.target - i) < 0.3) set.time = seconds; }); },
-    advance(dt) { resize(false); frame(dt); },
+    advance(dt) { resize(false); frame(dt, true); },
     resize() { resize(true); },
     run(on) {
       if (on === state.running) return;
       state.running = on;
       last = 0;
+      drawn = 0;
+      if (pace) pace.pause();
       renderer.setAnimationLoop(on ? tick : null);
     },
     // Draws one still: bay `index`, `seconds` into its little performance.
@@ -1112,8 +1246,10 @@ export async function createStage(canvas, options = {}) {
       state.clock = clock;
       state.eyeX = state.eyeY = state.pointerX = state.pointerY = 0;
       resize(true);
-      frame(0);
+      frame(0, true);
     },
+    // How sharply the stage is being drawn right now.
+    quality() { return { ratio: pixelRatio, width: canvas.width, height: canvas.height, adaptive: !!pace }; },
     renderer,
     scene,
   };
