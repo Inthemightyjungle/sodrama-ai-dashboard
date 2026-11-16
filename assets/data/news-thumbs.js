@@ -1,48 +1,48 @@
 window.SD_NEWS_THUMBS = {
-  "_for": "6955fd5973d4ea75",
-  "disney-ozzy-fox-ai-animation": {
-    "src": "assets/img/news/disney-ozzy-fox-ai-animation.jpg",
-    "w": 960,
-    "h": 537,
-    "v": "017551eb",
-    "page": "https://www.cnet.com/tech/services-and-software/animaj-ozzy-fox-series-disney-plus-ai-agentic-animation/",
-    "wanted": "",
-    "image": "https://www.cnet.com/wp-content/uploads/sites/2/Screenshot-2026-11-11-at-9.53.14-AM.png"
-  },
-  "facestealer-fake-video-calls": {
-    "src": "assets/img/news/facestealer-fake-video-calls.jpg",
+  "_for": "09fe9a4fb305188d",
+  "ace-editors-ai-survey": {
+    "src": "assets/img/news/ace-editors-ai-survey.jpg",
     "w": 960,
     "h": 540,
-    "v": "425208c5",
-    "page": "https://www.bbc.co.uk/news/articles/cqdj1ellpd70o",
+    "v": "d8ec0ce6",
+    "page": "https://variety.com/2026/biz/news/surveyed-ace-editors-using-ai-avid-data-finds-1236947004/",
     "wanted": "",
-    "image": "https://ichef.bbci.co.uk/ace/branded_news/1200/cpsprodpb/c16a/live/65ee22f0-df02-11f1-b6e1-5b169363fed4.jpg"
+    "image": "https://variety.com/wp-content/uploads/2026/11/Molly_Shock_ACE_17-1.jpg?w=1000&h=563&crop=1"
   },
-  "avid-ready-to-play": {
-    "src": "assets/img/news/avid-ready-to-play.jpg",
+  "eu-ai-label-guidelines": {
+    "src": "assets/img/news/eu-ai-label-guidelines.jpg",
+    "w": 960,
+    "h": 504,
+    "v": "f0f710dd",
+    "page": "https://ppc.land/non-eu-advertisers-face-3-eu-fines-for-unlabelled-ai-deep-fake-ads/",
+    "wanted": "",
+    "image": "https://ppc.land/content/images/2026/11/mp-og-7a267889-bda5-4345-a599-bc8f5acce36e.png"
+  },
+  "adobe-project-live-set": {
+    "src": "assets/img/news/adobe-project-live-set.jpg",
     "w": 960,
     "h": 540,
-    "v": "15e0bab7",
-    "page": "https://www.avid.com/press-room/2026/11/avid-launches-ready-to-play-putting-new-ai-creative-capabilities-into-editors-hands",
+    "v": "02398566",
+    "page": "https://www.videomaker.com/news/project-live-set-lets-you-steer-adobe-ai-video-mid-stream",
     "wanted": "",
-    "image": "https://edge.sitecorecloud.io/avidtech-d6a2e9a9/media/images/press-room-archive/2026/11/media-composer-ready-to-play-app-perspective-1080p.jpg?h=1080&iar=0&w=1920"
+    "image": "https://assets.videomaker.com/2026/11/project_live_set_01-1400x788-1.jpg"
   },
-  "world-labs-atlas-open": {
-    "src": "assets/img/news/world-labs-atlas-open.jpg",
+  "elevenlabs-elevenai-notes": {
+    "src": "assets/img/news/elevenlabs-elevenai-notes.jpg",
     "w": 960,
-    "h": 540,
-    "v": "2e7c2f8d",
-    "page": "https://worldlabs.ai/atlas",
+    "h": 619,
+    "v": "eea2b1ff",
+    "page": "https://techcrunch.com/2026/11/13/elevenlabs-new-app-combines-meeting-note-taking-and-dictation-for-teams/",
     "wanted": "",
-    "image": "https://worldlabs.ai/images/blog/atlas-ga.jpg"
+    "image": "https://techcrunch.com/wp-content/uploads/2026/11/Screenshot-2026-11-13-at-7.19.18-PM.jpg?resize=1200,774"
   },
-  "gemini-4-hydrogen": {
-    "src": "assets/img/news/gemini-4-hydrogen.jpg",
+  "yahoo-ilc-ai-licensing": {
+    "src": "assets/img/news/yahoo-ilc-ai-licensing.jpg",
     "w": 960,
-    "h": 540,
-    "v": "2566a79c",
-    "page": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
+    "h": 558,
+    "v": "db4510a6",
+    "page": "https://digiday.com/media/yahoo-becomes-first-licensee-of-spotify-like-collective-ai-content-licensing-model/",
     "wanted": "",
-    "image": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/gemini-4-hydrogen__key-art__lockup__16-9.width-1300.jpg"
+    "image": "https://digiday.com/wp-content/uploads/sites/3/2026/05/brand-creator-deals-digiday.jpg"
   }
 };
