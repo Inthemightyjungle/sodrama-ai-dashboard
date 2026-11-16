@@ -13,6 +13,12 @@
 <meta property="og:image" content="https://inthemightyjungle.github.io/sodrama-ai-dashboard/assets/img/og.png">
 <link rel="icon" href="assets/img/favicon.png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<!-- So the dashboard can be installed as an app (see manifest.webmanifest and sw.js). -->
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="So Drama AI">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <link rel="preload" href="assets/fonts/bodonimoda-var.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/fonts/archivo-var.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="assets/css/site.css">
@@ -23,6 +29,14 @@
     root.className = 'js';
     var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (calm) root.className += ' calm';
+
+    // The browser's offer to install the site as an app can come before the page has finished loading,
+    // so it is caught here and kept for the "Install app" buttons (see setupInstall() in site.js).
+    window.addEventListener('beforeinstallprompt', function (e) {
+      e.preventDefault();
+      window.SD_INSTALL = e;
+      root.classList.add('can-install');
+    });
 
     // The four steps are the front page the first time someone opens the site.
     // After that it opens on the AI news, and the steps are the third tab.
@@ -85,6 +99,7 @@
     <a href="#apps" data-nav="apps">Apps</a>
     <a href="#how" data-nav="how">How it works</a>
   </nav>
+  <button class="btn btn-install btn-install-top" type="button" data-install><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>Install app</button>
   <a class="btn btn-mini" data-mini-cta href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=rcy329-Y_kaUIVobvsyr0TBFYZVJ-u1FmQ3PZtT_HmlUNFlVNjJPVjcwTFJTTjVITE5IQVpZUTNYOSQlQCN0PWcu" target="_blank" rel="noopener">Declare a tool<span class="sr-only"> (opens the form in a new tab)</span></a>
 </header>
 
@@ -262,7 +277,11 @@
   <footer class="foot">
     <div class="wrap foot-inner">
       <p class="foot-brand"><img src="assets/img/logo-white.png" alt="" width="648" height="296" loading="lazy"><span>So Drama! Entertainment<br>AI Solutions Dashboard</span></p>
-      <a class="btn btn-ghost" href="#main" data-to-top>Back to the top<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></a>
+      <div class="foot-actions">
+        <button class="btn btn-ghost btn-install" type="button" data-install><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>Install the app</button>
+        <p class="install-hint">To add it to your iPhone or iPad: tap <strong>Share</strong>, then <strong>Add to Home Screen</strong>.</p>
+        <a class="btn btn-ghost" href="#main" data-to-top>Back to the top<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></a>
+      </div>
     </div>
   </footer>
 

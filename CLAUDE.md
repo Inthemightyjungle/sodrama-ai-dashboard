@@ -32,6 +32,7 @@ Live: https://inthemightyjungle.github.io/sodrama-ai-dashboard/
 | Path | What it is |
 | --- | --- |
 | `index.html` | All three pages (`#news`, `#apps`, `#how`). The small script in its `<head>` picks the page to open on before the first paint. |
+| `manifest.webmanifest`, `sw.js`, `assets/img/app/` | Make the site installable as an app. `sw.js` always asks the network first and keeps a copy only for offline use, so new news shows straight away; change its `VERSION` only when its `SHELL` list changes. |
 | `assets/css/site.css` | All styles. |
 | `assets/js/site.js` | News and app lists, switching between the three pages, scroll indicators, starts the stage. |
 | `assets/js/stage3d.js` | The 3D revolving stage (three.js). `stage-boot.js` loads it. |

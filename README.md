@@ -1,5 +1,7 @@
 # So Drama! Entertainment: AI Solutions Dashboard
 
+**Open the dashboard: <https://inthemightyjungle.github.io/sodrama-ai-dashboard/>**
+
 Everything AI at So Drama!, in three tabs:
 
 1. **AI news** (The AI Dispatch): five AI stories, refreshed every morning, with at least one word of caution.
@@ -10,9 +12,18 @@ The first time someone opens the site, **How it works** is the front page. From 
 
 Each tab has its own address: add `#news`, `#apps` or `#how` to the link (`#step-2` goes straight to step 2).
 
-Live site: https://inthemightyjungle.github.io/sodrama-ai-dashboard/
-
 It is a plain static site (HTML, CSS and JavaScript, no build step), hosted on GitHub Pages. Nothing is loaded from other servers: fonts, the 3D library and news thumbnails all live in this repository.
+
+## Install it as an app
+
+The dashboard can sit on a computer or phone like an app, with its own icon and window.
+
+- **Chrome or Edge, on a computer or Android:** click **Install app** in the top bar (or at the bottom of any page), or use the install icon in the address bar.
+- **iPhone or iPad:** open the link in Safari, tap **Share**, then **Add to Home Screen**.
+
+Once installed it opens even without a connection, showing the news and apps from the last visit. When online it always fetches the latest news first.
+
+How it works: [`manifest.webmanifest`](manifest.webmanifest) names the app and its icons (`assets/img/app/`), and [`sw.js`](sw.js) keeps a copy of the site for offline use. Neither needs touching when the news or apps change.
 
 ## The AI Dispatch updates itself
 

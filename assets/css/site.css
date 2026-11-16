@@ -95,6 +95,12 @@ html[data-view]:not([data-view="how"]) .cues, html[data-view]:not([data-view="ho
 .btn-mini { padding: 10px 16px; font-size: 14px; background: var(--tungsten); color: var(--coal); opacity: 0; pointer-events: none; transform: translateY(-8px); }
 .top.has-cta .btn-mini { opacity: 1; pointer-events: auto; transform: none; }
 .btn-mini:hover { background: var(--tungsten-hi); }
+/* Install buttons only appear when the browser offers to install the site as an app (see setupInstall() in site.js). */
+.btn-install { display: none; color: var(--ivory); }
+.can-install .btn-install { display: inline-flex; }
+.btn-install-top { padding: 10px 16px; border-color: var(--line-2); background: rgba(255, 255, 255, .05); font-size: 14px; }
+.btn-install-top:hover { border-color: var(--tungsten); color: var(--tungsten); }
+.btn-install svg { width: 17px; height: 17px; margin-left: -2px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 
 /* The big one. It is built like a stage push-button: it sits proud and sinks when pressed. */
 .cta {
@@ -334,6 +340,11 @@ html[data-view]:not([data-view="how"]) .cues, html[data-view]:not([data-view="ho
 .foot-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; }
 .foot-brand { display: flex; align-items: center; gap: 16px; font-size: 14px; line-height: 1.35; color: var(--dim); }
 .foot-brand img { width: auto; height: 34px; }
+.foot-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 14px; }
+/* iPhone and iPad have no install button in Safari, so they get a line of instructions instead. */
+.install-hint { display: none; max-width: 30em; font-size: 14px; line-height: 1.45; color: var(--dim); }
+.ios-install .install-hint { display: block; }
+.install-hint strong { color: var(--ivory); font-weight: 700; }
 
 /* ---------- things that arrive as you scroll ---------- */
 
@@ -376,7 +387,7 @@ html[data-view]:not([data-view="how"]) .cues, html[data-view]:not([data-view="ho
 }
 @media (max-width: 860px) {
   :root { --tabbar: 62px; }
-  .nav { display: none; }
+  .nav, .btn-install-top { display: none !important; }
   .tabbar { position: fixed; inset: auto 0 0 0; z-index: 55; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 6px 10px calc(6px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); background: var(--house); }
   .tabbar a { display: grid; justify-items: center; gap: 3px; padding: 6px 4px 5px; border-radius: 14px; font-weight: 600; font-size: 11.5px; line-height: 1.2; color: var(--faint); text-decoration: none; transition: color .2s, background-color .2s; }
   .tabbar svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }

@@ -552,6 +552,42 @@
     }
   }
 
+  /* ---------- installing the dashboard as an app ---------- */
+
+  // Chrome and Edge, on computers and on Android, offer to install the site as an app.
+  // The "Install app" buttons only show while that offer stands.
+  function setupInstall() {
+    var installed = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
+    if (installed) { root.classList.add('is-app'); return; }
+    // The offer itself is caught by the script at the top of index.html, as window.SD_INSTALL.
+    function done() {
+      window.SD_INSTALL = null;
+      root.classList.remove('can-install');
+    }
+    window.addEventListener('appinstalled', done);
+    $$('[data-install]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        var offer = window.SD_INSTALL;
+        if (!offer) return;
+        offer.prompt();
+        offer.userChoice.then(done, done);
+      });
+    });
+    // Safari on iPhone and iPad has no install offer, so the footer says how to add it to the home screen.
+    var apple = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    if (apple) root.classList.add('ios-install');
+  }
+
+  // The service worker (sw.js) makes the site installable and lets it open without a connection.
+  // It is not used inside a preview frame, or anywhere that is not https.
+  function registerWorker() {
+    if (!('serviceWorker' in navigator) || window.top !== window) return;
+    var local = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+    if (location.protocol !== 'https:' && !local) return;
+    function go() { navigator.serviceWorker.register('sw.js').catch(function () { /* the site works without it */ }); }
+    if (document.readyState === 'complete') go(); else window.addEventListener('load', go);
+  }
+
   /* ---------- start ---------- */
 
   function safely(fn) { try { fn(); } catch (err) { if (window.console) console.error(err); } }
@@ -576,6 +612,8 @@
     safely(function () { enter(view); });
     safely(measure);
     safely(watchTickers);
+    safely(setupInstall);
+    safely(registerWorker);
 
     window.addEventListener('hashchange', route);
     els.nav.forEach(function (link) {
