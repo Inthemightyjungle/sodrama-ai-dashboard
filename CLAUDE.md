@@ -1,6 +1,6 @@
-# Working on the AI Sandbox
+# Working on the AI Solutions Dashboard
 
-This is So Drama! Entertainment's internal AI page, the **AI Sandbox** (it was called the AI Solutions Dashboard until 16 November 2026; the web address still says `sodrama-ai-dashboard`). It is hosted on GitHub Pages from `main`.
+This is So Drama! Entertainment's internal AI page, hosted on GitHub Pages from `main`.
 Live: https://inthemightyjungle.github.io/sodrama-ai-dashboard/
 
 ## Ground rules
@@ -20,6 +20,7 @@ Live: https://inthemightyjungle.github.io/sodrama-ai-dashboard/
 
 ## What the owner has asked for (keep to these)
 
+- **The name is "AI Solutions Dashboard".** It was briefly renamed "AI Sandbox" and the owner asked to go back. The app icon reads "AI Dashboard" under the So Drama logo.
 - **Three pages, in this order: AI news, Apps, How it works.** The four steps on the 3D stage ("How it works") are the front page only the first time someone opens the site. From the second visit on, the site opens on AI news and the steps are the third tab. The same three tabs sit in the top bar on wide screens and in a bar along the bottom on phones.
 - The look is a theatre with the house lights down: a real 3D revolving stage, velvet curtains, warm spotlight. Flat, hard-edged vector drawings were rejected as looking "like MS Paint".
 - Scrolling must be obvious: the stage turns, the progress bar and the rail on the right move, the big type bands slide.

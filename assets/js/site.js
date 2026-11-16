@@ -1,4 +1,4 @@
-/* So Drama! Entertainment: AI Sandbox */
+/* So Drama! Entertainment: AI Solutions Dashboard */
 (function () {
   'use strict';
 
@@ -552,7 +552,7 @@
     }
   }
 
-  /* ---------- installing the AI Sandbox as an app ---------- */
+  /* ---------- installing the dashboard as an app ---------- */
 
   // Chrome and Edge, on computers and on Android, offer to install the site as an app.
   // The "Install app" buttons only show while that offer stands.
