@@ -1,6 +1,6 @@
-# Working on the AI Solutions Dashboard
+# Working on the AI Sandbox
 
-This is So Drama! Entertainment's internal AI page, hosted on GitHub Pages from `main`.
+This is So Drama! Entertainment's internal AI page, the **AI Sandbox** (it was called the AI Solutions Dashboard until 16 November 2026; the web address still says `sodrama-ai-dashboard`). It is hosted on GitHub Pages from `main`.
 Live: https://inthemightyjungle.github.io/sodrama-ai-dashboard/
 
 ## Ground rules

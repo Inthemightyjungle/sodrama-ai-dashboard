@@ -1,5 +1,5 @@
 /*
-  Lets the dashboard be installed as an app, and open without a connection.
+  Lets the AI Sandbox be installed as an app, and open without a connection.
 
   When online, every request goes to the network first, so the AI news is
   always today's and a new version of the site shows straight away. A copy of
@@ -55,7 +55,7 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(networkFirst(event, url));
 });
 
-// The dashboard itself, whether it was opened as …/, …/index.html or with something after a "?".
+// The page itself, whether it was opened as …/, …/index.html or with something after a "?".
 function isDashboard(request, url) {
   return request.mode === 'navigate' && (url.pathname === HOME || url.pathname === HOME + 'index.html');
 }

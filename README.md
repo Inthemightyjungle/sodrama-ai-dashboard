@@ -1,6 +1,6 @@
-# So Drama! Entertainment: AI Solutions Dashboard
+# So Drama! Entertainment: AI Sandbox
 
-**Open the dashboard: <https://inthemightyjungle.github.io/sodrama-ai-dashboard/>**
+**Open the AI Sandbox: <https://inthemightyjungle.github.io/sodrama-ai-dashboard/>**
 
 Everything AI at So Drama!, in three tabs:
 
@@ -16,7 +16,7 @@ It is a plain static site (HTML, CSS and JavaScript, no build step), hosted on G
 
 ## Install it as an app
 
-The dashboard can sit on a computer or phone like an app, with its own icon and window.
+The AI Sandbox can sit on a computer or phone like an app, with its own icon and window.
 
 - **Chrome or Edge, on a computer or Android:** click **Install app** in the top bar (or at the bottom of any page), or use the install icon in the address bar.
 - **iPhone or iPad:** open the link in Safari, tap **Share**, then **Add to Home Screen**.
