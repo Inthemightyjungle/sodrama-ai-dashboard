@@ -1,5 +1,5 @@
 window.SD_NEWS = {
-  "updated": "2026-11-17T06:41:52+08:00",
+  "updated": "2026-11-17T06:42:46+08:00",
   "stories": [
     {
       "id": "ace-editors-ai-survey",
@@ -7,9 +7,9 @@ window.SD_NEWS = {
       "category": "Post-production",
       "title": "Nearly four in five film editors surveyed already use AI in post",
       "summary": "Avid asked 120 members of American Cinema Editors. 77.5% use AI, mostly for transcripts, audio clean-up and finding shots. Only 7.5% want it to build rough cuts. The chores go to AI and the creative choices stay with people.",
-      "source": "Variety",
-      "url": "https://variety.com/2026/biz/news/surveyed-ace-editors-using-ai-avid-data-finds-1236947004/",
-      "date": "2026-11-13"
+      "source": "VP Land",
+      "url": "https://www.vp-land.com/stories/77-5-of-ace-editors-in-avids-survey-use-ai-led-by-transcription-and-audio-cleanup",
+      "date": "2026-11-15"
     },
     {
       "id": "eu-ai-label-guidelines",
