@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "AI Solutions Dashboard · So Drama!",
+  "short_name": "AI Dashboard",
+  "version": "1.0.0",
+  "description": "So Drama! Entertainment's AI news every morning, our apps, and how to declare the AI tools you use.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "AI Solutions Dashboard",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": ["alarms", "sidePanel", "storage"],
+  "minimum_chrome_version": "116"
+}

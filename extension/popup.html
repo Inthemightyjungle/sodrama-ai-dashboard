@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AI Solutions Dashboard</title>
+<link rel="stylesheet" href="popup.css">
+<script type="module" src="popup.js"></script>
+</head>
+<body>
+<header class="head">
+  <img class="logo" src="img/logo-white.png" alt="So Drama!" width="648" height="296">
+  <p class="head-text"><span class="head-company">So Drama! Entertainment</span><span class="head-title">AI Solutions Dashboard</span></p>
+</header>
+
+<a class="cta" data-form target="_blank" rel="noopener">
+  <span class="cta-label">Declare an AI tool</span>
+  <span class="cta-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"></path></svg></span>
+</a>
+
+<nav class="tabs" role="tablist" aria-label="Pages">
+  <span class="tabs-pill" data-pill aria-hidden="true"></span>
+  <button type="button" role="tab" data-tab="news" aria-selected="true">AI news</button>
+  <button type="button" role="tab" data-tab="apps" aria-selected="false">Apps</button>
+  <button type="button" role="tab" data-tab="how" aria-selected="false">How it works</button>
+</nav>
+
+<main class="panes">
+  <section class="pane" data-pane="news" role="tabpanel" aria-label="AI news">
+    <p class="edition" data-edition><span class="edition-dot" aria-hidden="true"></span><span data-edition-text>The AI Dispatch</span></p>
+    <div class="stories" data-stories><p class="note">Loading today’s news…</p></div>
+  </section>
+
+  <section class="pane" data-pane="apps" role="tabpanel" aria-label="Apps" hidden>
+    <div class="apps" data-apps><p class="note">Loading the apps…</p></div>
+  </section>
+
+  <section class="pane" data-pane="how" role="tabpanel" aria-label="How it works" hidden>
+    <p class="how-lede">Got a new AI tool? Declare it first. AAGB checks the security risk, then you can buy it and start using it.</p>
+    <ol class="steps">
+      <li class="step"><span class="step-num" aria-hidden="true">1</span><span class="step-body"><span class="step-title">Declare your AI tools</span><span class="step-desc">Fill in the form for every AI tool you use, or want to use.</span><span class="who who-you">You do this</span></span></li>
+      <li class="step"><span class="step-num" aria-hidden="true">2</span><span class="step-body"><span class="step-title">Security review and approval</span><span class="step-desc">AAGB checks each declared tool for risk before anything is bought.</span><span class="who who-board">AAGB does this</span></span></li>
+      <li class="step"><span class="step-num" aria-hidden="true">3</span><span class="step-body"><span class="step-title">Request the purchase with AAGB approval</span><span class="step-desc">No approval, no purchase.</span><span class="who who-you">You do this</span></span></li>
+      <li class="step"><span class="step-num" aria-hidden="true">4</span><span class="step-body"><span class="step-title">Acquire it and start using it</span><span class="step-desc">From here, it’s yours to use in your work.</span><span class="who who-live">Showtime</span></span></li>
+    </ol>
+    <a class="text-link" data-site-how target="_blank" rel="noopener">See the four steps on the 3D stage</a>
+  </section>
+</main>
+
+<footer class="foot">
+  <a class="btn btn-solid" data-site target="_blank" rel="noopener">Open the full dashboard</a>
+  <button class="btn btn-ghost" type="button" data-panel>Open in side panel</button>
+</footer>
+</body>
+</html>

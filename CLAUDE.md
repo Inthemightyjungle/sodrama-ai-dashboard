@@ -40,11 +40,13 @@ Live: https://inthemightyjungle.github.io/sodrama-ai-dashboard/
 | `assets/js/pace.js` | Softens the stage on devices that cannot keep up, and asks for still pictures if that is not enough. Tested by `node tools/test_pace.mjs`. |
 | `assets/data/news.js` | The five stories. **Strict JSON** inside `window.SD_NEWS = …;`. |
 | `assets/data/news-thumbs.js`, `assets/img/news/` | Thumbnails. Written by the workflow, never by hand. |
-| `assets/data/apps.js` | The apps list. |
+| `assets/data/apps.js` | The apps list. **Strict JSON** inside `window.SD_APPS = …;`. |
 | `assets/img/posters/` | Still pictures of the stage (fallback and cover art). Made by `tools/make_posters.py`. |
 | `tools/check_news.py` | Validates `news.js`. |
 | `tools/news_thumbs.py` | Downloads thumbnails. Run by `.github/workflows/news-thumbs.yml` on pushes to `main` and `news-draft`. |
 | `tools/stage-lab.html` | Workbench for the stage. |
+| `extension/` | The Chrome extension (toolbar window with news, apps and steps; the full site in the side panel). It reads `news.js`, `news-thumbs.js` and `apps.js` from the live site **as JSON**, so all three must stay strict JSON inside `window.SD_… = …;` (`python3 tools/check_news.py`, `python3 tools/check_apps.py`). If the web address ever changes, update `SITE` in `extension/shared.js`, raise `version` in `extension/manifest.json` and upload a new zip to the Chrome Web Store. |
+| `tools/check_apps.py` | Validates `apps.js`. |
 | `tools/make_icon.py`, `tools/icon-lab.html` | Make the app icons. `icon-lab.html` draws the 3D scene; `make_icon.py` adds the logo file on top and writes every size. After a change, bump `?v=` on the icons in `manifest.webmanifest` so installed apps pick it up. |
 
 To look at the page locally: `python3 -m http.server 8000` in the repository root. The browser remembers that the steps have been shown in `localStorage` under `sd-intro-seen`; remove it (or use a private window) to see a first visit again. Add `?still` to see the version without 3D, or `?3d` to keep the stage on at full sharpness even where it draws slowly (needed when testing in a browser with no graphics chip).

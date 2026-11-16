@@ -92,7 +92,7 @@ html[data-view]:not([data-view="how"]) .cues, html[data-view]:not([data-view="ho
 .btn-ghost:hover { border-color: var(--tungsten); color: var(--tungsten); transform: translateY(-2px); }
 .btn-solid { background: var(--ivory); color: var(--house); }
 .btn-solid:hover, .app:hover .btn-solid, .door:hover .btn-solid { background: var(--tungsten); color: var(--coal); }
-.btn-mini { padding: 10px 16px; font-size: 14px; background: var(--tungsten); color: var(--coal); opacity: 0; pointer-events: none; transform: translateY(-8px); }
+.btn-mini { flex-shrink: 0; white-space: nowrap; padding: 10px 16px; font-size: 14px; background: var(--tungsten); color: var(--coal); opacity: 0; pointer-events: none; transform: translateY(-8px); }
 .top.has-cta .btn-mini { opacity: 1; pointer-events: auto; transform: none; }
 .btn-mini:hover { background: var(--tungsten-hi); }
 /* Install buttons only appear when the browser offers to install the site as an app (see setupInstall() in site.js). */
@@ -143,7 +143,8 @@ html[data-view]:not([data-view="how"]) .cues, html[data-view]:not([data-view="ho
 .top.is-stuck { background: rgba(12, 10, 16, .74); border-color: var(--line); -webkit-backdrop-filter: blur(14px) saturate(1.3); backdrop-filter: blur(14px) saturate(1.3); }
 .brand { display: flex; align-items: center; gap: 14px; min-width: 0; margin-right: auto; text-decoration: none; }
 .brand-logo { flex: none; width: auto; height: 30px; }
-.brand-text { display: grid; padding-left: 14px; border-left: 1px solid var(--line-2); line-height: 1.2; white-space: nowrap; }
+.brand-text { display: grid; min-width: 0; padding-left: 14px; border-left: 1px solid var(--line-2); line-height: 1.2; white-space: nowrap; }
+.brand-name, .brand-title { overflow: hidden; text-overflow: ellipsis; }
 .brand-name { font-weight: 700; font-size: 14.5px; }
 .brand-title { font-size: 12.5px; color: var(--dim); }
 .nav { display: flex; gap: 4px; }
@@ -416,6 +417,13 @@ html[data-view]:not([data-view="how"]) .cues, html[data-view]:not([data-view="ho
   .brand-text { padding-left: 11px; }
   .brand-title { font-size: 13px; }
   .btn-mini { padding: 9px 13px; font-size: 13px; }
+}
+/* Very narrow screens and Chrome's side panel: the name goes onto two lines, so the button fits beside it. */
+@media (max-width: 400px) {
+  .brand { gap: 10px; }
+  .brand-logo { height: 24px; }
+  .brand-text { padding-left: 10px; }
+  .brand-title { max-width: 7.2em; font-size: 12.5px; line-height: 1.15; white-space: normal; }
 }
 
 /* ---------- for people who prefer less motion ---------- */

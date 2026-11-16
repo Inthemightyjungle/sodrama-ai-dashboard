@@ -25,6 +25,19 @@ Once installed it opens even without a connection, showing the news and apps fro
 
 How it works: [`manifest.webmanifest`](manifest.webmanifest) names the app and its icons (`assets/img/app/`), and [`sw.js`](sw.js) keeps a copy of the site for offline use. Neither needs touching when the news or apps change.
 
+## Chrome extension
+
+[`extension/`](extension/) is a Chrome extension version of the dashboard.
+
+- **Toolbar button:** opens a small window with today's AI news, the apps, the four steps and a **Declare an AI tool** button. It shows **NEW** when a fresh edition of the news is out.
+- **Side panel:** **Open in side panel** shows the full dashboard beside whatever page you are on.
+
+It reads the news and the apps from the live site, so it never needs updating when they change. It collects no data and asks for no access to the pages you visit.
+
+**To give it to staff:** zip the `extension` folder and upload it in the [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole) (a one-time US$5 registration). Publish it as *Unlisted* (only people with the link can find it) or, with Google Workspace, *Private* to the company.
+
+**To try it on your own computer:** open `chrome://extensions`, turn on **Developer mode**, click **Load unpacked** and pick the `extension` folder.
+
 ## The AI Dispatch updates itself
 
 Every day a scheduled Claude task starts at 6:38 am Singapore time, so the new edition is live by 7:00. It:

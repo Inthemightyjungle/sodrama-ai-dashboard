@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AI Solutions Dashboard</title>
+<style>
+  html, body { height: 100%; margin: 0; background: #0c0a10; color: #f6efe2; font: 14px/1.45 system-ui, sans-serif; }
+  iframe { display: block; width: 100%; height: 100%; border: 0; }
+  .offline { display: grid; place-content: center; gap: 12px; height: 100%; padding: 24px; text-align: center; }
+  .offline button { justify-self: center; padding: 10px 16px; border: 1px solid rgba(246, 239, 226, .2); border-radius: 12px; background: none; color: inherit; font: inherit; font-weight: 700; cursor: pointer; }
+  [hidden] { display: none !important; }
+</style>
+<script type="module" src="sidepanel.js"></script>
+</head>
+<body>
+<!-- The full site, as it is on the web, opened at the AI news. -->
+<iframe data-site title="AI Solutions Dashboard" allow="fullscreen"></iframe>
+<div class="offline" data-offline hidden>
+  <p>You’re offline, so the dashboard can’t be shown here. The news in the toolbar button still shows the last edition seen.</p>
+  <button type="button" data-retry>Try again</button>
+</div>
+</body>
+</html>
