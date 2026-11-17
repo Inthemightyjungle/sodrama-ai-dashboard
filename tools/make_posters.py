@@ -37,7 +37,6 @@ SHOTS = [
     ('cover-declare', 1, 960, 600, 'fill=0.92&up=0.03'),
     ('news-update', 4, 960, 600, 'fill=0.94&up=0.0'),
     ('news-caution', 2, 960, 600, 'fill=0.92&up=0.03'),
-    ('cover-finaid', 3, 960, 600, 'fill=0.92&up=0.03'),
 ]
 
 

@@ -57,7 +57,7 @@ window.SD_APPS = [
     "url": "https://claude.ai/artifact/HER2RFzkotzUqRM6XPvTkC",
     "cover": {
       "type": "image",
-      "src": "assets/img/posters/cover-finaid.webp"
+      "src": "assets/img/finaid-cover.webp"
     }
   },
   {
