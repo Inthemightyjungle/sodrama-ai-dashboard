@@ -7,7 +7,7 @@ cover art. Re-run this after changing assets/js/stage3d.js.
 Needs:  pip install playwright pillow   and a Chrome or Chromium binary.
 Run from the repository root while a local server is serving it:
     python3 -m http.server 8765 &
-    python3 tools/make_posters.py [path-to-chrome]
+    python3 tools/make_posters.py [path-to-chrome] [--only name,name]
 """
 import asyncio
 import io
@@ -20,7 +20,13 @@ from playwright.async_api import async_playwright
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / 'assets' / 'img' / 'posters'
 LAB = 'http://127.0.0.1:8765/tools/stage-lab.html'
-CHROME = sys.argv[1] if len(sys.argv) > 1 else None
+ARGS = sys.argv[1:]
+ONLY = None
+if '--only' in ARGS:
+    i = ARGS.index('--only')
+    ONLY = set(ARGS[i + 1].split(','))
+    del ARGS[i:i + 2]
+CHROME = ARGS[0] if ARGS else None
 # name, bay, width, height, extra framing
 SHOTS = [
     ('bay-0', 0, 1200, 1200, 'up=-0.05'),
@@ -31,6 +37,7 @@ SHOTS = [
     ('cover-declare', 1, 960, 600, 'fill=0.92&up=0.03'),
     ('news-update', 4, 960, 600, 'fill=0.94&up=0.0'),
     ('news-caution', 2, 960, 600, 'fill=0.92&up=0.03'),
+    ('cover-finaid', 3, 960, 600, 'fill=0.92&up=0.03'),
 ]
 
 
@@ -42,6 +49,8 @@ async def main():
             args=['--no-sandbox', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'],
         )
         for name, bay, width, height, framing in SHOTS:
+            if ONLY and name not in ONLY:
+                continue
             context = await browser.new_context(viewport={'width': width, 'height': height}, device_scale_factor=2)
             page = await context.new_page()
             await page.goto(f'{LAB}?bay={bay}&t=6&poster=1&{framing}', wait_until='load')

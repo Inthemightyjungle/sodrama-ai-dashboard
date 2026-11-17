@@ -37,6 +37,30 @@ window.SD_APPS = [
     }
   },
   {
+    "name": "2nd Brain",
+    "category": "Tools",
+    "meta": "Opens in Claude",
+    "description": "A 2D and 3D map of the team\u2019s inspiration posts, projects, horizon scans and calendar.",
+    "action": "Open",
+    "url": "https://claude.ai/artifact/WMecCroh1RazAz4sYCnQwQ",
+    "cover": {
+      "type": "image",
+      "src": "assets/img/brain-cover.webp"
+    }
+  },
+  {
+    "name": "FinAid",
+    "category": "Tools",
+    "meta": "Preview in Claude",
+    "description": "Answers finance questions and checks a purchase before you raise a PR: quotes, approvals and how to pay.",
+    "action": "Try it",
+    "url": "https://claude.ai/artifact/HER2RFzkotzUqRM6XPvTkC",
+    "cover": {
+      "type": "image",
+      "src": "assets/img/posters/cover-finaid.webp"
+    }
+  },
+  {
     "name": "Pipe Rush",
     "category": "Games",
     "meta": "Plays in your browser",
@@ -54,7 +78,7 @@ window.SD_APPS = [
     "name": "Lion Strike: F-15SG",
     "category": "Games",
     "meta": "Plays in your browser",
-    "description": "A 16-bit shoot-’em-up: fly RSAF jets through ten sorties over Singapore.",
+    "description": "A 16-bit shoot-\u2019em-up: fly RSAF jets through ten sorties over Singapore.",
     "action": "Play",
     "url": "https://inthemightyjungle.github.io/Lion-Strike/",
     "cover": {
@@ -68,7 +92,7 @@ window.SD_APPS = [
     "name": "Haze Squad v02",
     "category": "Games",
     "meta": "Plays in your browser",
-    "description": "A 16-bit game about haze in Singapore: clean the air zone by zone with Grandpa’s vacuum and your squad.",
+    "description": "A 16-bit game about haze in Singapore: clean the air zone by zone with Grandpa\u2019s vacuum and your squad.",
     "action": "Play",
     "url": "https://claude.ai/artifact/Hf9pbNEHTjvMk2Z3bEoRDb",
     "cover": {
@@ -92,7 +116,7 @@ window.SD_APPS = [
     "name": "My Grandmother Can Run Faster Than You!",
     "category": "Games",
     "meta": "Plays in your browser",
-    "description": "Run Ah Ma down the MRT tracks: dress her up, dodge the trains, and don’t let the Police Aunty catch you.",
+    "description": "Run Ah Ma down the MRT tracks: dress her up, dodge the trains, and don\u2019t let the Police Aunty catch you.",
     "action": "Play",
     "url": "https://claude.ai/artifact/12XfM12MWm13Bi8JAjDpZH",
     "cover": {
