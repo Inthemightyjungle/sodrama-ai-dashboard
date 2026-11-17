@@ -1,48 +1,45 @@
 window.SD_NEWS_THUMBS = {
-  "_for": "0884e3e4b768254c",
-  "ace-editors-ai-survey": {
-    "src": "assets/img/news/ace-editors-ai-survey.jpg",
+  "_for": "7c7d5982e376a19e",
+  "suno-visuals-music-video": {
+    "src": "assets/img/news/suno-visuals-music-video.jpg",
     "w": 960,
-    "h": 536,
-    "v": "bc7fb98c",
-    "page": "https://www.vp-land.com/stories/77-5-of-ace-editors-in-avids-survey-use-ai-led-by-transcription-and-audio-cleanup",
+    "h": 544,
+    "v": "8d069daa",
+    "page": "https://www.musicbusinessworldwide.com/suno-launches-ai-music-video-tool-built-on-model-from-minimax-the-chinese-ai-firm-being-sued-by-disney-and-other-hollywood-studios/",
     "wanted": "",
-    "image": "https://piqvbzhttirzocvnnlhc.supabase.co/storage/v1/object/public/story-images/thumbnails/3e8fbc7a-a51c-459b-a6d0-73b5cd78cacd/31d9ca15-56c6-49f4-b0a4-94c87139de74-1.jpg"
+    "image": "https://www.musicbusinessworldwide.com/files/2026/11/Screenshot-2026-11-17-at-16.26.43.jpg"
   },
-  "eu-ai-label-guidelines": {
-    "src": "assets/img/news/eu-ai-label-guidelines.jpg",
-    "w": 960,
-    "h": 504,
-    "v": "f0f710dd",
-    "page": "https://ppc.land/non-eu-advertisers-face-3-eu-fines-for-unlabelled-ai-deep-fake-ads/",
-    "wanted": "",
-    "image": "https://ppc.land/content/images/2026/11/mp-og-7a267889-bda5-4345-a599-bc8f5acce36e.png"
+  "deepfake-ceo-fraud-indictment": {
+    "src": null,
+    "error": "the site answered 403 Forbidden",
+    "page": "https://securityboulevard.com/2026/11/three-men-indicted-for-using-ai-to-impersonate-ceos-and-steal-129-million/",
+    "wanted": ""
   },
-  "adobe-project-live-set": {
-    "src": "assets/img/news/adobe-project-live-set.jpg",
+  "equity-pact-ai-protections": {
+    "src": "assets/img/news/equity-pact-ai-protections.jpg",
     "w": 960,
     "h": 540,
-    "v": "02398566",
-    "page": "https://www.videomaker.com/news/project-live-set-lets-you-steer-adobe-ai-video-mid-stream",
+    "v": "4b7d9b86",
+    "page": "https://www.equity.org.uk/news/2026/equity-secures-uk-first-ai-protections-for-performers",
     "wanted": "",
-    "image": "https://assets.videomaker.com/2026/11/project_live_set_01-1400x788-1.jpg"
+    "image": "https://www.equity.org.uk/media/uhwlu0mk/website-vote-yes.jpg"
   },
-  "elevenlabs-elevenai-notes": {
-    "src": "assets/img/news/elevenlabs-elevenai-notes.jpg",
-    "w": 960,
-    "h": 619,
-    "v": "eea2b1ff",
-    "page": "https://techcrunch.com/2026/11/13/elevenlabs-new-app-combines-meeting-note-taking-and-dictation-for-teams/",
+  "kling-image-4": {
+    "src": "assets/img/news/kling-image-4.jpg",
+    "w": 720,
+    "h": 720,
+    "v": "88c38485",
+    "page": "https://finance.yahoo.com/technology/ai/articles/kling-ai-launches-kling-image-163300875.html",
     "wanted": "",
-    "image": "https://techcrunch.com/wp-content/uploads/2026/11/Screenshot-2026-11-13-at-7.19.18-PM.jpg?resize=1200,774"
+    "image": "https://s.yimg.com/lo/mysterio/api/85e2e2b6625d082528c9177e8a1735fa826310396d61e070b80e3cf255903b4f/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Faccesswire.ca%2F7a8c98b39d7f5fb20559dce6d8de19bc.jpg"
   },
-  "yahoo-ilc-ai-licensing": {
-    "src": "assets/img/news/yahoo-ilc-ai-licensing.jpg",
+  "microsoft-mai-models-ignite": {
+    "src": "assets/img/news/microsoft-mai-models-ignite.jpg",
     "w": 960,
-    "h": 558,
-    "v": "db4510a6",
-    "page": "https://digiday.com/media/yahoo-becomes-first-licensee-of-spotify-like-collective-ai-content-licensing-model/",
+    "h": 540,
+    "v": "b0cdac05",
+    "page": "https://www.testingcatalog.com/microsoft-launches-seven-mai-models-at-ignite-2026/",
     "wanted": "",
-    "image": "https://digiday.com/wp-content/uploads/sites/3/2026/05/brand-creator-deals-digiday.jpg"
+    "image": "https://storage.ghost.io/c/2a/1b/2a1b1782-8506-4d7d-bf53-ad3fb52e2a0f/content/images/size/w1200/2026/11/HXWOGsZWsAEnlxQ.png"
   }
 };
