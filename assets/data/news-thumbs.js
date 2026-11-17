@@ -1,5 +1,5 @@
 window.SD_NEWS_THUMBS = {
-  "_for": "74062ed5d2a8b162",
+  "_for": "e3eabc5690466717",
   "suno-visuals-music-video": {
     "src": "assets/img/news/suno-visuals-music-video.jpg",
     "w": 960,
@@ -10,10 +10,13 @@ window.SD_NEWS_THUMBS = {
     "image": "https://www.musicbusinessworldwide.com/files/2026/11/Screenshot-2026-11-17-at-16.26.43.jpg"
   },
   "youtube-ask-studio-mobile": {
-    "src": null,
-    "error": "the site answered 403 Forbidden",
-    "page": "https://www.socialmediatoday.com/news/youtube-expands-ai-powered-creative-chatbot-to-all-mobile-users/874802/",
-    "wanted": ""
+    "src": "assets/img/news/youtube-ask-studio-mobile.jpg",
+    "w": 960,
+    "h": 536,
+    "v": "ffc8f6a4",
+    "page": "https://ppc.land/youtube-studios-numbers-learn-to-talk-as-analytics-becomes-insights/",
+    "wanted": "",
+    "image": "https://ppc.land/content/images/2026/11/youtube-studio-analytics-becomes-insights-research-tab-plain-language-adding-machine-speech-bubble.jpg"
   },
   "notion-ai-chats-fireworks-breach": {
     "src": "assets/img/news/notion-ai-chats-fireworks-breach.jpg",
