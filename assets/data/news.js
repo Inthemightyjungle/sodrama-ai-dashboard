@@ -1,5 +1,5 @@
 window.SD_NEWS = {
-  "updated": "2026-11-18T06:41:45+08:00",
+  "updated": "2026-11-18T06:42:21+08:00",
   "stories": [
     {
       "id": "suno-visuals-music-video",
@@ -16,10 +16,10 @@ window.SD_NEWS = {
       "kind": "update",
       "category": "Creators",
       "title": "YouTube's Ask Studio assistant comes to the Studio app on Android and iPhone",
-      "summary": "Channel teams can now ask it on the phone how recent uploads are doing, sum up comments, and draft titles and outlines by voice. It also reads uploaded sketches or still frames to suggest thumbnails and give notes on framing.",
-      "source": "Social Media Today",
-      "url": "https://www.socialmediatoday.com/news/youtube-expands-ai-powered-creative-chatbot-to-all-mobile-users/874802/",
-      "date": "2026-11-16"
+      "summary": "Eligible channels can now ask it on the phone how recent uploads are doing, sum up comments, and draft titles and outlines by voice. It also reads up to 10 uploaded sketches or still frames to suggest thumbnails and give notes.",
+      "source": "PPC Land",
+      "url": "https://ppc.land/youtube-studios-numbers-learn-to-talk-as-analytics-becomes-insights/",
+      "date": "2026-11-14"
     },
     {
       "id": "notion-ai-chats-fireworks-breach",
