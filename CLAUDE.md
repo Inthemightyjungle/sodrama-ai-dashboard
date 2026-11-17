@@ -27,6 +27,7 @@ Live: https://inthemightyjungle.github.io/sodrama-ai-dashboard/
 - It must not feel laggy: the stage follows the scroll closely (`FOLLOW` in `stage3d.js`) and never stutters when a new set arrives.
 - The AI Dispatch always shows real thumbnails from the stories' own sources, and always includes at least one word of caution.
 - The purchase step is worded "Request the purchase with AAGB approval".
+- Every app, story and form link opens in a window of its own and leaves the dashboard as it was (`setupWindows()` in `site.js`). Keep `target="_blank"` on these links as well: it is the fallback when pop-ups are blocked. A new-tab link alone is not enough, because the Claude app's browser panel opens it in place of the dashboard.
 
 ## Map
 

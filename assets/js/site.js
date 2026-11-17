@@ -48,7 +48,7 @@
         '<div class="story-body">' +
           '<p class="story-tags">' + (caution ? '<span class="tag tag-caution">' + WARN + 'Word of caution</span>' : '') + '<span class="tag">' + esc(s.category) + '</span></p>' +
           '<h3 class="story-title"><a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.title) +
-            '<span class="sr-only"> (opens ' + esc(s.source) + ' in a new tab)</span></a></h3>' +
+            '<span class="sr-only"> (opens ' + esc(s.source) + ' in a new window)</span></a></h3>' +
           '<p class="story-summary">' + esc(s.summary) + '</p>' +
           '<p class="story-meta"><span class="story-source">' + esc(s.source) + ARROW + '</span><time datetime="' + esc(s.date) + '">' + esc(shortDay(s.date)) + '</time></p>' +
         '</div>' +
@@ -90,7 +90,7 @@
         (a.description ? '<p class="app-desc">' + esc(a.description) + '</p>' : '') +
         '<span class="app-action-gap"></span>' +
         '<a class="btn btn-solid app-action" href="' + esc(a.url) + '" target="_blank" rel="noopener">' + esc(a.action) + ARROW +
-          '<span class="sr-only">: ' + esc(a.name) + ', opens in a new tab</span></a>' +
+          '<span class="sr-only">: ' + esc(a.name) + ', opens in a new window</span></a>' +
       '</article>';
     }).join('');
 
@@ -588,6 +588,31 @@
     if (document.readyState === 'complete') go(); else window.addEventListener('load', go);
   }
 
+  /* ---------- apps, stories and the form open in a window of their own ---------- */
+
+  // A click on any link that leaves the dashboard opens it in its own window, so the dashboard
+  // stays just as it was. A plain "new tab" link is not enough: the browser panel in the Claude
+  // app opens those in place of the dashboard. Ctrl, Shift or middle clicks are left to the browser.
+  function windowFeatures() {
+    var w = Math.round(Math.min(1280, (screen.availWidth || 1280) - 48));
+    var h = Math.round(Math.min(900, (screen.availHeight || 900) - 48));
+    var left = Math.round(Math.max(0, (window.screenX || 0) + ((window.outerWidth || w) - w) / 2));
+    var top = Math.round(Math.max(0, (window.screenY || 0) + ((window.outerHeight || h) - h) / 2));
+    return 'popup,width=' + w + ',height=' + h + ',left=' + left + ',top=' + top;
+  }
+
+  function setupWindows() {
+    document.addEventListener('click', function (e) {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var link = e.target.closest ? e.target.closest('a[target="_blank"]') : null;
+      if (!link || !/^https:\/\//.test(link.href)) return;
+      var win = window.open(link.href, '_blank', windowFeatures());
+      if (!win) return; // pop-ups blocked: the link opens a new tab as usual
+      try { win.opener = null; } catch (err) { /* already on the other site */ }
+      e.preventDefault();
+    });
+  }
+
   /* ---------- start ---------- */
 
   function safely(fn) { try { fn(); } catch (err) { if (window.console) console.error(err); } }
@@ -614,6 +639,7 @@
     safely(watchTickers);
     safely(setupInstall);
     safely(registerWorker);
+    safely(setupWindows);
 
     window.addEventListener('hashchange', route);
     els.nav.forEach(function (link) {
