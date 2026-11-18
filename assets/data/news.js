@@ -1,55 +1,55 @@
 window.SD_NEWS = {
-  "updated": "2026-11-18T06:42:21+08:00",
+  "updated": "2026-11-19T06:39:51+08:00",
   "stories": [
     {
-      "id": "suno-visuals-music-video",
-      "kind": "update",
-      "category": "Music video",
-      "title": "Suno adds Visuals, which makes lyric videos and cover art for your songs",
-      "summary": "The AI music app now turns a song into clips of up to 15 seconds that follow the lyrics and beat, in tall, square or wide shapes. It is on the web first and uses its own credits. Filters block real artists and known characters.",
-      "source": "Music Business Worldwide",
-      "url": "https://www.musicbusinessworldwide.com/suno-launches-ai-music-video-tool-built-on-model-from-minimax-the-chinese-ai-firm-being-sued-by-disney-and-other-hollywood-studios/",
-      "date": "2026-11-17"
-    },
-    {
-      "id": "youtube-ask-studio-mobile",
+      "id": "instagram-content-protection-ai-copies",
       "kind": "update",
       "category": "Creators",
-      "title": "YouTube's Ask Studio assistant comes to the Studio app on Android and iPhone",
-      "summary": "Eligible channels can now ask it on the phone how recent uploads are doing, sum up comments, and draft titles and outlines by voice. It also reads up to 10 uploaded sketches or still frames to suggest thumbnails and give notes.",
-      "source": "PPC Land",
-      "url": "https://ppc.land/youtube-studios-numbers-learn-to-talk-as-analytics-becomes-insights/",
-      "date": "2026-11-14"
-    },
-    {
-      "id": "notion-ai-chats-fireworks-breach",
-      "kind": "caution",
-      "category": "Data security",
-      "title": "Hackers took Notion AI chat transcripts after a breach at an AI supplier",
-      "summary": "Notion says under 1% of workspaces were hit when Fireworks AI, a firm that ran some of its AI, was hacked. Whatever people typed into those chats may be exposed. Keep passwords, client details and unreleased plans out of AI chats.",
+      "title": "Instagram will alert creators to copies of their videos, including AI remakes",
+      "summary": "Eligible creators who switch on content protection get an alert when their video is reposted on Instagram or Facebook, and can hide the copy or add a credit link. A test will also catch AI remakes that reuse the spoken words.",
       "source": "TechCrunch",
-      "url": "https://techcrunch.com/2026/11/12/cyberattack-on-fireworks-ai-allowed-hackers-to-access-notion-customers-chat-transcripts/",
-      "date": "2026-11-12"
-    },
-    {
-      "id": "microsoft-mai-models-ignite",
-      "kind": "update",
-      "category": "AI models",
-      "title": "Microsoft launches its own cheaper AI models for images, voice and code",
-      "summary": "At its Ignite event Microsoft showed seven in-house MAI models. MAI Image 2.7 tops one independent test for editing pictures at about a fifth of a rival's price, and there is a live voice model. Firms buy them through Foundry.",
-      "source": "TestingCatalog",
-      "url": "https://www.testingcatalog.com/microsoft-launches-seven-mai-models-at-ignite-2026/",
+      "url": "https://techcrunch.com/2026/11/17/instagrams-new-tool-for-creators-targets-unauthorized-reposts-and-ai-modified-videos/",
       "date": "2026-11-17"
     },
     {
-      "id": "manchester-animation-genai-ban",
+      "id": "synthesia-video-in-claude",
       "kind": "update",
-      "category": "Festivals",
-      "title": "Manchester Animation Festival will refuse generative AI films from 2027",
-      "summary": "The UK's only Oscar and BAFTA-qualifying animation festival says a film is out if any part of its final picture was made or changed by a generative AI model. Check a festival's AI rules before you plan an entry.",
-      "source": "Skwigly",
-      "url": "https://www.skwigly.co.uk/manchester-animation-festival-announces-2026-winners-and-bans-generative-ai-films-from-2027/",
-      "date": "2026-11-15"
+      "category": "Video",
+      "title": "Synthesia now makes explainer videos inside a Claude chat",
+      "summary": "Add the Synthesia connector, then ask Claude to turn a brief, document or deck into a short video with a presenter or voiceover, and change it just by asking. It needs a paid Synthesia plan and uses that plan's credits.",
+      "source": "Synthesia",
+      "url": "https://www.synthesia.io/post/synthesia-connector-claude",
+      "date": "2026-11-18"
+    },
+    {
+      "id": "character-ai-chats-for-sale",
+      "kind": "caution",
+      "category": "Privacy",
+      "title": "Character.ai's bankruptcy puts users' private chats up for sale",
+      "summary": "A US$10m bid for the chatbot app covers its AI models, chat logs and ad data, and a consumer group has warned the judge they could be misused. What you type into a chatbot can outlive the company, so keep private matters out.",
+      "source": "PPC Land",
+      "url": "https://ppc.land/what-the-therapist-bot-heard-character-ais-chats-are-on-the-block/",
+      "date": "2026-11-17"
+    },
+    {
+      "id": "gemini-notebook-interactive-sites",
+      "kind": "update",
+      "category": "Research",
+      "title": "Gemini Notebook can turn your notes and files into a small interactive site",
+      "summary": "Type \"make me a site\" in a notebook chat and Google's research tool, once called NotebookLM, builds an explainer, dashboard or project tracker from your sources. It is rolling out worldwide on the web for users aged 18 and over.",
+      "source": "Google",
+      "url": "https://blog.google/innovation-and-ai/products/gemini-notebook/interactive-sites/",
+      "date": "2026-11-16"
+    },
+    {
+      "id": "openai-gpt-6-2-astra-sol",
+      "kind": "update",
+      "category": "Assistants",
+      "title": "ChatGPT gets two new models, GPT-6.2 Astra and Sol, on its paid plans",
+      "summary": "Astra is for hard specialist work and Sol for quick everyday jobs. OpenAI says Astra makes slides that follow your template's layout, colours and fonts more closely. Both are out now for Plus, Pro, Enterprise and Edu users.",
+      "source": "The Decoder",
+      "url": "https://the-decoder.com/openai-launches-gpt-6-2-astra-and-sol-with-lower-api-prices-and-some-benchmark-gains/",
+      "date": "2026-11-17"
     }
   ]
 };
