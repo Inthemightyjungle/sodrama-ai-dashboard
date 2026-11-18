@@ -1,48 +1,48 @@
 window.SD_NEWS_THUMBS = {
-  "_for": "e3eabc5690466717",
-  "suno-visuals-music-video": {
-    "src": "assets/img/news/suno-visuals-music-video.jpg",
+  "_for": "b03b1e1212c35f9c",
+  "instagram-content-protection-ai-copies": {
+    "src": "assets/img/news/instagram-content-protection-ai-copies.jpg",
     "w": 960,
-    "h": 544,
-    "v": "8d069daa",
-    "page": "https://www.musicbusinessworldwide.com/suno-launches-ai-music-video-tool-built-on-model-from-minimax-the-chinese-ai-firm-being-sued-by-disney-and-other-hollywood-studios/",
+    "h": 640,
+    "v": "0e99f534",
+    "page": "https://techcrunch.com/2026/11/17/instagrams-new-tool-for-creators-targets-unauthorized-reposts-and-ai-modified-videos/",
     "wanted": "",
-    "image": "https://www.musicbusinessworldwide.com/files/2026/11/Screenshot-2026-11-17-at-16.26.43.jpg"
+    "image": "https://techcrunch.com/wp-content/uploads/2026/03/GettyImages-2268477082.jpg?resize=1200,800"
   },
-  "youtube-ask-studio-mobile": {
-    "src": "assets/img/news/youtube-ask-studio-mobile.jpg",
-    "w": 960,
-    "h": 536,
-    "v": "ffc8f6a4",
-    "page": "https://ppc.land/youtube-studios-numbers-learn-to-talk-as-analytics-becomes-insights/",
-    "wanted": "",
-    "image": "https://ppc.land/content/images/2026/11/youtube-studio-analytics-becomes-insights-research-tab-plain-language-adding-machine-speech-bubble.jpg"
-  },
-  "notion-ai-chats-fireworks-breach": {
-    "src": "assets/img/news/notion-ai-chats-fireworks-breach.jpg",
-    "w": 960,
-    "h": 662,
-    "v": "bf470b3a",
-    "page": "https://techcrunch.com/2026/11/12/cyberattack-on-fireworks-ai-allowed-hackers-to-access-notion-customers-chat-transcripts/",
-    "wanted": "",
-    "image": "https://techcrunch.com/wp-content/uploads/2021/02/notion-glitch-hero.jpg?resize=1200,827"
-  },
-  "microsoft-mai-models-ignite": {
-    "src": "assets/img/news/microsoft-mai-models-ignite.jpg",
+  "synthesia-video-in-claude": {
+    "src": "assets/img/news/synthesia-video-in-claude.jpg",
     "w": 960,
     "h": 540,
-    "v": "b0cdac05",
-    "page": "https://www.testingcatalog.com/microsoft-launches-seven-mai-models-at-ignite-2026/",
+    "v": "0d9328bb",
+    "page": "https://www.synthesia.io/post/synthesia-connector-claude",
     "wanted": "",
-    "image": "https://storage.ghost.io/c/2a/1b/2a1b1782-8506-4d7d-bf53-ad3fb52e2a0f/content/images/size/w1200/2026/11/HXWOGsZWsAEnlxQ.png"
+    "image": "https://cdn.prod.website-files.com/65e89895c5a4b8d764c0d70e/6afb1c5112e71b99d19a5ab7_GTM_Press_MCP_Claude.png"
   },
-  "manchester-animation-genai-ban": {
-    "src": "assets/img/news/manchester-animation-genai-ban.jpg",
-    "w": 900,
-    "h": 500,
-    "v": "c5e498c0",
-    "page": "https://www.skwigly.co.uk/manchester-animation-festival-announces-2026-winners-and-bans-generative-ai-films-from-2027/",
+  "character-ai-chats-for-sale": {
+    "src": "assets/img/news/character-ai-chats-for-sale.jpg",
+    "w": 960,
+    "h": 536,
+    "v": "36953644",
+    "page": "https://ppc.land/what-the-therapist-bot-heard-character-ais-chats-are-on-the-block/",
     "wanted": "",
-    "image": "https://www.skwigly.co.uk/wp-content/uploads/2026/11/MAF-2026-Trophies-Awards.jpg"
+    "image": "https://ppc.land/content/images/2026/11/character-ai-bankruptcy-consumer-federation-letter-therapist-bot-chats-ad-tech-model-deletion-couch-gavel.jpg"
+  },
+  "gemini-notebook-interactive-sites": {
+    "src": "assets/img/news/gemini-notebook-interactive-sites.jpg",
+    "w": 960,
+    "h": 540,
+    "v": "34c47984",
+    "page": "https://blog.google/innovation-and-ai/products/gemini-notebook/interactive-sites/",
+    "wanted": "",
+    "image": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/blog_hero_periodic_table3_2784x1566.max-1440x810.png"
+  },
+  "openai-gpt-6-2-astra-sol": {
+    "src": "assets/img/news/openai-gpt-6-2-astra-sol.jpg",
+    "w": 960,
+    "h": 640,
+    "v": "a35c8414",
+    "page": "https://the-decoder.com/openai-launches-gpt-6-2-astra-and-sol-with-lower-api-prices-and-some-benchmark-gains/",
+    "wanted": "",
+    "image": "https://the-decoder.com/wp-content/uploads/2026/11/openai_vals_sol.png"
   }
 };
