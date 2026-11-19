@@ -1,48 +1,48 @@
 window.SD_NEWS_THUMBS = {
-  "_for": "b03b1e1212c35f9c",
-  "instagram-content-protection-ai-copies": {
-    "src": "assets/img/news/instagram-content-protection-ai-copies.jpg",
-    "w": 960,
-    "h": 640,
-    "v": "0e99f534",
-    "page": "https://techcrunch.com/2026/11/17/instagrams-new-tool-for-creators-targets-unauthorized-reposts-and-ai-modified-videos/",
-    "wanted": "",
-    "image": "https://techcrunch.com/wp-content/uploads/2026/03/GettyImages-2268477082.jpg?resize=1200,800"
-  },
-  "synthesia-video-in-claude": {
-    "src": "assets/img/news/synthesia-video-in-claude.jpg",
+  "_for": "56be194280681a9e",
+  "genie-4-project-genie": {
+    "src": "assets/img/news/genie-4-project-genie.jpg",
     "w": 960,
     "h": 540,
-    "v": "0d9328bb",
-    "page": "https://www.synthesia.io/post/synthesia-connector-claude",
+    "v": "33bd6af4",
+    "page": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/genie-4-now-available-project-genie/",
     "wanted": "",
-    "image": "https://cdn.prod.website-files.com/65e89895c5a4b8d764c0d70e/6afb1c5112e71b99d19a5ab7_GTM_Press_MCP_Claude.png"
+    "image": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/resized_ProjectGenie_Thumbnail_v02.width-1300.png"
   },
-  "character-ai-chats-for-sale": {
-    "src": "assets/img/news/character-ai-chats-for-sale.jpg",
+  "canva-generative-ai-off-switch": {
+    "src": "assets/img/news/canva-generative-ai-off-switch.jpg",
     "w": 960,
-    "h": 536,
-    "v": "36953644",
-    "page": "https://ppc.land/what-the-therapist-bot-heard-character-ais-chats-are-on-the-block/",
+    "h": 539,
+    "v": "a82fdd11",
+    "page": "https://www.engadget.com/2321318/canva-will-let-users-switch-off-most-generative-ai",
     "wanted": "",
-    "image": "https://ppc.land/content/images/2026/11/character-ai-bankruptcy-consumer-federation-letter-therapist-bot-chats-ad-tech-model-deletion-couch-gavel.jpg"
+    "image": "https://www.engadget.com/img/gallery/canva-will-let-users-switch-off-most-generative-ai/l-intro-1795044723.jpg"
   },
-  "gemini-notebook-interactive-sites": {
-    "src": "assets/img/news/gemini-notebook-interactive-sites.jpg",
-    "w": 960,
-    "h": 540,
-    "v": "34c47984",
-    "page": "https://blog.google/innovation-and-ai/products/gemini-notebook/interactive-sites/",
-    "wanted": "",
-    "image": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/blog_hero_periodic_table3_2784x1566.max-1440x810.png"
-  },
-  "openai-gpt-6-2-astra-sol": {
-    "src": "assets/img/news/openai-gpt-6-2-astra-sol.jpg",
+  "gemini-chats-kept-two-months": {
+    "src": "assets/img/news/gemini-chats-kept-two-months.jpg",
     "w": 960,
     "h": 640,
-    "v": "a35c8414",
-    "page": "https://the-decoder.com/openai-launches-gpt-6-2-astra-and-sol-with-lower-api-prices-and-some-benchmark-gains/",
+    "v": "24168b2b",
+    "page": "https://techcrunch.com/2026/11/17/google-to-keep-gemini-chats-for-two-months-up-from-72-hours-even-with-history-off/",
     "wanted": "",
-    "image": "https://the-decoder.com/wp-content/uploads/2026/11/openai_vals_sol.png"
+    "image": "https://techcrunch.com/wp-content/uploads/2026/11/google-gemini-app.jpg?resize=1200,800"
+  },
+  "heygen-avatar-6": {
+    "src": "assets/img/news/heygen-avatar-6.jpg",
+    "w": 960,
+    "h": 540,
+    "v": "ddc5d1be",
+    "page": "https://www.heygen.com/research/avatar-6-model",
+    "wanted": "",
+    "image": "https://cdn.sanity.io/images/pdhqcmb1/production/4722f4a2aed0bdedd90bcf8354171b04b6738c03-2776x1562.png?fit=max&fm=png"
+  },
+  "chatgpt-live-dictation": {
+    "src": "assets/img/news/chatgpt-live-dictation.jpg",
+    "w": 960,
+    "h": 502,
+    "v": "00bb5c90",
+    "page": "https://9to5mac.com/2026/11/18/chatgpt-app-gains-enhanced-live-dictation-streaming-without-10-minute-limit/",
+    "wanted": "",
+    "image": "https://9to5mac.com/wp-content/uploads/sites/6/2026/10/chatgpt-app-icon-dark-openai.jpg?quality=82&strip=all&resize=1200,628"
   }
 };
