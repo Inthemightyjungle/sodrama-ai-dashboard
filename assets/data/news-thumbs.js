@@ -1,5 +1,5 @@
 window.SD_NEWS_THUMBS = {
-  "_for": "56be194280681a9e",
+  "_for": "04ee40a41918c5c2",
   "genie-4-project-genie": {
     "src": "assets/img/news/genie-4-project-genie.jpg",
     "w": 960,
@@ -30,11 +30,11 @@ window.SD_NEWS_THUMBS = {
   "heygen-avatar-6": {
     "src": "assets/img/news/heygen-avatar-6.jpg",
     "w": 960,
-    "h": 540,
-    "v": "ddc5d1be",
-    "page": "https://www.heygen.com/research/avatar-6-model",
+    "h": 502,
+    "v": "8e18e3b0",
+    "page": "https://www.prnewswire.com/news-releases/heygen-introduces-avatar-6-an-audio-driven-context-aware-ai-model-that-alleviates-repetitive-or-unnatural-motion-in-ai-generated-video-302942527.html",
     "wanted": "",
-    "image": "https://cdn.sanity.io/images/pdhqcmb1/production/4722f4a2aed0bdedd90bcf8354171b04b6738c03-2776x1562.png?fit=max&fm=png"
+    "image": "https://mmx.prnewswire.com/media/MS1995129/HenGen-logo.jpg?id=OA3083977&p=facebook"
   },
   "chatgpt-live-dictation": {
     "src": "assets/img/news/chatgpt-live-dictation.jpg",
