@@ -16,12 +16,13 @@ Live: https://inthemightyjungle.github.io/sodrama-ai-dashboard/
   - `update()` in `site.js` runs on every scroll frame. It must not read the layout (`getBoundingClientRect`, `offsetTop` and friends belong in `measure()`), and it must not set a CSS variable on `<html>` or `<body>`: either one makes the browser re-work the whole page on every frame.
   - Animate only `transform` and `opacity`. No `backdrop-filter` or `mix-blend-mode` on anything that sits over the 3D stage, apart from the top bar.
   - New lights, or materials of a new kind, in one bay only mean a second set of shaders: add them to the rehearsal.
-- Only `main` is published. `news-draft` is a scratch branch for the daily news job and gets overwritten.
+- Only `main` is published. `news-draft` is a scratch branch for the daily news job and gets overwritten; `tools-draft` is the same for checking tool icons before they go live.
 
 ## What the owner has asked for (keep to these)
 
 - **The name is "AI Solutions Dashboard".** It was briefly renamed "AI Sandbox" and the owner asked to go back. The app icon is a 3D scene (curtain, lit stage, gold 3D letters reading "AI Dashboard") with the So Drama logo laid on top **exactly as it is**: never redraw, recolour or add effects to the logo.
-- **Three pages, in this order: AI news, Apps, How it works.** The four steps on the 3D stage ("How it works") are the front page only the first time someone opens the site. From the second visit on, the site opens on AI news and the steps are the third tab. The same three tabs sit in the top bar on wide screens and in a bar along the bottom on phones.
+- **Four pages, in this order: AI news, Apps, How it works, Approved tools.** The four steps on the 3D stage ("How it works") are the front page only the first time someone opens the site. From the second visit on, the site opens on AI news and the steps are the third tab. The same four tabs sit in the top bar on wide screens and in a bar along the bottom on phones (where the fourth is labelled "Approved").
+- **Approved tools** lists the AI tools AAGB has approved: each tool's icon, its full name, and whether it is Annual (renewed each year) or One-time (credits or a fixed-term licence). The list is `assets/data/tools.js`. It was first built on 20 Nov 2026 from CapDev's approved purchase requests, not from an official AAGB register; correct it when the owner gives one.
 - The look is a theatre with the house lights down: a real 3D revolving stage, velvet curtains, warm spotlight. Flat, hard-edged vector drawings were rejected as looking "like MS Paint".
 - Scrolling must be obvious: the stage turns, the progress bar and the rail on the right move, the big type bands slide.
 - It must not feel laggy: the stage follows the scroll closely (`FOLLOW` in `stage3d.js`) and never stutters when a new set arrives.
@@ -33,10 +34,10 @@ Live: https://inthemightyjungle.github.io/sodrama-ai-dashboard/
 
 | Path | What it is |
 | --- | --- |
-| `index.html` | All three pages (`#news`, `#apps`, `#how`). The small script in its `<head>` picks the page to open on before the first paint. |
+| `index.html` | All four pages (`#news`, `#apps`, `#how`, `#tools`). The small script in its `<head>` picks the page to open on before the first paint. |
 | `manifest.webmanifest`, `sw.js`, `assets/img/app/` | Make the site installable as an app. `sw.js` always asks the network first and keeps a copy only for offline use, so new news shows straight away; change its `VERSION` only when its `SHELL` list changes. |
 | `assets/css/site.css` | All styles. |
-| `assets/js/site.js` | News and app lists, switching between the three pages, scroll indicators, starts the stage. |
+| `assets/js/site.js` | News, app and approved-tool lists, switching between the four pages, scroll indicators, starts the stage. |
 | `assets/js/stage3d.js` | The 3D revolving stage (three.js). `stage-boot.js` loads it. |
 | `assets/js/pace.js` | Softens the stage on devices that cannot keep up, and asks for still pictures if that is not enough. Tested by `node tools/test_pace.mjs`. |
 | `assets/data/news.js` | The five stories. **Strict JSON** inside `window.SD_NEWS = …;`. |
@@ -48,6 +49,8 @@ Live: https://inthemightyjungle.github.io/sodrama-ai-dashboard/
 | `tools/stage-lab.html` | Workbench for the stage. |
 | `extension/` | The Chrome extension (toolbar window with news, apps and steps; the full site in the side panel). It reads `news.js`, `news-thumbs.js` and `apps.js` from the live site **as JSON**, so all three must stay strict JSON inside `window.SD_… = …;` (`python3 tools/check_news.py`, `python3 tools/check_apps.py`). If the web address ever changes, update `SITE` in `extension/shared.js`, raise `version` in `extension/manifest.json` and upload a new zip to the Chrome Web Store. |
 | `tools/check_apps.py` | Validates `apps.js`. |
+| `assets/data/tools.js` | The approved tools. **Strict JSON** inside `window.SD_TOOLS = …;`. Check with `python3 tools/check_tools.py`. |
+| `assets/data/tool-icons.js`, `assets/img/tools/` | Tool icons, copied from each tool's own website by `tools/tool_icons.py`, which `.github/workflows/tool-icons.yml` runs on pushes to `main` and `tools-draft` that change `tools.js`. Written by the workflow, never by hand. Look at each new icon; if one is wrong, set the tool's `icon` to a better picture's address. A tool with no `site` or `icon` shows its initials. |
 | `tools/make_icon.py`, `tools/icon-lab.html` | Make the app icons. `icon-lab.html` draws the 3D scene; `make_icon.py` adds the logo file on top and writes every size. After a change, bump `?v=` on the icons in `manifest.webmanifest` so installed apps pick it up. |
 
 To look at the page locally: `python3 -m http.server 8000` in the repository root. The browser remembers that the steps have been shown in `localStorage` under `sd-intro-seen`; remove it (or use a private window) to see a first visit again. Add `?still` to see the version without 3D, or `?3d` to keep the stage on at full sharpness even where it draws slowly (needed when testing in a browser with no graphics chip).

@@ -8,7 +8,7 @@
   The daily news job never needs to touch this file. Change VERSION only when
   the list in SHELL changes.
 */
-const VERSION = 'v1';
+const VERSION = 'v2';
 const CACHE = 'sd-dashboard-' + VERSION;
 const SHELL = [
   './',
@@ -18,6 +18,8 @@ const SHELL = [
   'assets/data/news.js',
   'assets/data/news-thumbs.js',
   'assets/data/apps.js',
+  'assets/data/tools.js',
+  'assets/data/tool-icons.js',
   'assets/fonts/bodonimoda-var.woff',
   'assets/fonts/bodonimoda-italic-var.woff',
   'assets/fonts/archivo-var.woff',

@@ -2,15 +2,16 @@
 
 **Open the dashboard: <https://inthemightyjungle.github.io/sodrama-ai-dashboard/>**
 
-Everything AI at So Drama!, in three tabs:
+Everything AI at So Drama!, in four tabs:
 
 1. **AI news** (The AI Dispatch): five AI stories, refreshed every morning, with at least one word of caution.
 2. **Apps**: everything we've built, filterable by type.
 3. **How it works**: four steps on a 3D revolving stage. Declare → AAGB security review and approval → purchase request with AAGB approval → acquire and use. The big button opens the AI tool declaration form (Microsoft Forms).
+4. **Approved tools**: the AI tools AAGB has approved, each with its icon, its full name and whether it is **Annual** (renewed every year) or **One-time** (credits or a licence for a set time).
 
 The first time someone opens the site, **How it works** is the front page. From their second visit on, the site opens on **AI news**. A "Declare a tool" button stays in the top bar on every tab.
 
-Each tab has its own address: add `#news`, `#apps` or `#how` to the link (`#step-2` goes straight to step 2).
+Each tab has its own address: add `#news`, `#apps`, `#how` or `#tools` to the link (`#step-2` goes straight to step 2).
 
 It is a plain static site (HTML, CSS and JavaScript, no build step), hosted on GitHub Pages. Nothing is loaded from other servers: fonts, the 3D library and news thumbnails all live in this repository.
 
@@ -63,6 +64,10 @@ Edit [`assets/data/news.js`](assets/data/news.js) on GitHub (pencil icon → edi
 ## Adding an app
 
 Add an entry to [`assets/data/apps.js`](assets/data/apps.js) and put its cover image in `assets/img/`. The filter tabs are built from the `category` values automatically.
+
+## Changing the approved tools
+
+Edit [`assets/data/tools.js`](assets/data/tools.js): each tool has a full name, what it is for, `"plan": "annual"` or `"once"`, and its website. Run `python3 tools/check_tools.py`. When the change reaches GitHub, the **Tool icons** workflow copies each tool's own icon from its website into `assets/img/tools/`. Look at the new icons; if one is wrong, give that tool an `"icon"` with the address of a better picture. A tool with no website shows its initials.
 
 ## The 3D stage
 

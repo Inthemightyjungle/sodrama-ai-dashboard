@@ -19,6 +19,7 @@
   "shortcuts": [
     { "name": "AI news", "url": "./#news" },
     { "name": "Apps", "url": "./#apps" },
-    { "name": "How it works", "url": "./#how" }
+    { "name": "How it works", "url": "./#how" },
+    { "name": "Approved tools", "url": "./#tools" }
   ]
 }
