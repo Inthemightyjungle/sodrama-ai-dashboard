@@ -40,11 +40,12 @@
 
     // The four steps are the front page the first time someone opens the site.
     // After that it opens on the AI news, and the steps are the third tab.
+    // The fourth tab is the list of approved tools.
     var seen = false;
     try { seen = window.localStorage.getItem('sd-intro-seen') === '1'; } catch (e) {}
     var home = seen ? 'news' : 'how';
     var hash = location.hash.slice(1);
-    var view = hash === 'news' || hash === 'apps' ? hash : /^(how|process|top|next|step-[1-4])$/.test(hash) ? 'how' : home;
+    var view = hash === 'news' || hash === 'apps' || hash === 'tools' ? hash : /^(how|process|top|next|step-[1-4])$/.test(hash) ? 'how' : home;
     root.setAttribute('data-home', home);
     root.setAttribute('data-view', view);
 
@@ -75,6 +76,8 @@
 <script defer src="assets/data/news.js"></script>
 <script defer src="assets/data/news-thumbs.js"></script>
 <script defer src="assets/data/apps.js"></script>
+<script defer src="assets/data/tools.js"></script>
+<script defer src="assets/data/tool-icons.js"></script>
 <script defer src="assets/js/site.js"></script>
 <script type="module" src="assets/js/stage-boot.js"></script>
 </head>
@@ -98,6 +101,7 @@
     <a href="#news" data-nav="news">AI news</a>
     <a href="#apps" data-nav="apps">Apps</a>
     <a href="#how" data-nav="how">How it works</a>
+    <a href="#tools" data-nav="tools">Approved tools</a>
   </nav>
   <button class="btn btn-install btn-install-top" type="button" data-install><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>Install app</button>
   <a class="btn btn-mini" data-mini-cta href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=rcy329-Y_kaUIVobvsyr0TBFYZVJ-u1FmQ3PZtT_HmlUNFlVNjJPVjcwTFJTTjVITE5IQVpZUTNYOSQlQCN0PWcu" target="_blank" rel="noopener">Declare a tool<span class="sr-only"> (opens the form in a new window)</span></a>
@@ -274,6 +278,32 @@
     </div>
   </div>
 
+  <!-- Page 4: the AI tools AAGB has approved. -->
+  <div class="view view-page" id="tools">
+    <div class="ticker" data-ticker="-1" aria-hidden="true">
+      <div class="ticker-row"><span>Cleared for use</span><span>Approved by AAGB</span><span>Cleared for use</span><span>Approved by AAGB</span><span>Cleared for use</span><span>Approved by AAGB</span><span>Cleared for use</span><span>Approved by AAGB</span></div>
+    </div>
+
+    <section class="tools" data-section>
+      <div class="wrap">
+        <header class="section-head">
+          <h2 class="section-title" data-reveal>Approved tools</h2>
+          <div class="section-side" data-reveal>
+            <p class="section-lede">The AI tools AAGB has approved for our work. Annual ones renew every year. One-time ones are bought once.</p>
+            <div class="tabs" data-tool-tabs role="group" aria-label="Show tools by plan"><span class="tabs-pill" data-tabs-pill aria-hidden="true"></span></div>
+          </div>
+        </header>
+        <ul class="tool-list" data-tools></ul>
+        <div class="tool-foot" data-reveal>
+          <p class="tool-checked" data-tools-checked></p>
+          <p class="tool-ask">Need a tool that isn’t here? Declare it first, then wait for approval.</p>
+          <a class="btn btn-ghost" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=rcy329-Y_kaUIVobvsyr0TBFYZVJ-u1FmQ3PZtT_HmlUNFlVNjJPVjcwTFJTTjVITE5IQVpZUTNYOSQlQCN0PWcu" target="_blank" rel="noopener">Declare an AI tool<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"></path></svg><span class="sr-only"> (opens the form in a new window)</span></a>
+        </div>
+        <noscript><p class="plain-note">The list needs JavaScript. It lives in <a href="assets/data/tools.js">assets/data/tools.js</a>.</p></noscript>
+      </div>
+    </section>
+  </div>
+
   <footer class="foot">
     <div class="wrap foot-inner">
       <p class="foot-brand"><img src="assets/img/logo-white.png" alt="" width="648" height="296" loading="lazy"><span>So Drama! Entertainment<br>AI Solutions Dashboard</span></p>
@@ -287,11 +317,12 @@
 
 </main>
 
-<!-- The same three pages as the top bar, as a tab bar along the bottom on small screens. -->
+<!-- The same four pages as the top bar, as a tab bar along the bottom on small screens. -->
 <nav class="tabbar" aria-label="Pages">
   <a href="#news" data-nav="news"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h12v14H6.5A2.5 2.5 0 0 1 4 16.5zM16 9h4v7.5a2.5 2.5 0 0 1-2.5 2.5M7.5 9h5M7.5 12.5h5M7.5 16h3"></path></svg>AI news</a>
   <a href="#apps" data-nav="apps"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.6"></rect><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.6"></rect><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.6"></rect><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.6"></rect></svg>Apps</a>
   <a href="#how" data-nav="how"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 6h10M10 12h10M10 18h10"></path><circle cx="5" cy="6" r="1.3"></circle><circle cx="5" cy="12" r="1.3"></circle><circle cx="5" cy="18" r="1.3"></circle></svg>How it works</a>
+  <a href="#tools" data-nav="tools"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 14.2 5l2.6-.2.9 2.5 2.2 1.4-.8 2.5.8 2.5-2.2 1.4-.9 2.5-2.6-.2L12 20.5 9.8 19l-2.6.2-.9-2.5-2.2-1.4.8-2.5-.8-2.5 2.2-1.4.9-2.5 2.6.2z"></path><path d="m8.8 12 2.2 2.2 4.2-4.4"></path></svg>Approved</a>
 </nav>
 </body>
 </html>

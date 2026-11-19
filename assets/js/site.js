@@ -175,6 +175,86 @@
     }
   }
 
+  /* ---------- approved tools ---------- */
+
+  var PLANS = {
+    annual: { label: 'Annual', tab: 'Annual', icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 9.5A8 8 0 0 0 5 7.4M4.5 14.5A8 8 0 0 0 19 16.6M5 3.5v4h4M19 20.5v-4h-4"></path></svg>' },
+    once: { label: 'One-time', tab: 'One-time', icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8a2 2 0 0 0 2-2h12a2 2 0 0 0 2 2v8a2 2 0 0 0-2 2H6a2 2 0 0 0-2-2z"></path><path d="M12 9.5v5"></path></svg>' }
+  };
+
+  // Two letters for a tool with no icon: "RealityTransform" gives RT, "Claude Max" gives CM.
+  function initials(name) {
+    var words = String(name).split(/[\s-]+/).filter(Boolean);
+    if (words.length > 1) return (words[0][0] + words[1][0]).toUpperCase();
+    var caps = String(name).replace(/[^A-Z]/g, '');
+    return (caps.length > 1 ? caps.slice(0, 2) : String(name).slice(0, 2)).toUpperCase();
+  }
+
+  function renderTools() {
+    var data = window.SD_TOOLS;
+    var list = $('[data-tools]');
+    var tabs = $('[data-tool-tabs]');
+    if (!data || !data.tools || !list) return;
+    var icons = window.SD_TOOL_ICONS || {};
+    var tools = data.tools.slice().sort(function (a, b) { return a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }); });
+
+    list.innerHTML = tools.map(function (t) {
+      var plan = PLANS[t.plan] || PLANS.annual;
+      var icon = icons[t.id];
+      var tile = icon && icon.src
+        ? '<span class="tool-icon' + (icon.light ? ' is-light' : '') + '"><img src="' + esc(icon.src) + (icon.v ? '?v=' + esc(icon.v) : '') + '" width="128" height="128" alt="" loading="lazy" decoding="async"></span>'
+        : '<span class="tool-icon is-initials" aria-hidden="true">' + esc(initials(t.name)) + '</span>';
+      return '<li class="tool" data-plan="' + esc(t.plan) + '">' + tile +
+        '<span class="tool-text"><span class="tool-name">' + esc(t.name) + '</span>' +
+          '<span class="tool-for">' + esc(t.for) + (t.by ? ', from ' + esc(t.by) : '') + '</span></span>' +
+        '<span class="plan plan-' + esc(t.plan) + '">' + plan.icon + plan.label + '</span>' +
+      '</li>';
+    }).join('');
+
+    var checked = $('[data-tools-checked]');
+    var day = new Date(data.checked + 'T12:00:00');
+    if (checked && !isNaN(day)) checked.textContent = 'List last checked on ' + day.toLocaleDateString('en-SG', { day: 'numeric', month: 'long', year: 'numeric' }) + '.';
+
+    if (!tabs) return;
+    var pill = $('[data-tabs-pill]', tabs);
+    [['all', 'All', tools.length]].concat(['annual', 'once'].map(function (p) {
+      return [p, PLANS[p].tab, tools.filter(function (t) { return t.plan === p; }).length];
+    })).forEach(function (c) {
+      if (!c[2]) return;
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'tab';
+      b.setAttribute('aria-pressed', c[0] === 'all' ? 'true' : 'false');
+      b.setAttribute('data-plan', c[0]);
+      b.innerHTML = esc(c[1]) + '<span class="tab-count">' + c[2] + '</span>';
+      tabs.appendChild(b);
+    });
+
+    function current() { return $('.tab[aria-pressed="true"]', tabs); }
+    function movePill(btn, instant) {
+      if (!pill || !btn) return;
+      if (instant) pill.style.transition = 'none';
+      pill.style.width = btn.offsetWidth + 'px';
+      pill.style.height = btn.offsetHeight + 'px';
+      pill.style.transform = 'translate(' + btn.offsetLeft + 'px,' + btn.offsetTop + 'px)';
+      if (instant) { void pill.offsetWidth; pill.style.transition = ''; }
+    }
+    tabs.addEventListener('click', function (e) {
+      var b = e.target.closest ? e.target.closest('.tab') : null;
+      if (!b || b.getAttribute('aria-pressed') === 'true') return;
+      $$('.tab', tabs).forEach(function (t) { t.setAttribute('aria-pressed', t === b ? 'true' : 'false'); });
+      movePill(b);
+      var plan = b.getAttribute('data-plan');
+      $$('.tool', list).forEach(function (row) {
+        row.classList.toggle('is-hidden', plan !== 'all' && row.getAttribute('data-plan') !== plan);
+      });
+      requestMeasure();
+    });
+    placeToolTabs = function () { movePill(current(), true); };
+    window.addEventListener('resize', placeToolTabs);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeToolTabs);
+  }
+
   /* ---------- things that arrive as you scroll ---------- */
 
   function setupReveal() {
@@ -199,13 +279,13 @@
     items.forEach(function (el) { io.observe(el); });
   }
 
-  /* ---------- the three pages ---------- */
+  /* ---------- the four pages ---------- */
 
   /*
-    The site is three pages in one file: AI news, Apps and How it works (the
-    four steps on the 3D stage). Only one shows at a time. The address ends in
-    #news, #apps or #how, so each page can be linked to and the Back button
-    works.
+    The site is four pages in one file: AI news, Apps, How it works (the four
+    steps on the 3D stage) and Approved tools. Only one shows at a time. The
+    address ends in #news, #apps, #how or #tools, so each page can be linked to
+    and the Back button works.
 
     The steps are the front page the first time someone opens the site. From
     then on it opens on the news (the script in index.html decides, before the
@@ -217,9 +297,10 @@
   var home = root.getAttribute('data-home') || 'news';    // the page shown when the address names none
   var keptScroll = {};                                     // how far down each page was left
   var placeAppTabs = null;                                 // set by renderApps
+  var placeToolTabs = null;                                // set by renderTools
 
   function viewOf(hash) {
-    if (hash === 'news' || hash === 'apps') return hash;
+    if (hash === 'news' || hash === 'apps' || hash === 'tools') return hash;
     return HOW_LINKS.test(hash) ? 'how' : '';
   }
 
@@ -236,6 +317,7 @@
       bootStage();
     }
     if (name === 'apps' && placeAppTabs) placeAppTabs();
+    if (name === 'tools' && placeToolTabs) placeToolTabs();
   }
 
   function show(name, anchor) {
@@ -633,6 +715,7 @@
 
     safely(renderNews);
     safely(renderApps);
+    safely(renderTools);
     safely(setupReveal);
     safely(function () { enter(view); });
     safely(measure);
