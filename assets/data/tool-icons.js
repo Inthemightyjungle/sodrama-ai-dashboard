@@ -1,5 +1,5 @@
 window.SD_TOOL_ICONS = {
-  "_for": "3d1d235594f6873a",
+  "_for": "35d046cf0dc48bc8",
   "chatgpt-pro": {
     "src": "assets/img/tools/chatgpt-pro.png",
     "v": "136b2431",
@@ -12,12 +12,12 @@ window.SD_TOOL_ICONS = {
   },
   "claude-max": {
     "src": "assets/img/tools/claude-max.png",
-    "v": "bc9e4dc6",
+    "v": "d5aea14f",
     "light": false,
-    "from": "https://claude.com/images/icon-512x512.png",
-    "how": "app icon",
-    "was": "512x512",
-    "site": "https://claude.com/",
+    "from": "https://claude.ai/apple-touch-icon.png",
+    "how": "home-screen icon",
+    "was": "180x180",
+    "site": "https://claude.ai/",
     "wanted": ""
   },
   "canva-pro": {
