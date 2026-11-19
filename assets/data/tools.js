@@ -24,7 +24,7 @@ window.SD_TOOLS = {
   "checked": "2026-11-20",
   "tools": [
     {"id": "chatgpt-pro", "name": "ChatGPT Pro", "by": "OpenAI", "for": "Chat assistant for writing, research and ideas", "plan": "annual", "site": "https://chatgpt.com/"},
-    {"id": "claude-max", "name": "Claude Max", "by": "Anthropic", "for": "Chat assistant for writing, research and building tools", "plan": "annual", "site": "https://claude.com/"},
+    {"id": "claude-max", "name": "Claude Max", "by": "Anthropic", "for": "Chat assistant for writing, research and building tools", "plan": "annual", "site": "https://claude.ai/"},
     {"id": "canva-pro", "name": "Canva Pro", "for": "Design, presentations and AI images", "plan": "annual", "site": "https://www.canva.com/"},
     {"id": "deep-live-cam", "name": "Deep-Live-Cam Ultimate", "for": "Live face swap for video", "plan": "once", "site": "https://deeplivecam.net/"},
     {"id": "dramagic", "name": "Dramagic", "by": "BytePlus", "for": "Short-drama production from script to video, paid by credits", "plan": "once", "site": "https://www.byteplus.com/en"},
