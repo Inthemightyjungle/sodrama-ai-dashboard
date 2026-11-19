@@ -1,5 +1,5 @@
 window.SD_NEWS = {
-  "updated": "2026-11-20T06:41:15+08:00",
+  "updated": "2026-11-20T06:42:01+08:00",
   "stories": [
     {
       "id": "genie-4-project-genie",
@@ -37,8 +37,8 @@ window.SD_NEWS = {
       "category": "Video",
       "title": "HeyGen's Avatar 6 gives presenter videos more natural gestures, at any length",
       "summary": "The new model builds a talking avatar from one photo, moves it to suit what is being said, and has no fixed time limit. You can write a gesture next to a line of script. Avatars of real people still need their consent.",
-      "source": "HeyGen",
-      "url": "https://www.heygen.com/research/avatar-6-model",
+      "source": "PR Newswire",
+      "url": "https://www.prnewswire.com/news-releases/heygen-introduces-avatar-6-an-audio-driven-context-aware-ai-model-that-alleviates-repetitive-or-unnatural-motion-in-ai-generated-video-302942527.html",
       "date": "2026-11-17"
     },
     {
