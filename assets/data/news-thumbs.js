@@ -1,12 +1,12 @@
 window.SD_NEWS_THUMBS = {
-  "_for": "713ba213fea5bcfa",
+  "_for": "4ccad0108d3da4ed",
   "veed-ai-editing-agent": {
     "src": "assets/img/news/veed-ai-editing-agent.jpg",
     "w": 960,
     "h": 504,
-    "v": "238b50d3",
-    "page": "https://www.veed.io/ai/agentic-video-editing-manifesto",
-    "wanted": "",
+    "v": "1d3e862e",
+    "page": "https://www.veed.io/newsroom/veed-ai-video-editing-agent",
+    "wanted": "https://cdn-site-assets.veed.io/veed_ai_og_6_matrix_3d457857b0/veed_ai_og_6_matrix_3d457857b0.png",
     "image": "https://cdn-site-assets.veed.io/veed_ai_og_6_matrix_3d457857b0/veed_ai_og_6_matrix_3d457857b0.png"
   },
   "ideogram-4-6-precise-edits": {
