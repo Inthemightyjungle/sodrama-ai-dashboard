@@ -8,7 +8,7 @@ window.SD_NEWS = {
       "title": "VEED's new AI agent edits short social videos from a written brief",
       "summary": "Upload footage or paste a product page link, say what the video is for, and VEED AI cuts it, adds captions, titles and your logo, and exports each shape you need. It runs on web and phone, with a free plan and no watermark.",
       "source": "VEED",
-      "url": "https://www.veed.io/newsroom/veed-ai-video-editing-agent",
+      "url": "https://www.veed.io/learn/agentic-ai-video-editor",
       "date": "2026-11-19"
     },
     {
@@ -19,7 +19,8 @@ window.SD_NEWS = {
       "summary": "Ask for a single change, such as a new colour or material, and the new model keeps everything else in place, edit after edit. Handy for product shots and key art. It is live in the Ideogram app and in tools such as Runway.",
       "source": "Ideogram",
       "url": "https://ideogram.ai/models/4.6",
-      "date": "2026-11-19"
+      "date": "2026-11-19",
+      "image": "https://storage.googleapis.com/ideogram-static/website/images/10295761b068e577.jpeg"
     },
     {
       "id": "ai-prompts-stolen-canary-study",
@@ -37,9 +38,9 @@ window.SD_NEWS = {
       "category": "Music",
       "title": "SoundCloud sets rules against AI spam and fake artists, but still allows AI music",
       "summary": "New terms target mass uploads of near-identical tracks, AI songs passed off as fully human-made, and invented artists posing as real people. SoundCloud can limit uploads and take back payouts. Describe AI work honestly.",
-      "source": "Digital Music News",
-      "url": "https://www.digitalmusicnews.com/2026/11/17/soundcloud-ai-slop-crackdown/",
-      "date": "2026-11-17"
+      "source": "RouteNote",
+      "url": "https://routenote.com/blog/soundcloud-ai-policies/",
+      "date": "2026-11-19"
     },
     {
       "id": "gemini-mac-computer-use",
