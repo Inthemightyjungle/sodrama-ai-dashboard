@@ -1,5 +1,5 @@
 window.SD_NEWS = {
-  "updated": "2026-11-21T06:40:36+08:00",
+  "updated": "2026-11-21T06:43:15+08:00",
   "stories": [
     {
       "id": "veed-ai-editing-agent",
@@ -8,8 +8,9 @@ window.SD_NEWS = {
       "title": "VEED's new AI agent edits short social videos from a written brief",
       "summary": "Upload footage or paste a product page link, say what the video is for, and VEED AI cuts it, adds captions, titles and your logo, and exports each shape you need. It runs on web and phone, with a free plan and no watermark.",
       "source": "VEED",
-      "url": "https://www.veed.io/ai/agentic-video-editing-manifesto",
-      "date": "2026-11-19"
+      "url": "https://www.veed.io/newsroom/veed-ai-video-editing-agent",
+      "date": "2026-11-19",
+      "image": "https://cdn-site-assets.veed.io/veed_ai_og_6_matrix_3d457857b0/veed_ai_og_6_matrix_3d457857b0.png"
     },
     {
       "id": "ideogram-4-6-precise-edits",
