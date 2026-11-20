@@ -7,7 +7,7 @@ Everything AI at So Drama!, in four tabs:
 1. **AI news** (The AI Dispatch): five AI stories, refreshed every morning, with at least one word of caution.
 2. **Apps**: everything we've built, filterable by type.
 3. **How it works**: four steps on a 3D revolving stage. Declare → AAGB security review and approval → purchase request with AAGB approval → acquire and use. The big button opens the AI tool declaration form (Microsoft Forms).
-4. **Approved tools**: the AI tools AAGB has approved, each with its icon, its full name and whether it is **Annual** (renewed every year) or **One-time** (credits or a licence for a set time).
+4. **Approved tools**: the AI tools AAGB has approved, each with its icon, its full name and whether it is **Annual** (renewed every year) or **One-time** (credits or a licence for a set time). Search by name, maker or what a tool does ("video", "voice"), or filter by Annual and One-time.
 
 The first time someone opens the site, **How it works** is the front page. From their second visit on, the site opens on **AI news**. A "Declare a tool" button stays in the top bar on every tab.
 

@@ -239,17 +239,76 @@
       pill.style.transform = 'translate(' + btn.offsetLeft + 'px,' + btn.offsetTop + 'px)';
       if (instant) { void pill.offsetWidth; pill.style.transition = ''; }
     }
+
+    // Search: every word typed must appear somewhere in the tool's name, maker,
+    // what it is for, or its plan. "chat gpt", "deeplive" and "one time" all work.
+    var search = $('[data-tool-search]');
+    var clear = $('[data-tool-clear]');
+    var empty = $('[data-tools-empty]');
+    var status = $('[data-tools-status]');
+    function fold(text) {
+      return String(text || '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+    }
+    var rows = $$('.tool', list).map(function (row, i) {
+      var t = tools[i];
+      var words = [t.name, t.by, t.for, t.plan === 'once' ? 'one-time once one-off' : 'annual yearly subscription'].join(' ');
+      return { row: row, plan: t.plan, hay: fold(words) + ' ' + fold(t.name).replace(/ /g, '') };
+    });
+
+    function apply() {
+      var plan = current() ? current().getAttribute('data-plan') : 'all';
+      var typed = search ? search.value.trim() : '';
+      var words = fold(typed).split(' ').filter(Boolean);
+      var counts = { all: 0, annual: 0, once: 0 };
+      var shown = 0;
+      rows.forEach(function (r) {
+        var found = words.every(function (w) { return r.hay.indexOf(w) !== -1; });
+        if (found) { counts.all++; counts[r.plan]++; }
+        var on = found && (plan === 'all' || r.plan === plan);
+        r.row.classList.toggle('is-hidden', !on);
+        if (on) shown++;
+      });
+      $$('.tab', tabs).forEach(function (t) {
+        var count = $('.tab-count', t);
+        if (count) count.textContent = counts[t.getAttribute('data-plan')];
+      });
+      if (clear) clear.hidden = !typed;
+      if (empty) {
+        empty.hidden = shown > 0;
+        if (!shown) {
+          var label = plan === 'once' ? 'one-time' : plan;
+          empty.textContent = !typed ? 'No tools here.'
+            : plan !== 'all' && counts.all ? 'No ' + label + ' tool matches “' + typed + '”, but ' + (counts.all === 1 ? 'one tool does' : counts.all + ' tools do') + ' under All.'
+            : 'No approved tool matches “' + typed + '”. Check the spelling, or declare the tool if you need it.';
+        }
+      }
+      if (status) status.textContent = shown === rows.length ? '' : shown + ' of ' + rows.length + ' tools shown';
+      movePill(current());
+      requestMeasure();
+    }
+
     tabs.addEventListener('click', function (e) {
       var b = e.target.closest ? e.target.closest('.tab') : null;
       if (!b || b.getAttribute('aria-pressed') === 'true') return;
       $$('.tab', tabs).forEach(function (t) { t.setAttribute('aria-pressed', t === b ? 'true' : 'false'); });
-      movePill(b);
-      var plan = b.getAttribute('data-plan');
-      $$('.tool', list).forEach(function (row) {
-        row.classList.toggle('is-hidden', plan !== 'all' && row.getAttribute('data-plan') !== plan);
-      });
-      requestMeasure();
+      apply();
     });
+    if (search) {
+      search.addEventListener('input', apply);
+      search.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && search.value) { e.preventDefault(); search.value = ''; apply(); }
+      });
+      // "/" jumps to the search box while this page is showing.
+      document.addEventListener('keydown', function (e) {
+        if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey || root.getAttribute('data-view') !== 'tools') return;
+        var t = e.target;
+        if (t && (t.isContentEditable || /^(input|textarea|select)$/i.test(t.tagName))) return;
+        e.preventDefault();
+        search.focus();
+      });
+    }
+    if (clear) clear.addEventListener('click', function () { search.value = ''; apply(); search.focus(); });
+    if (search && search.value) apply();           // the browser kept what was typed before a reload
     placeToolTabs = function () { movePill(current(), true); };
     window.addEventListener('resize', placeToolTabs);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeToolTabs);
