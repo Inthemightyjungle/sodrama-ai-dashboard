@@ -1,55 +1,55 @@
 window.SD_NEWS = {
-  "updated": "2026-11-20T06:42:01+08:00",
+  "updated": "2026-11-21T06:40:36+08:00",
   "stories": [
     {
-      "id": "genie-4-project-genie",
+      "id": "veed-ai-editing-agent",
       "kind": "update",
-      "category": "Virtual worlds",
-      "title": "Google's Genie 4 builds worlds you can walk through, with sound, from a prompt",
-      "summary": "Describe a place and Genie 4 makes a world you can explore, then change the weather or add a character by typing as you move. It is rolling out to eligible Google AI Ultra subscribers, and Google still calls it an experiment.",
-      "source": "Google",
-      "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/genie-4-now-available-project-genie/",
-      "date": "2026-11-18"
-    },
-    {
-      "id": "canva-generative-ai-off-switch",
-      "kind": "update",
-      "category": "Design",
-      "title": "Canva adds a switch to turn off its generative AI tools",
-      "summary": "Free and Pro users can now hide Canva's generative AI tools from their profile settings, and ask to see fewer AI-made items in the library. Background Remover and Magic Grab stay on. Useful when a job must be AI-free.",
-      "source": "Engadget",
-      "url": "https://www.engadget.com/2321318/canva-will-let-users-switch-off-most-generative-ai",
+      "category": "Video",
+      "title": "VEED's new AI agent edits short social videos from a written brief",
+      "summary": "Upload footage or paste a product page link, say what the video is for, and VEED AI cuts it, adds captions, titles and your logo, and exports each shape you need. It runs on web and phone, with a free plan and no watermark.",
+      "source": "VEED",
+      "url": "https://www.veed.io/newsroom/veed-ai-video-editing-agent",
       "date": "2026-11-19"
     },
     {
-      "id": "gemini-chats-kept-two-months",
-      "kind": "caution",
-      "category": "Privacy",
-      "title": "Gemini will keep your chats for about two months even with history switched off",
-      "summary": "That is up from 72 hours and covers temporary chats too. Google is also adding a separate switch to stop chats training its AI. When the change reaches you, check both settings, and keep confidential work out of the chat.",
-      "source": "TechCrunch",
-      "url": "https://techcrunch.com/2026/11/17/google-to-keep-gemini-chats-for-two-months-up-from-72-hours-even-with-history-off/",
-      "date": "2026-11-17"
-    },
-    {
-      "id": "heygen-avatar-6",
+      "id": "ideogram-4-6-precise-edits",
       "kind": "update",
-      "category": "Video",
-      "title": "HeyGen's Avatar 6 gives presenter videos more natural gestures, at any length",
-      "summary": "The new model builds a talking avatar from one photo, moves it to suit what is being said, and has no fixed time limit. You can write a gesture next to a line of script. Avatars of real people still need their consent.",
-      "source": "PR Newswire",
-      "url": "https://www.prnewswire.com/news-releases/heygen-introduces-avatar-6-an-audio-driven-context-aware-ai-model-that-alleviates-repetitive-or-unnatural-motion-in-ai-generated-video-302942527.html",
+      "category": "Image tools",
+      "title": "Ideogram 4.6 changes one part of a picture and leaves the rest alone, at up to 4K",
+      "summary": "Ask for a single change, such as a new colour or material, and the new model keeps everything else in place, edit after edit. Handy for product shots and key art. It is live in the Ideogram app and in tools such as Runway.",
+      "source": "Ideogram",
+      "url": "https://ideogram.ai/models/4.6",
+      "date": "2026-11-19"
+    },
+    {
+      "id": "ai-prompts-stolen-canary-study",
+      "kind": "caution",
+      "category": "Data security",
+      "title": "Test finds prompts sent to some AI services were stolen, logged or kept",
+      "summary": "Researchers hid fake passwords in about two million prompts, then watched strangers try to use them. At least three AI providers had been breached and some ignored privacy settings. Never paste passwords or secrets into AI.",
+      "source": "Ars Technica",
+      "url": "https://arstechnica.com/security/2026/11/a-leaky-ai-supply-chain-is-exposing-secret-user-data-at-an-alarming-rate/",
+      "date": "2026-11-20"
+    },
+    {
+      "id": "soundcloud-ai-spam-rules",
+      "kind": "update",
+      "category": "Music",
+      "title": "SoundCloud sets rules against AI spam and fake artists, but still allows AI music",
+      "summary": "New terms target mass uploads of near-identical tracks, AI songs passed off as fully human-made, and invented artists posing as real people. SoundCloud can limit uploads and take back payouts. Describe AI work honestly.",
+      "source": "Digital Music News",
+      "url": "https://www.digitalmusicnews.com/2026/11/17/soundcloud-ai-slop-crackdown/",
       "date": "2026-11-17"
     },
     {
-      "id": "chatgpt-live-dictation",
+      "id": "gemini-mac-computer-use",
       "kind": "update",
       "category": "Assistants",
-      "title": "ChatGPT dictation now types as you talk and drops the 10-minute limit",
-      "summary": "Live Dictation shows your words on screen while you speak, so long notes, interview recaps and script ideas no longer wait for a transcript. It is rolling out to every ChatGPT plan on phone, web and desktop.",
-      "source": "9to5Mac",
-      "url": "https://9to5mac.com/2026/11/18/chatgpt-app-gains-enhanced-live-dictation-streaming-without-10-minute-limit/",
-      "date": "2026-11-18"
+      "title": "Gemini's Mac app can now click and type through your apps to finish a task",
+      "summary": "Describe a job, such as colour-grading a batch of photos or filling in forms from PDFs, and Gemini works in a background window while you carry on. You choose the apps it may use and approve key steps. US paid plans only for now.",
+      "source": "9to5Google",
+      "url": "https://9to5google.com/2026/11/19/gemini-mac-computer-use/",
+      "date": "2026-11-19"
     }
   ]
 };
