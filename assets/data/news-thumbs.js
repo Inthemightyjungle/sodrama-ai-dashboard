@@ -1,5 +1,5 @@
 window.SD_NEWS_THUMBS = {
-  "_for": "3cc972abaaab27cd",
+  "_for": "31f6363d8bc628be",
   "suno-visuals-video-clips": {
     "src": "assets/img/news/suno-visuals-video-clips.jpg",
     "w": 960,
@@ -37,9 +37,12 @@ window.SD_NEWS_THUMBS = {
     "image": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/11/chatgpt-live-dictation-promo-screenshot.jpeg?quality=90&strip=all&crop=8.4734375%2C20.737347294939%2C85.1578125%2C79.262652705061&w=1200"
   },
   "microsoft-ads-ai-labels": {
-    "src": null,
-    "error": "the site answered 403 Forbidden",
-    "page": "https://searchengineland.com/microsoft-ads-adds-made-with-ai-labels-to-ai-generated-ad-images-502652",
-    "wanted": ""
+    "src": "assets/img/news/microsoft-ads-ai-labels.jpg",
+    "w": 960,
+    "h": 345,
+    "v": "0352894c",
+    "page": "https://www.seroundtable.com/bing-ads-made-with-ai-label-42579.html",
+    "wanted": "",
+    "image": "https://images.seroundtable.com/bing-microsoft-ads-made-with-ai-label-pA3x9oad.jpg"
   }
 };
