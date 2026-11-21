@@ -1,5 +1,5 @@
 window.SD_NEWS = {
-  "updated": "2026-11-22T06:39:46+08:00",
+  "updated": "2026-11-22T06:42:34+08:00",
   "stories": [
     {
       "id": "suno-visuals-video-clips",
@@ -42,14 +42,14 @@ window.SD_NEWS = {
       "date": "2026-11-19"
     },
     {
-      "id": "equity-pact-ai-protections",
+      "id": "microsoft-ads-ai-labels",
       "kind": "update",
-      "category": "Film and TV",
-      "title": "UK actors' union and producers agree first AI rules for film and TV performers",
-      "summary": "Under the Equity and Pact deal, a producer needs a performer's consent to use a digital copy of them, for a named project only, and must pay for it and keep it secure. Members vote until 30 November. A useful model for contracts.",
-      "source": "C21Media",
-      "url": "https://www.c21media.net/news/union-equity-secures-uk-first-ai-protections-for-performers/",
-      "date": "2026-11-17"
+      "category": "Advertising",
+      "title": "Microsoft Advertising lets you label AI-made images and videos in your ads",
+      "summary": "Advertisers can now mark each picture or video that includes AI-made content and add a visible watermark where the ad format allows. Microsoft's own detector gives hints, but the call is yours. Keep a list of which assets AI made.",
+      "source": "Microsoft Advertising",
+      "url": "https://about.ads.microsoft.com/en/blog/post/november-2026/put-ai-to-work-engaging-customers-in-more-places-whats-new-in-microsoft-advertising-this-november",
+      "date": "2026-11-19"
     }
   ]
 };
