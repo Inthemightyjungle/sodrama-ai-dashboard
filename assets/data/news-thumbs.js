@@ -1,5 +1,5 @@
 window.SD_NEWS_THUMBS = {
-  "_for": "55ffeb2f9c9f430b",
+  "_for": "fbd0c9a7171f34bc",
   "suno-visuals-video-clips": {
     "src": "assets/img/news/suno-visuals-video-clips.jpg",
     "w": 960,
@@ -38,11 +38,11 @@ window.SD_NEWS_THUMBS = {
   },
   "equity-pact-ai-protections": {
     "src": "assets/img/news/equity-pact-ai-protections.jpg",
-    "w": 956,
-    "h": 538,
-    "v": "ef65cea7",
-    "page": "https://www.televisual.com/news/equity-secures-ai-protections-for-performers/",
+    "w": 620,
+    "h": 349,
+    "v": "363338bd",
+    "page": "https://www.c21media.net/news/union-equity-secures-uk-first-ai-protections-for-performers/",
     "wanted": "",
-    "image": "https://www.televisual.com/wp-content/uploads/equity-ai.jpg"
+    "image": "https://cdn.c21media.net/wp-content/uploads/2026/11/equity-vote-demo-2026.jpg"
   }
 };
