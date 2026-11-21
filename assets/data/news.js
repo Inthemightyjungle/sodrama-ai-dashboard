@@ -1,57 +1,55 @@
 window.SD_NEWS = {
-  "updated": "2026-11-21T06:43:15+08:00",
+  "updated": "2026-11-22T06:39:46+08:00",
   "stories": [
     {
-      "id": "veed-ai-editing-agent",
+      "id": "suno-visuals-video-clips",
       "kind": "update",
       "category": "Video",
-      "title": "VEED's new AI agent edits short social videos from a written brief",
-      "summary": "Upload footage or paste a product page link, say what the video is for, and VEED AI cuts it, adds captions, titles and your logo, and exports each shape you need. It runs on web and phone, with a free plan and no watermark.",
-      "source": "VEED",
-      "url": "https://www.veed.io/newsroom/veed-ai-video-editing-agent",
-      "date": "2026-11-19",
-      "image": "https://cdn-site-assets.veed.io/veed_ai_og_6_matrix_3d457857b0/veed_ai_og_6_matrix_3d457857b0.png"
+      "title": "Suno adds Visuals, which makes lyric videos, cover art and short clips for your songs",
+      "summary": "Drag a song in and Suno makes clips of up to 15 seconds that follow its structure and lip-sync to the lyrics. You can then extend or change them with text. Visual credits are sold separately from song credits.",
+      "source": "Suno",
+      "url": "https://suno.com/blog/introducing-visuals",
+      "date": "2026-11-17"
     },
     {
-      "id": "ideogram-4-6-precise-edits",
+      "id": "canva-ai-off-switch",
       "kind": "update",
-      "category": "Image tools",
-      "title": "Ideogram 4.6 changes one part of a picture and leaves the rest alone, at up to 4K",
-      "summary": "Ask for a single change, such as a new colour or material, and the new model keeps everything else in place, edit after edit. Handy for product shots and key art. It is live in the Ideogram app and in tools such as Runway.",
-      "source": "Ideogram",
-      "url": "https://ideogram.ai/models/4.6",
-      "date": "2026-11-19",
-      "image": "https://storage.googleapis.com/ideogram-static/website/images/10295761b068e577.jpeg"
-    },
-    {
-      "id": "ai-prompts-stolen-canary-study",
-      "kind": "caution",
-      "category": "Data security",
-      "title": "Test finds prompts sent to some AI services were stolen, logged or kept",
-      "summary": "Researchers hid fake passwords in about two million prompts, then watched strangers try to use them. At least three AI providers had been breached and some ignored privacy settings. Never paste passwords or secrets into AI.",
-      "source": "Ars Technica",
-      "url": "https://arstechnica.com/security/2026/11/a-leaky-ai-supply-chain-is-exposing-secret-user-data-at-an-alarming-rate/",
-      "date": "2026-11-20"
-    },
-    {
-      "id": "soundcloud-ai-spam-rules",
-      "kind": "update",
-      "category": "Music",
-      "title": "SoundCloud sets rules against AI spam and fake artists, but still allows AI music",
-      "summary": "New terms target mass uploads of near-identical tracks, AI songs passed off as fully human-made, and invented artists posing as real people. SoundCloud can limit uploads and take back payouts. Describe AI work honestly.",
-      "source": "RouteNote",
-      "url": "https://routenote.com/blog/soundcloud-ai-policies/",
+      "category": "Design",
+      "title": "Canva adds a switch to turn its generative AI features off",
+      "summary": "Free and Pro users can now hide tools such as Magic Expand and image generation, and ask to see fewer AI-made templates and graphics in the library. Background Remover and Magic Grab stay on. Handy when a client wants no AI.",
+      "source": "Canva",
+      "url": "https://www.canva.com/newsroom/news/ai-controls-canva/",
       "date": "2026-11-19"
     },
     {
-      "id": "gemini-mac-computer-use",
+      "id": "meta-muse-mixed-up-chats",
+      "kind": "caution",
+      "category": "Privacy",
+      "title": "Meta staff say its Muse AI agent showed them other people's private details",
+      "summary": "Reuters saw internal posts where Muse brought up bank balances and orders that were not the user's, and reminded one tester of a private Signal message. Meta says staff test unreleased versions. Keep work data out of new agents.",
+      "source": "TechCrunch",
+      "url": "https://techcrunch.com/2026/11/19/metas-ai-agent-muse-is-mixing-up-conversations-and-exposing-private-data-report-says/",
+      "date": "2026-11-19"
+    },
+    {
+      "id": "chatgpt-live-dictation",
       "kind": "update",
       "category": "Assistants",
-      "title": "Gemini's Mac app can now click and type through your apps to finish a task",
-      "summary": "Describe a job, such as colour-grading a batch of photos or filling in forms from PDFs, and Gemini works in a background window while you carry on. You choose the apps it may use and approve key steps. US paid plans only for now.",
-      "source": "9to5Google",
-      "url": "https://9to5google.com/2026/11/19/gemini-mac-computer-use/",
+      "title": "ChatGPT now types out your words as you speak, with no 10-minute limit",
+      "summary": "Live Dictation shows the text while you are still talking, so you can check it before you send. The 10-minute cap on recordings is gone. It is rolling out on every plan, on phone, web and desktop. Good for long notes and drafts.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1037634/openai-chatgpt-live-dictation",
       "date": "2026-11-19"
+    },
+    {
+      "id": "equity-pact-ai-protections",
+      "kind": "update",
+      "category": "Film and TV",
+      "title": "UK actors' union and producers agree first AI rules for film and TV performers",
+      "summary": "Under the Equity and Pact deal, a producer needs a performer's consent to use a digital copy of them, for a named project only, and must pay for it and keep it secure. Members vote until 30 November. A useful model for contracts.",
+      "source": "Equity",
+      "url": "https://www.equity.org.uk/news/2026/equity-secures-uk-first-ai-protections-for-performers",
+      "date": "2026-11-16"
     }
   ]
 };
