@@ -47,8 +47,8 @@ window.SD_NEWS = {
       "category": "Advertising",
       "title": "Microsoft adds a \"Made with AI\" label to AI-generated pictures in its ads",
       "summary": "Advertisers on Bing and Microsoft's network can now mark each image or video that includes AI-made content and show a tag in its corner. Microsoft's own detector only gives hints, so the call is yours. Keep a list of what AI made.",
-      "source": "Search Engine Land",
-      "url": "https://searchengineland.com/microsoft-ads-adds-made-with-ai-labels-to-ai-generated-ad-images-502652",
+      "source": "Search Engine Roundtable",
+      "url": "https://www.seroundtable.com/bing-ads-made-with-ai-label-42579.html",
       "date": "2026-11-20"
     }
   ]
