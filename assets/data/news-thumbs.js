@@ -1,5 +1,5 @@
 window.SD_NEWS_THUMBS = {
-  "_for": "fbd0c9a7171f34bc",
+  "_for": "d417826cc805e07a",
   "suno-visuals-video-clips": {
     "src": "assets/img/news/suno-visuals-video-clips.jpg",
     "w": 960,
@@ -36,13 +36,13 @@ window.SD_NEWS_THUMBS = {
     "wanted": "",
     "image": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/11/chatgpt-live-dictation-promo-screenshot.jpeg?quality=90&strip=all&crop=8.4734375%2C20.737347294939%2C85.1578125%2C79.262652705061&w=1200"
   },
-  "equity-pact-ai-protections": {
-    "src": "assets/img/news/equity-pact-ai-protections.jpg",
-    "w": 620,
-    "h": 349,
-    "v": "363338bd",
-    "page": "https://www.c21media.net/news/union-equity-secures-uk-first-ai-protections-for-performers/",
+  "microsoft-ads-ai-labels": {
+    "src": "assets/img/news/microsoft-ads-ai-labels.jpg",
+    "w": 960,
+    "h": 358,
+    "v": "32636fda",
+    "page": "https://about.ads.microsoft.com/en/blog/post/november-2026/put-ai-to-work-engaging-customers-in-more-places-whats-new-in-microsoft-advertising-this-november",
     "wanted": "",
-    "image": "https://cdn.c21media.net/wp-content/uploads/2026/11/equity-vote-demo-2026.jpg"
+    "image": "https://about.ads.microsoft.com/content/dam/sites/msa-about/global/common/content-lib/blogs/blog/2026/11/pub_NewHero_90713_844x315.png"
   }
 };
