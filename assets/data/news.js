@@ -17,8 +17,8 @@ window.SD_NEWS = {
       "category": "Design",
       "title": "Canva adds a switch to turn its generative AI features off",
       "summary": "Free and Pro users can now hide tools such as Magic Expand and image generation, and ask to see fewer AI-made templates and graphics in the library. Background Remover and Magic Grab stay on. Handy when a client wants no AI.",
-      "source": "Canva",
-      "url": "https://www.canva.com/newsroom/news/ai-controls-canva/",
+      "source": "9to5Mac",
+      "url": "https://9to5mac.com/2026/11/19/canva-introduces-new-controls-to-hide-generative-ai-features/",
       "date": "2026-11-19"
     },
     {
@@ -47,9 +47,9 @@ window.SD_NEWS = {
       "category": "Film and TV",
       "title": "UK actors' union and producers agree first AI rules for film and TV performers",
       "summary": "Under the Equity and Pact deal, a producer needs a performer's consent to use a digital copy of them, for a named project only, and must pay for it and keep it secure. Members vote until 30 November. A useful model for contracts.",
-      "source": "Equity",
-      "url": "https://www.equity.org.uk/news/2026/equity-secures-uk-first-ai-protections-for-performers",
-      "date": "2026-11-16"
+      "source": "Dentons",
+      "url": "https://www.dentons.com/en/insights/articles/2026/november/19/taking-the-lead-on-ai-uk-film-and-television-industry-agrees-new-performer-protections",
+      "date": "2026-11-19"
     }
   ]
 };
