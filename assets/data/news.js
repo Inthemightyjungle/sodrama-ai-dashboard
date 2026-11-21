@@ -1,5 +1,5 @@
 window.SD_NEWS = {
-  "updated": "2026-11-22T06:42:34+08:00",
+  "updated": "2026-11-22T06:43:17+08:00",
   "stories": [
     {
       "id": "suno-visuals-video-clips",
@@ -45,11 +45,11 @@ window.SD_NEWS = {
       "id": "microsoft-ads-ai-labels",
       "kind": "update",
       "category": "Advertising",
-      "title": "Microsoft Advertising lets you label AI-made images and videos in your ads",
-      "summary": "Advertisers can now mark each picture or video that includes AI-made content and add a visible watermark where the ad format allows. Microsoft's own detector gives hints, but the call is yours. Keep a list of which assets AI made.",
-      "source": "Microsoft Advertising",
-      "url": "https://about.ads.microsoft.com/en/blog/post/november-2026/put-ai-to-work-engaging-customers-in-more-places-whats-new-in-microsoft-advertising-this-november",
-      "date": "2026-11-19"
+      "title": "Microsoft adds a \"Made with AI\" label to AI-generated pictures in its ads",
+      "summary": "Advertisers on Bing and Microsoft's network can now mark each image or video that includes AI-made content and show a tag in its corner. Microsoft's own detector only gives hints, so the call is yours. Keep a list of what AI made.",
+      "source": "Search Engine Land",
+      "url": "https://searchengineland.com/microsoft-ads-adds-made-with-ai-labels-to-ai-generated-ad-images-502652",
+      "date": "2026-11-20"
     }
   ]
 };
