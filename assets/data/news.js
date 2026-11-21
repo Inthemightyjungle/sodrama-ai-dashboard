@@ -47,9 +47,9 @@ window.SD_NEWS = {
       "category": "Film and TV",
       "title": "UK actors' union and producers agree first AI rules for film and TV performers",
       "summary": "Under the Equity and Pact deal, a producer needs a performer's consent to use a digital copy of them, for a named project only, and must pay for it and keep it secure. Members vote until 30 November. A useful model for contracts.",
-      "source": "Dentons",
-      "url": "https://www.dentons.com/en/insights/articles/2026/november/19/taking-the-lead-on-ai-uk-film-and-television-industry-agrees-new-performer-protections",
-      "date": "2026-11-19"
+      "source": "Televisual",
+      "url": "https://www.televisual.com/news/equity-secures-ai-protections-for-performers/",
+      "date": "2026-11-17"
     }
   ]
 };
