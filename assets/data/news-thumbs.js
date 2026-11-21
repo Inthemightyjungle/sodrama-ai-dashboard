@@ -1,5 +1,5 @@
 window.SD_NEWS_THUMBS = {
-  "_for": "49938212d8ba1d25",
+  "_for": "55ffeb2f9c9f430b",
   "suno-visuals-video-clips": {
     "src": "assets/img/news/suno-visuals-video-clips.jpg",
     "w": 960,
@@ -37,9 +37,12 @@ window.SD_NEWS_THUMBS = {
     "image": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/11/chatgpt-live-dictation-promo-screenshot.jpeg?quality=90&strip=all&crop=8.4734375%2C20.737347294939%2C85.1578125%2C79.262652705061&w=1200"
   },
   "equity-pact-ai-protections": {
-    "src": null,
-    "error": "the site answered 403 Forbidden",
-    "page": "https://www.dentons.com/en/insights/articles/2026/november/19/taking-the-lead-on-ai-uk-film-and-television-industry-agrees-new-performer-protections",
-    "wanted": ""
+    "src": "assets/img/news/equity-pact-ai-protections.jpg",
+    "w": 956,
+    "h": 538,
+    "v": "ef65cea7",
+    "page": "https://www.televisual.com/news/equity-secures-ai-protections-for-performers/",
+    "wanted": "",
+    "image": "https://www.televisual.com/wp-content/uploads/equity-ai.jpg"
   }
 };
