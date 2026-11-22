@@ -1,48 +1,45 @@
 window.SD_NEWS_THUMBS = {
-  "_for": "31f6363d8bc628be",
-  "suno-visuals-video-clips": {
-    "src": "assets/img/news/suno-visuals-video-clips.jpg",
+  "_for": "f4ef59d27682131a",
+  "topview-film-studio-hybrid": {
+    "src": "assets/img/news/topview-film-studio-hybrid.jpg",
     "w": 960,
-    "h": 504,
-    "v": "ca528c98",
-    "page": "https://suno.com/blog/introducing-visuals",
+    "h": 540,
+    "v": "13088d31",
+    "page": "https://www.awn.com/news/topview-launches-film-studio-hybrid-ai-production-platform",
     "wanted": "",
-    "image": "https://cdn.sanity.io/images/cl7b1q1i/production/89947c59d1f2c8fda3d2133d67c0f7e11da012c5-3840x2160.jpg?rect=0,72,3840,2016&w=1200&h=630&fit=crop&auto=format"
+    "image": "https://www.awn.com/sites/default/files/styles/og_1200/public/image/featured/replace_green_screen-1280b.jpg?itok=-zv4bGCu"
   },
-  "canva-ai-off-switch": {
-    "src": "assets/img/news/canva-ai-off-switch.jpg",
-    "w": 960,
-    "h": 502,
-    "v": "ee936a32",
-    "page": "https://9to5mac.com/2026/11/19/canva-introduces-new-controls-to-hide-generative-ai-features/",
+  "elevenlabs-ads-video-variants": {
+    "src": "assets/img/news/elevenlabs-ads-video-variants.jpg",
+    "w": 720,
+    "h": 720,
+    "v": "b080d2c4",
+    "page": "https://elevenlabs.io/blog/video-variants-localization-ads-engine",
     "wanted": "",
-    "image": "https://9to5mac.com/wp-content/uploads/sites/6/2026/11/canva-ai.jpg?quality=82&strip=all&resize=1200,628"
+    "image": "https://eleven-public-cdn.elevenlabs.io/payloadcms/wkj94xsg9yf-ads-engine-video-variants-cover-v5.webp"
   },
-  "meta-muse-mixed-up-chats": {
-    "src": "assets/img/news/meta-muse-mixed-up-chats.jpg",
+  "signal-blocks-phone-ai-screenshots": {
+    "src": "assets/img/news/signal-blocks-phone-ai-screenshots.jpg",
     "w": 960,
-    "h": 504,
-    "v": "554884b8",
-    "page": "https://techcrunch.com/2026/11/19/metas-ai-agent-muse-is-mixing-up-conversations-and-exposing-private-data-report-says/",
+    "h": 539,
+    "v": "1a9fb1bd",
+    "page": "https://www.engadget.com/2323574/signal-now-blocks-screenshots-by-default-to-stymie-ai-agents",
     "wanted": "",
-    "image": "https://techcrunch.com/wp-content/uploads/2026/09/muse-ai-meta.jpg?w=1200"
+    "image": "https://www.engadget.com/img/gallery/signal-now-blocks-screenshots-by-default-to-stymie-ai-agents/l-intro-1795205811.jpg"
   },
-  "chatgpt-live-dictation": {
-    "src": "assets/img/news/chatgpt-live-dictation.jpg",
-    "w": 960,
-    "h": 502,
-    "v": "c4e8d07e",
-    "page": "https://www.theverge.com/ai-artificial-intelligence/1037634/openai-chatgpt-live-dictation",
-    "wanted": "",
-    "image": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/11/chatgpt-live-dictation-promo-screenshot.jpeg?quality=90&strip=all&crop=8.4734375%2C20.737347294939%2C85.1578125%2C79.262652705061&w=1200"
+  "gemini-gif-maker": {
+    "src": null,
+    "error": "the site answered 403 Forbidden",
+    "page": "https://www.androidauthority.com/gemini-gif-generation-rollout-3737901/",
+    "wanted": ""
   },
-  "microsoft-ads-ai-labels": {
-    "src": "assets/img/news/microsoft-ads-ai-labels.jpg",
+  "ai-prompts-stolen-canary-test": {
+    "src": "assets/img/news/ai-prompts-stolen-canary-test.jpg",
     "w": 960,
-    "h": 345,
-    "v": "0352894c",
-    "page": "https://www.seroundtable.com/bing-ads-made-with-ai-label-42579.html",
+    "h": 540,
+    "v": "99deb69e",
+    "page": "https://arstechnica.com/security/2026/11/a-leaky-ai-supply-chain-is-exposing-secret-user-data-at-an-alarming-rate/",
     "wanted": "",
-    "image": "https://images.seroundtable.com/bing-microsoft-ads-made-with-ai-label-pA3x9oad.jpg"
+    "image": "https://cdn.arstechnica.net/wp-content/uploads/2026/11/ai-privacy-leakage-1152x648.jpg"
   }
 };
