@@ -1,5 +1,5 @@
 window.SD_NEWS_THUMBS = {
-  "_for": "f4ef59d27682131a",
+  "_for": "a4ca66022702c8da",
   "topview-film-studio-hybrid": {
     "src": "assets/img/news/topview-film-studio-hybrid.jpg",
     "w": 960,
@@ -28,10 +28,13 @@ window.SD_NEWS_THUMBS = {
     "image": "https://www.engadget.com/img/gallery/signal-now-blocks-screenshots-by-default-to-stymie-ai-agents/l-intro-1795205811.jpg"
   },
   "gemini-gif-maker": {
-    "src": null,
-    "error": "the site answered 403 Forbidden",
-    "page": "https://www.androidauthority.com/gemini-gif-generation-rollout-3737901/",
-    "wanted": ""
+    "src": "assets/img/news/gemini-gif-maker.jpg",
+    "w": 960,
+    "h": 504,
+    "v": "496f0eea",
+    "page": "https://www.digitaltrends.com/cool-tech/google-gemini-ai-gif-generation/",
+    "wanted": "",
+    "image": "https://i0.wp.com/cdn.dtmg.xyz/uploads/2026/11/Google-Gemini-Logo-Featured-Official.jpg?resize=1200%2C630&ssl=1"
   },
   "ai-prompts-stolen-canary-test": {
     "src": "assets/img/news/ai-prompts-stolen-canary-test.jpg",
