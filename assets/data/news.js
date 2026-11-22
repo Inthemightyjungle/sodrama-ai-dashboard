@@ -1,5 +1,5 @@
 window.SD_NEWS = {
-  "updated": "2026-11-23T06:40:34+08:00",
+  "updated": "2026-11-23T06:41:55+08:00",
   "stories": [
     {
       "id": "topview-film-studio-hybrid",
@@ -36,10 +36,10 @@ window.SD_NEWS = {
       "kind": "update",
       "category": "Assistants",
       "title": "Gemini can now make short looping GIFs from a text prompt",
-      "summary": "Pick GIF in the Format menu, or just ask, and Gemini makes a loop of about three seconds that you can download or paste elsewhere. It is starting in a few countries such as the US, UK and Japan. Singapore is not on the list yet.",
-      "source": "Android Authority",
-      "url": "https://www.androidauthority.com/gemini-gif-generation-rollout-3737901/",
-      "date": "2026-11-20"
+      "summary": "Pick GIF in the format menu, or just ask, and Gemini makes a loop of about three seconds to download or paste into messages and documents. Paid Google AI plans get it first. Free use starts in eight countries, not yet Singapore.",
+      "source": "Digital Trends",
+      "url": "https://www.digitaltrends.com/cool-tech/google-gemini-ai-gif-generation/",
+      "date": "2026-11-21"
     },
     {
       "id": "ai-prompts-stolen-canary-test",
