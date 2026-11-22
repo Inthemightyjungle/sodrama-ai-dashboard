@@ -1,54 +1,54 @@
 window.SD_NEWS = {
-  "updated": "2026-11-22T06:43:17+08:00",
+  "updated": "2026-11-23T06:40:34+08:00",
   "stories": [
     {
-      "id": "suno-visuals-video-clips",
+      "id": "topview-film-studio-hybrid",
       "kind": "update",
-      "category": "Video",
-      "title": "Suno adds Visuals, which makes lyric videos, cover art and short clips for your songs",
-      "summary": "Drag a song in and Suno makes clips of up to 15 seconds that follow its structure and lip-sync to the lyrics. You can then extend or change them with text. Visual credits are sold separately from song credits.",
-      "source": "Suno",
-      "url": "https://suno.com/blog/introducing-visuals",
-      "date": "2026-11-17"
-    },
-    {
-      "id": "canva-ai-off-switch",
-      "kind": "update",
-      "category": "Design",
-      "title": "Canva adds a switch to turn its generative AI features off",
-      "summary": "Free and Pro users can now hide tools such as Magic Expand and image generation, and ask to see fewer AI-made templates and graphics in the library. Background Remover and Magic Grab stay on. Handy when a client wants no AI.",
-      "source": "9to5Mac",
-      "url": "https://9to5mac.com/2026/11/19/canva-introduces-new-controls-to-hide-generative-ai-features/",
+      "category": "Production",
+      "title": "Singapore's Topview launches Film Studio, mixing live-action footage with AI sets",
+      "summary": "The tool relights filmed footage, makes new camera angles from shots you already have, adds AI extras to a crowd and swaps green screens behind real actors. It is aimed at films and short dramas. No prices were given.",
+      "source": "Animation World Network",
+      "url": "https://www.awn.com/news/topview-launches-film-studio-hybrid-ai-production-platform",
       "date": "2026-11-19"
     },
     {
-      "id": "meta-muse-mixed-up-chats",
-      "kind": "caution",
-      "category": "Privacy",
-      "title": "Meta staff say its Muse AI agent showed them other people's private details",
-      "summary": "Reuters saw internal posts where Muse brought up bank balances and orders that were not the user's, and reminded one tester of a private Signal message. Meta says staff test unreleased versions. Keep work data out of new agents.",
-      "source": "TechCrunch",
-      "url": "https://techcrunch.com/2026/11/19/metas-ai-agent-muse-is-mixing-up-conversations-and-exposing-private-data-report-says/",
-      "date": "2026-11-19"
-    },
-    {
-      "id": "chatgpt-live-dictation",
-      "kind": "update",
-      "category": "Assistants",
-      "title": "ChatGPT now types out your words as you speak, with no 10-minute limit",
-      "summary": "Live Dictation shows the text while you are still talking, so you can check it before you send. The 10-minute cap on recordings is gone. It is rolling out on every plan, on phone, web and desktop. Good for long notes and drafts.",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/ai-artificial-intelligence/1037634/openai-chatgpt-live-dictation",
-      "date": "2026-11-19"
-    },
-    {
-      "id": "microsoft-ads-ai-labels",
+      "id": "elevenlabs-ads-video-variants",
       "kind": "update",
       "category": "Advertising",
-      "title": "Microsoft adds a \"Made with AI\" label to AI-generated pictures in its ads",
-      "summary": "Advertisers on Bing and Microsoft's network can now mark each image or video that includes AI-made content and show a tag in its corner. Microsoft's own detector only gives hints, so the call is yours. Keep a list of what AI made.",
-      "source": "Search Engine Roundtable",
-      "url": "https://www.seroundtable.com/bing-ads-made-with-ai-label-42579.html",
+      "title": "ElevenLabs can now remake a video ad with new openings, music and dubbed versions",
+      "summary": "Ads Engine writes a new opening line, voices it with a copy of the original speaker's voice and lip-syncs it. It also dubs ads and redoes the captions for other markets. Get the speaker's consent before a voice is copied.",
+      "source": "ElevenLabs",
+      "url": "https://elevenlabs.io/blog/video-variants-localization-ads-engine",
+      "date": "2026-11-20"
+    },
+    {
+      "id": "signal-blocks-phone-ai-screenshots",
+      "kind": "caution",
+      "category": "Privacy",
+      "title": "Signal blocks screenshots so the AI assistants built into phones cannot read chats",
+      "summary": "On iOS 27 and some Android phones, Signal now stops Siri AI and Gemini from capturing its screen. It says the fix is only partial. Lesson: a phone's AI helper can see what is on screen, so check which apps it may read.",
+      "source": "Engadget",
+      "url": "https://www.engadget.com/2323574/signal-now-blocks-screenshots-by-default-to-stymie-ai-agents",
+      "date": "2026-11-20"
+    },
+    {
+      "id": "gemini-gif-maker",
+      "kind": "update",
+      "category": "Assistants",
+      "title": "Gemini can now make short looping GIFs from a text prompt",
+      "summary": "Pick GIF in the Format menu, or just ask, and Gemini makes a loop of about three seconds that you can download or paste elsewhere. It is starting in a few countries such as the US, UK and Japan. Singapore is not on the list yet.",
+      "source": "Android Authority",
+      "url": "https://www.androidauthority.com/gemini-gif-generation-rollout-3737901/",
+      "date": "2026-11-20"
+    },
+    {
+      "id": "ai-prompts-stolen-canary-test",
+      "kind": "caution",
+      "category": "Data security",
+      "title": "Test finds AI prompts stolen at three hosting firms, even with \"no storage\" switched on",
+      "summary": "Security firm Dragos hid fake passwords in two million prompts. Thieves used them after break-ins at three AI hosting firms, and cheap resellers logged prompts too. Never paste passwords or secrets into AI. Use approved tools.",
+      "source": "Ars Technica",
+      "url": "https://arstechnica.com/security/2026/11/a-leaky-ai-supply-chain-is-exposing-secret-user-data-at-an-alarming-rate/",
       "date": "2026-11-20"
     }
   ]
