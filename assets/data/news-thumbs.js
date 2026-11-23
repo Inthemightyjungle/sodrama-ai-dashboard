@@ -1,48 +1,45 @@
 window.SD_NEWS_THUMBS = {
-  "_for": "a4ca66022702c8da",
-  "topview-film-studio-hybrid": {
-    "src": "assets/img/news/topview-film-studio-hybrid.jpg",
+  "_for": "93031da82296f9a2",
+  "tiktok-ai-checker-likeness-detection": {
+    "src": "assets/img/news/tiktok-ai-checker-likeness-detection.jpg",
     "w": 960,
     "h": 540,
-    "v": "13088d31",
-    "page": "https://www.awn.com/news/topview-launches-film-studio-hybrid-ai-production-platform",
+    "v": "33f7ba75",
+    "page": "https://newsroom.tiktok.com/more-tools-to-provide-clarity-and-control-around-ai-generated-content?lang=en",
     "wanted": "",
-    "image": "https://www.awn.com/sites/default/files/styles/og_1200/public/image/featured/replace_green_screen-1280b.jpg?itok=-zv4bGCu"
+    "image": "https://p16-ttark.tiktokcdn-us.com/tos-useast5-i-1rzkm2vceq-tx/3d7192bedac0b17f0ad62ec6758f8c4d.png~tplv-1rzkm2vceq-default:0:0:q75.image"
   },
-  "elevenlabs-ads-video-variants": {
-    "src": "assets/img/news/elevenlabs-ads-video-variants.jpg",
-    "w": 720,
-    "h": 720,
-    "v": "b080d2c4",
-    "page": "https://elevenlabs.io/blog/video-variants-localization-ads-engine",
+  "lemonlight-hero-production-platform": {
+    "src": "assets/img/news/lemonlight-hero-production-platform.jpg",
+    "w": 770,
+    "h": 418,
+    "v": "82bcb42e",
+    "page": "https://www.broadcastnow.co.uk/tech-innovation/lemonlight-launches-ai-video-production-platform/5222645.article",
     "wanted": "",
-    "image": "https://eleven-public-cdn.elevenlabs.io/payloadcms/wkj94xsg9yf-ads-engine-video-variants-cover-v5.webp"
+    "image": "https://d11p0alxbet5ud.cloudfront.net/Pictures/1024x536/7/8/5/1492785_lemonlightlogo_335066.jpg"
   },
-  "signal-blocks-phone-ai-screenshots": {
-    "src": "assets/img/news/signal-blocks-phone-ai-screenshots.jpg",
+  "chatgpt-gpt-6-2-chat-tab": {
+    "src": "assets/img/news/chatgpt-gpt-6-2-chat-tab.jpg",
     "w": 960,
-    "h": 539,
-    "v": "1a9fb1bd",
-    "page": "https://www.engadget.com/2323574/signal-now-blocks-screenshots-by-default-to-stymie-ai-agents",
+    "h": 499,
+    "v": "a7793cd0",
+    "page": "https://www.theverge.com/ai-artificial-intelligence/1040716/openai-launched-a-chat-specific-version-of-gpt-6-2-sol",
     "wanted": "",
-    "image": "https://www.engadget.com/img/gallery/signal-now-blocks-screenshots-by-default-to-stymie-ai-agents/l-intro-1795205811.jpg"
+    "image": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/01/verge-placeholder_f212b3.png?quality=90&strip=all&crop=0,0.13712291199202,100,99.725754176016"
   },
-  "gemini-gif-maker": {
-    "src": "assets/img/news/gemini-gif-maker.jpg",
+  "netflix-ai-clause-german-dubbing": {
+    "src": "assets/img/news/netflix-ai-clause-german-dubbing.jpg",
     "w": 960,
-    "h": 504,
-    "v": "496f0eea",
-    "page": "https://www.digitaltrends.com/cool-tech/google-gemini-ai-gif-generation/",
+    "h": 640,
+    "v": "4bb8d4a2",
+    "page": "https://www.heise.de/en/news/Dubbing-Netflix-increases-residual-payments-but-AI-dispute-remains-unresolved-11528300.html",
     "wanted": "",
-    "image": "https://i0.wp.com/cdn.dtmg.xyz/uploads/2026/11/Google-Gemini-Logo-Featured-Official.jpg?resize=1200%2C630&ssl=1"
+    "image": "https://heise.cloudimg.io/v7/_www-heise-de_/imgs/18/5/2/0/3/2/0/2/shutterstock_1450562597-7e04928ec41a6771.jpg?func=bound&height=1200&org_if_sml=1&q=85&width=1200"
   },
-  "ai-prompts-stolen-canary-test": {
-    "src": "assets/img/news/ai-prompts-stolen-canary-test.jpg",
-    "w": 960,
-    "h": 540,
-    "v": "99deb69e",
-    "page": "https://arstechnica.com/security/2026/11/a-leaky-ai-supply-chain-is-exposing-secret-user-data-at-an-alarming-rate/",
-    "wanted": "",
-    "image": "https://cdn.arstechnica.net/wp-content/uploads/2026/11/ai-privacy-leakage-1152x648.jpg"
+  "fake-ai-sites-typo-malware": {
+    "src": null,
+    "error": "the site answered 451 ",
+    "page": "https://www.bangkokpost.com/life/tech/3359246/fake-ai-websites-mimic-chatgpt-gemini-and-claude-in-malware-threat",
+    "wanted": ""
   }
 };
