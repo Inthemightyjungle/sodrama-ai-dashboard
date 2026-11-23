@@ -1,6 +1,16 @@
 window.SD_NEWS = {
-  "updated": "2026-11-24T06:41:32+08:00",
+  "updated": "2026-11-24T06:42:51+08:00",
   "stories": [
+    {
+      "id": "netflix-ai-clause-german-dubbing",
+      "kind": "caution",
+      "category": "Contracts",
+      "title": "German voice actors refuse a Netflix contract that lets it train AI on their voices",
+      "summary": "Netflix's dubbing contract lets it use recordings to train AI. A cloned voice still needs separate consent and pay. Actors who will not sign are replaced. Lesson: read the AI clause, and spell out AI use when you hire talent.",
+      "source": "heise online",
+      "url": "https://www.heise.de/en/news/Dubbing-Netflix-increases-residual-payments-but-AI-dispute-remains-unresolved-11528300.html",
+      "date": "2026-11-17"
+    },
     {
       "id": "tiktok-ai-checker-likeness-detection",
       "kind": "update",
@@ -10,6 +20,16 @@ window.SD_NEWS = {
       "source": "TikTok",
       "url": "https://newsroom.tiktok.com/more-tools-to-provide-clarity-and-control-around-ai-generated-content?lang=en",
       "date": "2026-11-20"
+    },
+    {
+      "id": "chatgpt-gpt-6-2-chat-tab",
+      "kind": "update",
+      "category": "Assistants",
+      "title": "ChatGPT's everyday chat moves to GPT-6.2 on paid plans",
+      "summary": "The new model is better at following detailed instructions, reading pictures you share and finding answers online. It is rolling out to Plus, Pro, Business and Enterprise. The older GPT-5.6 Sol is switched off on 23 December.",
+      "source": "9to5Mac",
+      "url": "https://9to5mac.com/2026/11/23/chatgpt-expands-gpt-6-2-sol-as-openai-sets-retirement-date-for-two-models/",
+      "date": "2026-11-23"
     },
     {
       "id": "lemonlight-hero-production-platform",
@@ -22,34 +42,14 @@ window.SD_NEWS = {
       "date": "2026-11-20"
     },
     {
-      "id": "chatgpt-gpt-6-2-chat-tab",
-      "kind": "update",
-      "category": "Assistants",
-      "title": "ChatGPT's everyday chat moves to GPT-6.2 on paid plans",
-      "summary": "The new model is better at following long, detailed instructions, reading pictures you share and finding answers online. It is rolling out now to Plus, Pro, Business and Enterprise. Work and Codex keep the models they have.",
-      "source": "The Verge",
-      "url": "https://www.theverge.com/ai-artificial-intelligence/1040716/openai-launched-a-chat-specific-version-of-gpt-6-2-sol",
-      "date": "2026-11-23"
-    },
-    {
-      "id": "netflix-ai-clause-german-dubbing",
-      "kind": "caution",
-      "category": "Contracts",
-      "title": "German voice actors refuse a Netflix contract that lets it train AI on their voices",
-      "summary": "Netflix's dubbing contract lets it use recordings to train AI. A cloned voice still needs separate consent and pay. Actors who will not sign are replaced. Lesson: read the AI clause, and spell out AI use when you hire talent.",
-      "source": "heise online",
-      "url": "https://www.heise.de/en/news/Dubbing-Netflix-increases-residual-payments-but-AI-dispute-remains-unresolved-11528300.html",
-      "date": "2026-11-17"
-    },
-    {
       "id": "fake-ai-sites-typo-malware",
       "kind": "caution",
       "category": "Scams",
       "title": "186 fake sites copy ChatGPT, Gemini and Claude to catch people who mistype the address",
       "summary": "Security firm Island found lookalike addresses, one letter off, that show a fake security check and get you to install malware. Bookmark your AI tools, and never paste a command or install an app because a web page says so.",
-      "source": "Bangkok Post",
-      "url": "https://www.bangkokpost.com/life/tech/3359246/fake-ai-websites-mimic-chatgpt-gemini-and-claude-in-malware-threat",
-      "date": "2026-11-22"
+      "source": "TechRadar",
+      "url": "https://www.techradar.com/pro/security/making-a-typo-when-trying-to-access-ai-could-land-you-on-a-malware-site",
+      "date": "2026-11-16"
     }
   ]
 };
