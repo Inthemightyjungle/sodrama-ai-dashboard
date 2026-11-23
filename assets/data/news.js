@@ -1,55 +1,55 @@
 window.SD_NEWS = {
-  "updated": "2026-11-23T06:41:55+08:00",
+  "updated": "2026-11-24T06:41:32+08:00",
   "stories": [
     {
-      "id": "topview-film-studio-hybrid",
+      "id": "tiktok-ai-checker-likeness-detection",
+      "kind": "update",
+      "category": "Social media",
+      "title": "TikTok opens a free checker for AI-made clips and helps creators find deepfakes",
+      "summary": "Anyone can upload a picture or video to see if it was made with TikTok or CapCut AI tools. It cannot spot other makers' AI. Creators who verify their ID get alerts when a video may copy their face, and can report it.",
+      "source": "TikTok",
+      "url": "https://newsroom.tiktok.com/more-tools-to-provide-clarity-and-control-around-ai-generated-content?lang=en",
+      "date": "2026-11-20"
+    },
+    {
+      "id": "lemonlight-hero-production-platform",
       "kind": "update",
       "category": "Production",
-      "title": "Singapore's Topview launches Film Studio, mixing live-action footage with AI sets",
-      "summary": "The tool relights filmed footage, makes new camera angles from shots you already have, adds AI extras to a crowd and swaps green screens behind real actors. It is aimed at films and short dramas. No prices were given.",
-      "source": "Animation World Network",
-      "url": "https://www.awn.com/news/topview-launches-film-studio-hybrid-ai-production-platform",
-      "date": "2026-11-19"
-    },
-    {
-      "id": "elevenlabs-ads-video-variants",
-      "kind": "update",
-      "category": "Advertising",
-      "title": "ElevenLabs can now remake a video ad with new openings, music and dubbed versions",
-      "summary": "Ads Engine writes a new opening line, voices it with a copy of the original speaker's voice and lip-syncs it. It also dubs ads and redoes the captions for other markets. Get the speaker's consent before a voice is copied.",
-      "source": "ElevenLabs",
-      "url": "https://elevenlabs.io/blog/video-variants-localization-ads-engine",
+      "title": "Lemonlight launches Hero, one workspace for scripts, storyboards and AI edits",
+      "summary": "Hero drafts a treatment and script from a brief, then builds a storyboard from your reference photos and keeps faces and logos the same in every frame. Change a scene and the shot list and schedule update too.",
+      "source": "Broadcast",
+      "url": "https://www.broadcastnow.co.uk/tech-innovation/lemonlight-launches-ai-video-production-platform/5222645.article",
       "date": "2026-11-20"
     },
     {
-      "id": "signal-blocks-phone-ai-screenshots",
-      "kind": "caution",
-      "category": "Privacy",
-      "title": "Signal blocks screenshots so the AI assistants built into phones cannot read chats",
-      "summary": "On iOS 27 and some Android phones, Signal now stops Siri AI and Gemini from capturing its screen. It says the fix is only partial. Lesson: a phone's AI helper can see what is on screen, so check which apps it may read.",
-      "source": "Engadget",
-      "url": "https://www.engadget.com/2323574/signal-now-blocks-screenshots-by-default-to-stymie-ai-agents",
-      "date": "2026-11-20"
-    },
-    {
-      "id": "gemini-gif-maker",
+      "id": "chatgpt-gpt-6-2-chat-tab",
       "kind": "update",
       "category": "Assistants",
-      "title": "Gemini can now make short looping GIFs from a text prompt",
-      "summary": "Pick GIF in the format menu, or just ask, and Gemini makes a loop of about three seconds to download or paste into messages and documents. Paid Google AI plans get it first. Free use starts in eight countries, not yet Singapore.",
-      "source": "Digital Trends",
-      "url": "https://www.digitaltrends.com/cool-tech/google-gemini-ai-gif-generation/",
-      "date": "2026-11-21"
+      "title": "ChatGPT's everyday chat moves to GPT-6.2 on paid plans",
+      "summary": "The new model is better at following long, detailed instructions, reading pictures you share and finding answers online. It is rolling out now to Plus, Pro, Business and Enterprise. Work and Codex keep the models they have.",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1040716/openai-launched-a-chat-specific-version-of-gpt-6-2-sol",
+      "date": "2026-11-23"
     },
     {
-      "id": "ai-prompts-stolen-canary-test",
+      "id": "netflix-ai-clause-german-dubbing",
       "kind": "caution",
-      "category": "Data security",
-      "title": "Test finds AI prompts stolen at three hosting firms, even with \"no storage\" switched on",
-      "summary": "Security firm Dragos hid fake passwords in two million prompts. Thieves used them after break-ins at three AI hosting firms, and cheap resellers logged prompts too. Never paste passwords or secrets into AI. Use approved tools.",
-      "source": "Ars Technica",
-      "url": "https://arstechnica.com/security/2026/11/a-leaky-ai-supply-chain-is-exposing-secret-user-data-at-an-alarming-rate/",
-      "date": "2026-11-20"
+      "category": "Contracts",
+      "title": "German voice actors refuse a Netflix contract that lets it train AI on their voices",
+      "summary": "Netflix's dubbing contract lets it use recordings to train AI. A cloned voice still needs separate consent and pay. Actors who will not sign are replaced. Lesson: read the AI clause, and spell out AI use when you hire talent.",
+      "source": "heise online",
+      "url": "https://www.heise.de/en/news/Dubbing-Netflix-increases-residual-payments-but-AI-dispute-remains-unresolved-11528300.html",
+      "date": "2026-11-17"
+    },
+    {
+      "id": "fake-ai-sites-typo-malware",
+      "kind": "caution",
+      "category": "Scams",
+      "title": "186 fake sites copy ChatGPT, Gemini and Claude to catch people who mistype the address",
+      "summary": "Security firm Island found lookalike addresses, one letter off, that show a fake security check and get you to install malware. Bookmark your AI tools, and never paste a command or install an app because a web page says so.",
+      "source": "Bangkok Post",
+      "url": "https://www.bangkokpost.com/life/tech/3359246/fake-ai-websites-mimic-chatgpt-gemini-and-claude-in-malware-threat",
+      "date": "2026-11-22"
     }
   ]
 };
