@@ -1,55 +1,55 @@
 window.SD_NEWS = {
-  "updated": "2026-11-24T06:42:51+08:00",
+  "updated": "2026-11-25T06:40:48+08:00",
   "stories": [
     {
-      "id": "netflix-ai-clause-german-dubbing",
+      "id": "canva-design-tools-ai-agents",
+      "kind": "update",
+      "category": "Design",
+      "title": "Canva lets ChatGPT, Claude and Gemini build editable designs and videos for you",
+      "summary": "Ask your assistant for a social post or a short product video and it comes back as a real Canva file in your brand colours and fonts, ready to fix by hand. The connection is now open to everyone, with no waitlist.",
+      "source": "The Next Web",
+      "url": "https://thenextweb.com/news/canva-mcp-ai-agents-developers",
+      "date": "2026-11-24"
+    },
+    {
+      "id": "openrouter-providers-leaked-prompts",
       "kind": "caution",
-      "category": "Contracts",
-      "title": "German voice actors refuse a Netflix contract that lets it train AI on their voices",
-      "summary": "Netflix's dubbing contract lets it use recordings to train AI. A cloned voice still needs separate consent and pay. Actors who will not sign are replaced. Lesson: read the AI clause, and spell out AI use when you hire talent.",
-      "source": "heise online",
-      "url": "https://www.heise.de/en/news/Dubbing-Netflix-increases-residual-payments-but-AI-dispute-remains-unresolved-11528300.html",
-      "date": "2026-11-17"
-    },
-    {
-      "id": "tiktok-ai-checker-likeness-detection",
-      "kind": "update",
-      "category": "Social media",
-      "title": "TikTok opens a free checker for AI-made clips and helps creators find deepfakes",
-      "summary": "Anyone can upload a picture or video to see if it was made with TikTok or CapCut AI tools. It cannot spot other makers' AI. Creators who verify their ID get alerts when a video may copy their face, and can report it.",
-      "source": "TikTok",
-      "url": "https://newsroom.tiktok.com/more-tools-to-provide-clarity-and-control-around-ai-generated-content?lang=en",
-      "date": "2026-11-20"
-    },
-    {
-      "id": "chatgpt-gpt-6-2-chat-tab",
-      "kind": "update",
-      "category": "Assistants",
-      "title": "ChatGPT's everyday chat moves to GPT-6.2 on paid plans",
-      "summary": "The new model is better at following detailed instructions, reading pictures you share and finding answers online. It is rolling out to Plus, Pro, Business and Enterprise. The older GPT-5.6 Sol is switched off on 23 December.",
-      "source": "9to5Mac",
-      "url": "https://9to5mac.com/2026/11/23/chatgpt-expands-gpt-6-2-sol-as-openai-sets-retirement-date-for-two-models/",
+      "category": "Data security",
+      "title": "OpenRouter drops three AI providers after test prompts and passwords leaked",
+      "summary": "A security firm sent two million test prompts with fake passwords through OpenRouter. Some ended up with outsiders, who tried to use them. Lesson: what you type into an AI tool can leak. Keep passwords and client secrets out.",
+      "source": "BleepingComputer",
+      "url": "https://www.bleepingcomputer.com/news/security/openrouter-drops-ai-providers-over-leaked-prompts-and-secrets/",
       "date": "2026-11-23"
     },
     {
-      "id": "lemonlight-hero-production-platform",
+      "id": "claude-artifacts-install-as-apps",
       "kind": "update",
-      "category": "Production",
-      "title": "Lemonlight launches Hero, one workspace for scripts, storyboards and AI edits",
-      "summary": "Hero drafts a treatment and script from a brief, then builds a storyboard from your reference photos and keeps faces and logos the same in every frame. Change a scene and the shot list and schedule update too.",
-      "source": "Broadcast",
-      "url": "https://www.broadcastnow.co.uk/tech-innovation/lemonlight-launches-ai-video-production-platform/5222645.article",
-      "date": "2026-11-20"
+      "category": "Assistants",
+      "title": "Claude can now turn the small tools it builds into Mac and Windows apps",
+      "summary": "A tracker or meeting prep page made in Claude can get its own icon and window. It is in beta on all plans. Anthropic does not review these apps, so only give one full access to your computer if you trust who made it.",
+      "source": "Anthropic",
+      "url": "https://claude.com/resources/articles/install-as-app",
+      "date": "2026-11-24"
     },
     {
-      "id": "fake-ai-sites-typo-malware",
+      "id": "eloelo-dolphin-ai-film-studio",
+      "kind": "update",
+      "category": "Production",
+      "title": "India's EloElo launches an AI film studio aimed first at micro-dramas",
+      "summary": "Dolphin AI Film Studio takes a script through to finished scenes and keeps characters, places and props looking the same throughout. It shows what a scene will cost before you make it. No prices have been published yet.",
+      "source": "Storyboard18",
+      "url": "https://www.storyboard18.com/digital/eloelo-group-launches-ai-film-studio-to-cut-content-production-costs-targets-micro-drama-market-115296.htm",
+      "date": "2026-11-23"
+    },
+    {
+      "id": "suno-visuals-minimax-lawsuits",
       "kind": "caution",
-      "category": "Scams",
-      "title": "186 fake sites copy ChatGPT, Gemini and Claude to catch people who mistype the address",
-      "summary": "Security firm Island found lookalike addresses, one letter off, that show a fake security check and get you to install malware. Bookmark your AI tools, and never paste a command or install an app because a web page says so.",
-      "source": "TechRadar",
-      "url": "https://www.techradar.com/pro/security/making-a-typo-when-trying-to-access-ai-could-land-you-on-a-malware-site",
-      "date": "2026-11-16"
+      "category": "Copyright",
+      "title": "Suno's new music video maker is built on tech from a firm three film studios are suing",
+      "summary": "Visuals makes lyric videos, cover art and 15-second clips. It runs on a model from MiniMax, which Disney, Universal and Warner Bros. Discovery are suing. Lesson: find out what powers a tool before using its output in paid work.",
+      "source": "Music Business Worldwide",
+      "url": "https://www.musicbusinessworldwide.com/5-things-to-know-about-sunos-move-into-ai-video-the-distrokid-documents-and-the-fight-over-v6/",
+      "date": "2026-11-23"
     }
   ]
 };
