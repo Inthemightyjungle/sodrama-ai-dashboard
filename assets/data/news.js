@@ -1,5 +1,5 @@
 window.SD_NEWS = {
-  "updated": "2026-11-26T06:44:00+08:00",
+  "updated": "2026-11-26T06:44:38+08:00",
   "stories": [
     {
       "id": "sand-ai-magi-2-video-model",
@@ -47,9 +47,9 @@ window.SD_NEWS = {
       "category": "Copyright",
       "title": "Italian court: a few AI prompts are not enough to claim copyright in a viral character",
       "summary": "The makers of AI-generated \"Italian Brainrot\" characters could not stop others selling cards and stickers of them. The judge saw too little human creative work. Lesson: keep your drafts and edits, and add real work of your own.",
-      "source": "GamingTechLaw",
-      "url": "https://www.gamingtechlaw.com/2026/11/first-italian-court-decision-on-copyright-and-ai-rejects-the-italian-brainrot-claims/",
-      "date": "2026-11-22"
+      "source": "PPC Land",
+      "url": "https://ppc.land/brainrot-creators-lose-genoa-copyright-bid-over-six-chatgpt-prompts",
+      "date": "2026-11-19"
     }
   ]
 };
