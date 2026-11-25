@@ -1,5 +1,5 @@
 window.SD_NEWS_THUMBS = {
-  "_for": "ffddee823c38be28",
+  "_for": "241ac685500b8131",
   "sand-ai-magi-2-video-model": {
     "src": "assets/img/news/sand-ai-magi-2-video-model.jpg",
     "w": 960,
@@ -37,9 +37,12 @@ window.SD_NEWS_THUMBS = {
     "image": "https://media.thenextweb.com/2026/11/tiktok-logo-pattern-red-black.jpg"
   },
   "genoa-court-ai-characters-copyright": {
-    "src": null,
-    "error": "UnicodeEncodeError: 'ascii' codec can't encode character '\\xd7' in position 51: ordinal not in range(128)",
-    "page": "https://www.gamingtechlaw.com/2026/11/first-italian-court-decision-on-copyright-and-ai-rejects-the-italian-brainrot-claims/",
-    "wanted": ""
+    "src": "assets/img/news/genoa-court-ai-characters-copyright.jpg",
+    "w": 960,
+    "h": 536,
+    "v": "90564fcb",
+    "page": "https://ppc.land/brainrot-creators-lose-genoa-copyright-bid-over-six-chatgpt-prompts",
+    "wanted": "",
+    "image": "https://ppc.land/content/images/2026/11/genoa-court-brainrot-ai-copyright-six-chatgpt-prompts-no-authorship-one-leg-two-legs-typewriter-stamp.jpg"
   }
 };
