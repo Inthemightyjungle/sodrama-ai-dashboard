@@ -1,48 +1,42 @@
 window.SD_NEWS_THUMBS = {
-  "_for": "83a4585ccfbe918a",
-  "canva-design-tools-ai-agents": {
-    "src": "assets/img/news/canva-design-tools-ai-agents.jpg",
+  "_for": "78b4e19a3adeafb2",
+  "sand-ai-magi-2-video-model": {
+    "src": "assets/img/news/sand-ai-magi-2-video-model.jpg",
     "w": 960,
-    "h": 540,
-    "v": "4fe04156",
-    "page": "https://thenextweb.com/news/canva-mcp-ai-agents-developers",
+    "h": 571,
+    "v": "f99359ad",
+    "page": "https://sand.ai/blog/magi-2/",
     "wanted": "",
-    "image": "https://media.thenextweb.com/2026/11/canva-mcp-any-assistant-graphic.jpg"
+    "image": "https://static.magi.world/media/website/6c8334773b98eca3de5b02c0460740cef8802c111e173bd32de5a1f1f4d3d884.webp"
   },
-  "openrouter-providers-leaked-prompts": {
-    "src": "assets/img/news/openrouter-providers-leaked-prompts.jpg",
-    "w": 960,
-    "h": 540,
-    "v": "5eb4050f",
-    "page": "https://www.bleepingcomputer.com/news/security/openrouter-drops-ai-providers-over-leaked-prompts-and-secrets/",
+  "tidal-bans-fully-ai-music": {
+    "src": "assets/img/news/tidal-bans-fully-ai-music.jpg",
+    "w": 720,
+    "h": 382,
+    "v": "96f82439",
+    "page": "https://techcrunch.com/2026/11/24/tidal-to-ban-and-remove-millions-of-ai-generated-tracks-as-ai-slop-inundates-music-streaming/",
     "wanted": "",
-    "image": "https://www.bleepstatic.com/content/hl-images/2026/06/29/DataLeak.jpg"
+    "image": "https://techcrunch.com/wp-content/uploads/2026/06/tidal-brand.jpg?w=720"
   },
-  "claude-artifacts-install-as-apps": {
-    "src": "assets/img/news/claude-artifacts-install-as-apps.jpg",
-    "w": 960,
-    "h": 504,
-    "v": "5c35d921",
-    "page": "https://claude.com/resources/articles/install-as-app",
-    "wanted": "",
-    "image": "https://claude.com/resources/articles/install-as-app/opengraph-image/og"
+  "nyt-bars-photoshop-2027-ai-tags": {
+    "src": null,
+    "error": "the site answered 403 Forbidden",
+    "page": "https://www.dpreview.com/news/new-york-times-adobe-photoshop-2027-restriction-ai",
+    "wanted": ""
   },
-  "eloelo-dolphin-ai-film-studio": {
-    "src": "assets/img/news/eloelo-dolphin-ai-film-studio.jpg",
-    "w": 960,
-    "h": 540,
-    "v": "ed0144cb",
-    "page": "https://www.storyboard18.com/digital/eloelo-group-launches-ai-film-studio-to-cut-content-production-costs-targets-micro-drama-market-115296.htm",
+  "tiktok-ai-checker-likeness-detection": {
+    "src": "assets/img/news/tiktok-ai-checker-likeness-detection.jpg",
+    "w": 813,
+    "h": 720,
+    "v": "ec877f43",
+    "page": "https://newsroom.tiktok.com/TikTok-more-tools-to-provide-clarity-and-control-around-ai-generated-content?lang=en-150",
     "wanted": "",
-    "image": "https://images.storyboard18.com/storyboard18/2026/11/Visuals-Page-2026-11-04T125426.327-2026-11-e3858b590785b13f77b501953247fbea-1019x573.jpg"
+    "image": "https://p16-ttark-useast8.tiktokcdn-us.com/tos-useast8-i-zr23xo8qx2-tx2/b951e0594d260fcf71a30f13c2af2759.png~tplv-zr23xo8qx2-default:0:0:q75.image"
   },
-  "suno-visuals-minimax-lawsuits": {
-    "src": "assets/img/news/suno-visuals-minimax-lawsuits.jpg",
-    "w": 960,
-    "h": 540,
-    "v": "645c3097",
-    "page": "https://www.musicbusinessworldwide.com/5-things-to-know-about-sunos-move-into-ai-video-the-distrokid-documents-and-the-fight-over-v6/",
-    "wanted": "",
-    "image": "https://www.musicbusinessworldwide.com/files/2026/07/New-Project-4.jpg"
+  "genoa-court-ai-characters-copyright": {
+    "src": null,
+    "error": "the site answered 403 Forbidden",
+    "page": "https://www.hsfkramer.com/notes/ip/2026-11/ai-and-copyright-the-court-of-genoa-tests-the-limit-of-protection-for-ai-generated-content",
+    "wanted": ""
   }
 };
