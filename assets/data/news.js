@@ -1,5 +1,5 @@
 window.SD_NEWS = {
-  "updated": "2026-11-26T06:42:06+08:00",
+  "updated": "2026-11-26T06:43:23+08:00",
   "stories": [
     {
       "id": "sand-ai-magi-2-video-model",
@@ -27,19 +27,19 @@ window.SD_NEWS = {
       "category": "Photo editing",
       "title": "New York Times tells freelance photographers not to use the newest Photoshop",
       "summary": "The paper says some tools in Photoshop 2027 use generative AI without making it obvious, and can leave a hidden tag marking a photo as AI-made. Lesson: know which tools use AI, and check a file before you send it to a client.",
-      "source": "DPReview",
-      "url": "https://www.dpreview.com/news/new-york-times-adobe-photoshop-2027-restriction-ai",
-      "date": "2026-11-25"
+      "source": "The Verge",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1041227/the-new-york-times-warns-photographers-not-to-update-photoshop-over-ai-features",
+      "date": "2026-11-24"
     },
     {
       "id": "tiktok-ai-checker-likeness-detection",
       "kind": "update",
       "category": "Social video",
       "title": "TikTok opens a free checker that shows if a video was made with its AI tools",
-      "summary": "Upload a picture or video and it looks for TikTok's invisible watermark. No account is needed. It only spots content made with TikTok's own AI features. Some creators can also sign up for alerts when AI videos use their face.",
-      "source": "TikTok",
-      "url": "https://newsroom.tiktok.com/TikTok-more-tools-to-provide-clarity-and-control-around-ai-generated-content?lang=en-150",
-      "date": "2026-11-24"
+      "summary": "Upload a picture or video and it looks for TikTok's invisible watermark. No account is needed. It only spots AI content made in TikTok and sister apps like CapCut. Some creators can also get alerts when AI videos use their face.",
+      "source": "The Next Web",
+      "url": "https://thenextweb.com/news/tiktok-ai-checker-likeness-detection-global",
+      "date": "2026-11-23"
     },
     {
       "id": "genoa-court-ai-characters-copyright",
@@ -47,8 +47,8 @@ window.SD_NEWS = {
       "category": "Copyright",
       "title": "Italian court: a few AI prompts are not enough to claim copyright in a viral character",
       "summary": "The makers of AI-generated \"Italian Brainrot\" characters could not stop others selling cards and stickers of them. The judge saw too little human creative work. Lesson: keep your drafts and edits, and add real work of your own.",
-      "source": "Herbert Smith Freehills Kramer",
-      "url": "https://www.hsfkramer.com/notes/ip/2026-11/ai-and-copyright-the-court-of-genoa-tests-the-limit-of-protection-for-ai-generated-content",
+      "source": "The IPKat",
+      "url": "https://ipkitten.blogspot.com/2026/11/guest-post-can-ai-generated-works-be.html",
       "date": "2026-11-25"
     }
   ]
