@@ -1,5 +1,5 @@
 window.SD_NEWS_THUMBS = {
-  "_for": "78b4e19a3adeafb2",
+  "_for": "22727246523877ff",
   "sand-ai-magi-2-video-model": {
     "src": "assets/img/news/sand-ai-magi-2-video-model.jpg",
     "w": 960,
@@ -19,24 +19,27 @@ window.SD_NEWS_THUMBS = {
     "image": "https://techcrunch.com/wp-content/uploads/2026/06/tidal-brand.jpg?w=720"
   },
   "nyt-bars-photoshop-2027-ai-tags": {
-    "src": null,
-    "error": "the site answered 403 Forbidden",
-    "page": "https://www.dpreview.com/news/new-york-times-adobe-photoshop-2027-restriction-ai",
-    "wanted": ""
+    "src": "assets/img/news/nyt-bars-photoshop-2027-ai-tags.jpg",
+    "w": 960,
+    "h": 499,
+    "v": "2b49ab8b",
+    "page": "https://www.theverge.com/ai-artificial-intelligence/1041227/the-new-york-times-warns-photographers-not-to-update-photoshop-over-ai-features",
+    "wanted": "",
+    "image": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/11/gettyimages-2289911637.jpg?quality=90&strip=all&crop=0%2C10.232235952618%2C100%2C79.535528094764&w=1200"
   },
   "tiktok-ai-checker-likeness-detection": {
     "src": "assets/img/news/tiktok-ai-checker-likeness-detection.jpg",
-    "w": 813,
-    "h": 720,
-    "v": "ec877f43",
-    "page": "https://newsroom.tiktok.com/TikTok-more-tools-to-provide-clarity-and-control-around-ai-generated-content?lang=en-150",
+    "w": 960,
+    "h": 540,
+    "v": "524fe41a",
+    "page": "https://thenextweb.com/news/tiktok-ai-checker-likeness-detection-global",
     "wanted": "",
-    "image": "https://p16-ttark-useast8.tiktokcdn-us.com/tos-useast8-i-zr23xo8qx2-tx2/b951e0594d260fcf71a30f13c2af2759.png~tplv-zr23xo8qx2-default:0:0:q75.image"
+    "image": "https://media.thenextweb.com/2026/11/tiktok-logo-pattern-red-black.jpg"
   },
   "genoa-court-ai-characters-copyright": {
     "src": null,
-    "error": "the site answered 403 Forbidden",
-    "page": "https://www.hsfkramer.com/notes/ip/2026-11/ai-and-copyright-the-court-of-genoa-tests-the-limit-of-protection-for-ai-generated-content",
+    "error": "the site answered 429 Too Many Requests",
+    "page": "https://ipkitten.blogspot.com/2026/11/guest-post-can-ai-generated-works-be.html",
     "wanted": ""
   }
 };
