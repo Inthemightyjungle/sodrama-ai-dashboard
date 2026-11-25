@@ -1,5 +1,5 @@
 window.SD_NEWS_THUMBS = {
-  "_for": "22727246523877ff",
+  "_for": "ffddee823c38be28",
   "sand-ai-magi-2-video-model": {
     "src": "assets/img/news/sand-ai-magi-2-video-model.jpg",
     "w": 960,
@@ -38,8 +38,8 @@ window.SD_NEWS_THUMBS = {
   },
   "genoa-court-ai-characters-copyright": {
     "src": null,
-    "error": "the site answered 429 Too Many Requests",
-    "page": "https://ipkitten.blogspot.com/2026/11/guest-post-can-ai-generated-works-be.html",
+    "error": "UnicodeEncodeError: 'ascii' codec can't encode character '\\xd7' in position 51: ordinal not in range(128)",
+    "page": "https://www.gamingtechlaw.com/2026/11/first-italian-court-decision-on-copyright-and-ai-rejects-the-italian-brainrot-claims/",
     "wanted": ""
   }
 };
