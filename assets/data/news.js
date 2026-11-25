@@ -1,55 +1,55 @@
 window.SD_NEWS = {
-  "updated": "2026-11-25T06:40:48+08:00",
+  "updated": "2026-11-26T06:42:06+08:00",
   "stories": [
     {
-      "id": "canva-design-tools-ai-agents",
+      "id": "sand-ai-magi-2-video-model",
       "kind": "update",
-      "category": "Design",
-      "title": "Canva lets ChatGPT, Claude and Gemini build editable designs and videos for you",
-      "summary": "Ask your assistant for a social post or a short product video and it comes back as a real Canva file in your brand colours and fonts, ready to fix by hand. The connection is now open to everyone, with no waitlist.",
-      "source": "The Next Web",
-      "url": "https://thenextweb.com/news/canva-mcp-ai-agents-developers",
+      "category": "Video",
+      "title": "Sand.ai's MAGI-2 makes 30-second video clips with speech, sound and music built in",
+      "summary": "The new model makes 1080p clips up to 30 seconds long and can follow up to 20 reference pictures, videos and sound clips. Sand.ai says fast action can still glitch and busy soundscapes need work, so check every clip.",
+      "source": "Sand.ai",
+      "url": "https://sand.ai/blog/magi-2/",
       "date": "2026-11-24"
     },
     {
-      "id": "openrouter-providers-leaked-prompts",
+      "id": "tidal-bans-fully-ai-music",
+      "kind": "update",
+      "category": "Music",
+      "title": "Tidal will reject and remove songs made entirely by AI from 9 December",
+      "summary": "Tidal says 43% of the tracks sent to it in the past 90 days were made wholly by AI, and nearly all of its AI tracks go unplayed. Songs made with some AI help can stay. Worth knowing before you release AI-made music.",
+      "source": "TechCrunch",
+      "url": "https://techcrunch.com/2026/11/24/tidal-to-ban-and-remove-millions-of-ai-generated-tracks-as-ai-slop-inundates-music-streaming/",
+      "date": "2026-11-24"
+    },
+    {
+      "id": "nyt-bars-photoshop-2027-ai-tags",
       "kind": "caution",
-      "category": "Data security",
-      "title": "OpenRouter drops three AI providers after test prompts and passwords leaked",
-      "summary": "A security firm sent two million test prompts with fake passwords through OpenRouter. Some ended up with outsiders, who tried to use them. Lesson: what you type into an AI tool can leak. Keep passwords and client secrets out.",
-      "source": "BleepingComputer",
-      "url": "https://www.bleepingcomputer.com/news/security/openrouter-drops-ai-providers-over-leaked-prompts-and-secrets/",
-      "date": "2026-11-23"
+      "category": "Photo editing",
+      "title": "New York Times tells freelance photographers not to use the newest Photoshop",
+      "summary": "The paper says some tools in Photoshop 2027 use generative AI without making it obvious, and can leave a hidden tag marking a photo as AI-made. Lesson: know which tools use AI, and check a file before you send it to a client.",
+      "source": "DPReview",
+      "url": "https://www.dpreview.com/news/new-york-times-adobe-photoshop-2027-restriction-ai",
+      "date": "2026-11-25"
     },
     {
-      "id": "claude-artifacts-install-as-apps",
+      "id": "tiktok-ai-checker-likeness-detection",
       "kind": "update",
-      "category": "Assistants",
-      "title": "Claude can now turn the small tools it builds into Mac and Windows apps",
-      "summary": "A tracker or meeting prep page made in Claude can get its own icon and window. It is in beta on all plans. Anthropic does not review these apps, so only give one full access to your computer if you trust who made it.",
-      "source": "Anthropic",
-      "url": "https://claude.com/resources/articles/install-as-app",
+      "category": "Social video",
+      "title": "TikTok opens a free checker that shows if a video was made with its AI tools",
+      "summary": "Upload a picture or video and it looks for TikTok's invisible watermark. No account is needed. It only spots content made with TikTok's own AI features. Some creators can also sign up for alerts when AI videos use their face.",
+      "source": "TikTok",
+      "url": "https://newsroom.tiktok.com/TikTok-more-tools-to-provide-clarity-and-control-around-ai-generated-content?lang=en-150",
       "date": "2026-11-24"
     },
     {
-      "id": "eloelo-dolphin-ai-film-studio",
-      "kind": "update",
-      "category": "Production",
-      "title": "India's EloElo launches an AI film studio aimed first at micro-dramas",
-      "summary": "Dolphin AI Film Studio takes a script through to finished scenes and keeps characters, places and props looking the same throughout. It shows what a scene will cost before you make it. No prices have been published yet.",
-      "source": "Storyboard18",
-      "url": "https://www.storyboard18.com/digital/eloelo-group-launches-ai-film-studio-to-cut-content-production-costs-targets-micro-drama-market-115296.htm",
-      "date": "2026-11-23"
-    },
-    {
-      "id": "suno-visuals-minimax-lawsuits",
+      "id": "genoa-court-ai-characters-copyright",
       "kind": "caution",
       "category": "Copyright",
-      "title": "Suno's new music video maker is built on tech from a firm three film studios are suing",
-      "summary": "Visuals makes lyric videos, cover art and 15-second clips. It runs on a model from MiniMax, which Disney, Universal and Warner Bros. Discovery are suing. Lesson: find out what powers a tool before using its output in paid work.",
-      "source": "Music Business Worldwide",
-      "url": "https://www.musicbusinessworldwide.com/5-things-to-know-about-sunos-move-into-ai-video-the-distrokid-documents-and-the-fight-over-v6/",
-      "date": "2026-11-23"
+      "title": "Italian court: a few AI prompts are not enough to claim copyright in a viral character",
+      "summary": "The makers of AI-generated \"Italian Brainrot\" characters could not stop others selling cards and stickers of them. The judge saw too little human creative work. Lesson: keep your drafts and edits, and add real work of your own.",
+      "source": "Herbert Smith Freehills Kramer",
+      "url": "https://www.hsfkramer.com/notes/ip/2026-11/ai-and-copyright-the-court-of-genoa-tests-the-limit-of-protection-for-ai-generated-content",
+      "date": "2026-11-25"
     }
   ]
 };
