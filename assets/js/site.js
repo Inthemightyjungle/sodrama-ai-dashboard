@@ -177,12 +177,14 @@
 
   /* ---------- approved tools ---------- */
 
-  var PLANS = {
-    annual: { label: 'Annual', tab: 'Annual', icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 9.5A8 8 0 0 0 5 7.4M4.5 14.5A8 8 0 0 0 19 16.6M5 3.5v4h4M19 20.5v-4h-4"></path></svg>' },
-    once: { label: 'One-time', tab: 'One-time', icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8a2 2 0 0 0 2-2h12a2 2 0 0 0 2 2v8a2 2 0 0 0-2 2H6a2 2 0 0 0-2-2z"></path><path d="M12 9.5v5"></path></svg>' }
+  // How each tool is used, as recorded in the AI Tool Register.
+  var USES = {
+    company: { label: 'Company', words: 'company licence license work' },
+    personal: { label: 'Personal', words: 'personal own account' },
+    both: { label: 'Both', words: 'both company personal licence license account' }
   };
 
-  // Two letters for a tool with no icon: "RealityTransform" gives RT, "Claude Max" gives CM.
+  // Two letters for a tool with no icon: "Google AI Studio" gives GA, "WonderClip" gives WC.
   function initials(name) {
     var words = String(name).split(/[\s-]+/).filter(Boolean);
     if (words.length > 1) return (words[0][0] + words[1][0]).toUpperCase();
@@ -190,43 +192,75 @@
     return (caps.length > 1 ? caps.slice(0, 2) : String(name).slice(0, 2)).toUpperCase();
   }
 
+  function byName(a, b) { return a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }); }
+
   function renderTools() {
     var data = window.SD_TOOLS;
-    var list = $('[data-tools]');
+    var host = $('[data-tools]');
     var tabs = $('[data-tool-tabs]');
-    if (!data || !data.tools || !list) return;
+    if (!data || !data.tools || !data.groups || !host) return;
     var icons = window.SD_TOOL_ICONS || {};
-    var tools = data.tools.slice().sort(function (a, b) { return a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }); });
 
-    list.innerHTML = tools.map(function (t) {
-      var plan = PLANS[t.plan] || PLANS.annual;
-      var icon = icons[t.id];
-      var tile = icon && icon.src
-        ? '<span class="tool-icon' + (icon.light ? ' is-light' : '') + '"><img src="' + esc(icon.src) + (icon.v ? '?v=' + esc(icon.v) : '') + '" width="128" height="128" alt="" loading="lazy" decoding="async"></span>'
-        : '<span class="tool-icon is-initials" aria-hidden="true">' + esc(initials(t.name)) + '</span>';
-      return '<li class="tool" data-plan="' + esc(t.plan) + '">' + tile +
-        '<span class="tool-text"><span class="tool-name">' + esc(t.name) + '</span>' +
-          '<span class="tool-for">' + esc(t.for) + (t.by ? ', from ' + esc(t.by) : '') + '</span></span>' +
-        '<span class="plan plan-' + esc(t.plan) + '">' + plan.icon + plan.label + '</span>' +
-      '</li>';
+    // One heading and list per group, in the order "groups" gives, each sorted by name.
+    var rows = [];
+    var groups = data.groups.map(function (g) {
+      var tools = data.tools.filter(function (t) { return t.group === g.id; }).sort(byName);
+      return { id: g.id, name: g.name, tools: tools };
+    }).filter(function (g) { return g.tools.length; });
+
+    host.innerHTML = groups.map(function (g) {
+      return '<section class="tool-group" data-group="' + esc(g.id) + '" aria-labelledby="tools-' + esc(g.id) + '">' +
+        '<h3 class="tool-group-title" id="tools-' + esc(g.id) + '">' + esc(g.name) + '<span class="tool-group-count" data-group-count>' + g.tools.length + '</span></h3>' +
+        '<ul class="tool-list">' + g.tools.map(function (t) {
+          var use = USES[t.use] || USES.company;
+          var icon = icons[t.id];
+          var tile = icon && icon.src
+            ? '<span class="tool-icon' + (icon.light ? ' is-light' : '') + '"><img src="' + esc(icon.src) + (icon.v ? '?v=' + esc(icon.v) : '') + '" width="128" height="128" alt="" loading="lazy" decoding="async"></span>'
+            : '<span class="tool-icon is-initials" aria-hidden="true">' + esc(initials(t.name)) + '</span>';
+          return '<li class="tool" data-id="' + esc(t.id) + '">' + tile +
+            '<span class="tool-text"><span class="tool-name">' + esc(t.name) + '</span>' +
+              '<span class="tool-for">' + esc(t.for) + (t.by ? ', from ' + esc(t.by) : '') + '</span></span>' +
+            '<span class="use use-' + esc(t.use) + '"><span class="use-dots" aria-hidden="true"></span>' + use.label + '</span>' +
+          '</li>';
+        }).join('') + '</ul></section>';
     }).join('');
+
+    function fold(text) {
+      return String(text || '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+    }
+    groups.forEach(function (g) {
+      var section = $('[data-group="' + g.id + '"]', host);
+      g.section = section;
+      g.count = $('[data-group-count]', section);
+      g.tools.forEach(function (t) {
+        var use = USES[t.use] || USES.company;
+        rows.push({
+          row: $('[data-id="' + t.id + '"]', section),
+          group: g,
+          use: t.use,
+          hay: fold([t.name, t.by, t.for, g.name, use.words].join(' ')) + ' ' + fold(t.name).replace(/ /g, '')
+        });
+      });
+    });
 
     var checked = $('[data-tools-checked]');
     var day = new Date(data.checked + 'T12:00:00');
-    if (checked && !isNaN(day)) checked.textContent = 'List last checked on ' + day.toLocaleDateString('en-SG', { day: 'numeric', month: 'long', year: 'numeric' }) + '.';
+    if (checked && !isNaN(day)) checked.textContent = 'From the AI Tool Register, last checked on ' + day.toLocaleDateString('en-SG', { day: 'numeric', month: 'long', year: 'numeric' }) + '.';
 
     if (!tabs) return;
+    // "Company" shows tools used on a company licence, "Personal" those used on
+    // personal accounts. A tool used both ways shows under both.
+    function fits(use, pick) { return pick === 'all' || use === pick || use === 'both'; }
     var pill = $('[data-tabs-pill]', tabs);
-    [['all', 'All', tools.length]].concat(['annual', 'once'].map(function (p) {
-      return [p, PLANS[p].tab, tools.filter(function (t) { return t.plan === p; }).length];
-    })).forEach(function (c) {
-      if (!c[2]) return;
+    [['all', 'All'], ['company', 'Company'], ['personal', 'Personal']].forEach(function (c) {
+      var n = rows.filter(function (r) { return fits(r.use, c[0]); }).length;
+      if (!n) return;
       var b = document.createElement('button');
       b.type = 'button';
       b.className = 'tab';
       b.setAttribute('aria-pressed', c[0] === 'all' ? 'true' : 'false');
-      b.setAttribute('data-plan', c[0]);
-      b.innerHTML = esc(c[1]) + '<span class="tab-count">' + c[2] + '</span>';
+      b.setAttribute('data-use', c[0]);
+      b.innerHTML = esc(c[1]) + '<span class="tab-count">' + n + '</span>';
       tabs.appendChild(b);
     });
 
@@ -241,44 +275,44 @@
     }
 
     // Search: every word typed must appear somewhere in the tool's name, maker,
-    // what it is for, or its plan. "chat gpt", "deeplive" and "one time" all work.
+    // what it is for, its group, or how it is used. "chat gpt", "video" and "company" all work.
     var search = $('[data-tool-search]');
     var clear = $('[data-tool-clear]');
     var empty = $('[data-tools-empty]');
     var status = $('[data-tools-status]');
-    function fold(text) {
-      return String(text || '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
-    }
-    var rows = $$('.tool', list).map(function (row, i) {
-      var t = tools[i];
-      var words = [t.name, t.by, t.for, t.plan === 'once' ? 'one-time once one-off' : 'annual yearly subscription'].join(' ');
-      return { row: row, plan: t.plan, hay: fold(words) + ' ' + fold(t.name).replace(/ /g, '') };
-    });
 
     function apply() {
-      var plan = current() ? current().getAttribute('data-plan') : 'all';
+      var pick = current() ? current().getAttribute('data-use') : 'all';
       var typed = search ? search.value.trim() : '';
       var words = fold(typed).split(' ').filter(Boolean);
-      var counts = { all: 0, annual: 0, once: 0 };
+      var counts = { all: 0, company: 0, personal: 0 };
       var shown = 0;
+      groups.forEach(function (g) { g.shown = 0; });
       rows.forEach(function (r) {
         var found = words.every(function (w) { return r.hay.indexOf(w) !== -1; });
-        if (found) { counts.all++; counts[r.plan]++; }
-        var on = found && (plan === 'all' || r.plan === plan);
+        if (found) {
+          counts.all++;
+          if (fits(r.use, 'company')) counts.company++;
+          if (fits(r.use, 'personal')) counts.personal++;
+        }
+        var on = found && fits(r.use, pick);
         r.row.classList.toggle('is-hidden', !on);
-        if (on) shown++;
+        if (on) { shown++; r.group.shown++; }
+      });
+      groups.forEach(function (g) {
+        g.section.hidden = !g.shown;
+        if (g.count) g.count.textContent = g.shown;
       });
       $$('.tab', tabs).forEach(function (t) {
         var count = $('.tab-count', t);
-        if (count) count.textContent = counts[t.getAttribute('data-plan')];
+        if (count) count.textContent = counts[t.getAttribute('data-use')];
       });
       if (clear) clear.hidden = !typed;
       if (empty) {
         empty.hidden = shown > 0;
         if (!shown) {
-          var label = plan === 'once' ? 'one-time' : plan;
           empty.textContent = !typed ? 'No tools here.'
-            : plan !== 'all' && counts.all ? 'No ' + label + ' tool matches “' + typed + '”, but ' + (counts.all === 1 ? 'one tool does' : counts.all + ' tools do') + ' under All.'
+            : pick !== 'all' && counts.all ? 'No ' + pick + ' tool matches “' + typed + '”, but ' + (counts.all === 1 ? 'one tool does' : counts.all + ' tools do') + ' under All.'
             : 'No approved tool matches “' + typed + '”. Check the spelling, or declare the tool if you need it.';
         }
       }

@@ -338,10 +338,24 @@ html[data-view]:not([data-view="how"]) .cues, html[data-view]:not([data-view="ho
 .tool-text { display: grid; gap: 3px; min-width: 0; }
 .tool-name { font-weight: 700; font-size: 18px; line-height: 1.25; }
 .tool-for { font-size: 14.5px; line-height: 1.4; color: var(--dim); }
-.plan { display: inline-flex; align-items: center; gap: 7px; padding: 7px 13px 7px 10px; border: 1px solid; border-radius: 999px; font-weight: 700; font-size: 13px; line-height: 1; white-space: nowrap; }
-.plan svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.plan-annual { border-color: rgba(255, 194, 74, .42); background: rgba(255, 194, 74, .1); color: var(--tungsten); }
-.plan-once { border-color: rgba(129, 136, 255, .48); background: rgba(129, 136, 255, .13); color: #bcc0ff; }
+.tool-groups { display: grid; gap: clamp(44px, 4.6vw, 72px); }
+.tool-group[hidden] { display: none; }
+.tool-group-title { display: flex; align-items: baseline; gap: 14px; margin: 0 0 10px; font: 400 clamp(30px, 2.8vw, 42px)/1.05 var(--display); letter-spacing: -.01em; color: var(--ivory); }
+.tool-group-count { font: 700 14px/1 var(--text); letter-spacing: 0; color: var(--faint); }
+/* How a tool is used: gold for a company licence, violet for a personal account, both dots for both. */
+.use { display: inline-flex; align-items: center; gap: 8px; padding: 7px 13px 7px 11px; border: 1px solid; border-radius: 999px; font-weight: 700; font-size: 13px; line-height: 1; white-space: nowrap; }
+.use-dots { display: inline-flex; gap: 3px; }
+.use-dots::before, .use-dots::after { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--tungsten); }
+.use-dots::after { display: none; background: #a3a8ff; }
+.use-personal .use-dots::before { background: #a3a8ff; }
+.use-both .use-dots::after { display: block; }
+.use.use-company { border-color: rgba(255, 194, 74, .42); background: rgba(255, 194, 74, .1); color: var(--tungsten); }
+.use.use-personal { border-color: rgba(129, 136, 255, .48); background: rgba(129, 136, 255, .13); color: #c1c4ff; }
+.use.use-both { border-color: rgba(246, 239, 226, .32); background: rgba(246, 239, 226, .07); color: var(--ivory); }
+.use-word { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; white-space: nowrap; }
+.use-word.use-company { color: var(--tungsten); }
+.use-word.use-personal { color: #c1c4ff; }
+.use-word.use-both { color: var(--ivory); }
 .tool-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 14px; justify-self: stretch; }
 .tool-search { position: relative; display: flex; align-items: center; flex: 1 1 250px; max-width: 440px; }
 .tool-search > svg { position: absolute; left: 17px; width: 18px; height: 18px; fill: none; stroke: var(--faint); stroke-width: 2.2; stroke-linecap: round; pointer-events: none; transition: stroke .2s; }
@@ -462,7 +476,7 @@ html[data-view]:not([data-view="how"]) .cues, html[data-view]:not([data-view="ho
   .tool-icon { grid-row: span 2; width: 48px; height: 48px; padding: 7px; border-radius: 14px; }
   .tool-icon.is-initials { font-size: 18px; }
   .tool-name { font-size: 17px; }
-  .plan { grid-column: 2; justify-self: start; margin-top: 6px; padding: 6px 11px 6px 9px; font-size: 12.5px; }
+  .use { grid-column: 2; justify-self: start; margin-top: 6px; padding: 6px 11px 6px 9px; font-size: 12.5px; }
   .brand-logo { height: 26px; }
   .brand-text { padding-left: 11px; }
   .brand-title { font-size: 13px; }
