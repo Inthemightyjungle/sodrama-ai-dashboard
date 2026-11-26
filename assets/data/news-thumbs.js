@@ -1,9 +1,9 @@
 window.SD_NEWS_THUMBS = {
-  "_for": "6a019e0119e675a3",
-  "midjourney-niji-8-anime-model": {
+  "_for": "f7a1a2f73eac3469",
+  "canva-video-inside-claude-chatgpt": {
     "src": null,
     "error": "the site answered 403 Forbidden",
-    "page": "https://nijijourney.com/blog/niji-8",
+    "page": "https://www.canva.com/newsroom/news/canva-mcp-video-generation/",
     "wanted": ""
   },
   "academy-rules-ai-film-out-of-animation-oscar": {
