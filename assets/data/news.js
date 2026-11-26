@@ -5,11 +5,11 @@ window.SD_NEWS = {
       "id": "canva-video-inside-claude-chatgpt",
       "kind": "update",
       "category": "Video",
-      "title": "Canva can now make an editable video from a brief inside Claude and ChatGPT",
-      "summary": "Describe the video, add product shots or brand assets, and approve a timed plan before anything is made. The draft opens in Canva for trims and captions. Video is in select markets only. Flat images can become editable designs.",
-      "source": "Canva",
-      "url": "https://www.canva.com/newsroom/news/canva-mcp-video-generation/",
-      "date": "2026-11-23"
+      "title": "Canva now makes editable designs and short videos inside ChatGPT and Claude",
+      "summary": "Ask in the chat for a social post or a short product video and you get a real Canva file to edit, in your brand's colours and fonts. Flat images can become layered designs. Canva says video is in select markets only for now.",
+      "source": "The Next Web",
+      "url": "https://thenextweb.com/news/canva-mcp-ai-agents-developers",
+      "date": "2026-11-24"
     },
     {
       "id": "academy-rules-ai-film-out-of-animation-oscar",
