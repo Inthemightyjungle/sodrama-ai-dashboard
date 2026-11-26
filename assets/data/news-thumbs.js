@@ -1,10 +1,13 @@
 window.SD_NEWS_THUMBS = {
-  "_for": "f7a1a2f73eac3469",
+  "_for": "a75de4b75c37b937",
   "canva-video-inside-claude-chatgpt": {
-    "src": null,
-    "error": "the site answered 403 Forbidden",
-    "page": "https://www.canva.com/newsroom/news/canva-mcp-video-generation/",
-    "wanted": ""
+    "src": "assets/img/news/canva-video-inside-claude-chatgpt.jpg",
+    "w": 960,
+    "h": 540,
+    "v": "4fe04156",
+    "page": "https://thenextweb.com/news/canva-mcp-ai-agents-developers",
+    "wanted": "",
+    "image": "https://media.thenextweb.com/2026/11/canva-mcp-any-assistant-graphic.jpg"
   },
   "academy-rules-ai-film-out-of-animation-oscar": {
     "src": "assets/img/news/academy-rules-ai-film-out-of-animation-oscar.jpg",
