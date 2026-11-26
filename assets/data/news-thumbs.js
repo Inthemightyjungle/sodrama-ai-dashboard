@@ -1,48 +1,45 @@
 window.SD_NEWS_THUMBS = {
-  "_for": "241ac685500b8131",
-  "sand-ai-magi-2-video-model": {
-    "src": "assets/img/news/sand-ai-magi-2-video-model.jpg",
-    "w": 960,
-    "h": 571,
-    "v": "f99359ad",
-    "page": "https://sand.ai/blog/magi-2/",
-    "wanted": "",
-    "image": "https://static.magi.world/media/website/6c8334773b98eca3de5b02c0460740cef8802c111e173bd32de5a1f1f4d3d884.webp"
+  "_for": "6a019e0119e675a3",
+  "midjourney-niji-8-anime-model": {
+    "src": null,
+    "error": "the site answered 403 Forbidden",
+    "page": "https://nijijourney.com/blog/niji-8",
+    "wanted": ""
   },
-  "tidal-bans-fully-ai-music": {
-    "src": "assets/img/news/tidal-bans-fully-ai-music.jpg",
-    "w": 720,
-    "h": 382,
-    "v": "96f82439",
-    "page": "https://techcrunch.com/2026/11/24/tidal-to-ban-and-remove-millions-of-ai-generated-tracks-as-ai-slop-inundates-music-streaming/",
+  "academy-rules-ai-film-out-of-animation-oscar": {
+    "src": "assets/img/news/academy-rules-ai-film-out-of-animation-oscar.jpg",
+    "w": 648,
+    "h": 276,
+    "v": "857b30fc",
+    "page": "https://www.indiewire.com/news/breaking-news/ai-film-gods-dont-give-gifts-ineligible-oscars-1235230159/",
     "wanted": "",
-    "image": "https://techcrunch.com/wp-content/uploads/2026/06/tidal-brand.jpg?w=720"
+    "image": "https://www.indiewire.com/wp-content/uploads/2026/11/Still-15.png?w=650"
   },
-  "nyt-bars-photoshop-2027-ai-tags": {
-    "src": "assets/img/news/nyt-bars-photoshop-2027-ai-tags.jpg",
-    "w": 960,
-    "h": 499,
-    "v": "2b49ab8b",
-    "page": "https://www.theverge.com/ai-artificial-intelligence/1041227/the-new-york-times-warns-photographers-not-to-update-photoshop-over-ai-features",
-    "wanted": "",
-    "image": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/11/gettyimages-2289911637.jpg?quality=90&strip=all&crop=0%2C10.232235952618%2C100%2C79.535528094764&w=1200"
-  },
-  "tiktok-ai-checker-likeness-detection": {
-    "src": "assets/img/news/tiktok-ai-checker-likeness-detection.jpg",
+  "cornwall-christmas-market-ai-adverts": {
+    "src": "assets/img/news/cornwall-christmas-market-ai-adverts.jpg",
     "w": 960,
     "h": 540,
-    "v": "524fe41a",
-    "page": "https://thenextweb.com/news/tiktok-ai-checker-likeness-detection-global",
+    "v": "9271601f",
+    "page": "https://www.bbc.com/news/articles/cm0qjglj3ejlo",
     "wanted": "",
-    "image": "https://media.thenextweb.com/2026/11/tiktok-logo-pattern-red-black.jpg"
+    "image": "https://ichef.bbci.co.uk/news/1024/branded_news/2a94/live/c4c88960-e8d9-11f1-99a1-253766e7ad8b.png"
   },
-  "genoa-court-ai-characters-copyright": {
-    "src": "assets/img/news/genoa-court-ai-characters-copyright.jpg",
+  "chatgpt-shared-limit-chat-and-work": {
+    "src": "assets/img/news/chatgpt-shared-limit-chat-and-work.jpg",
     "w": 960,
-    "h": 536,
-    "v": "90564fcb",
-    "page": "https://ppc.land/brainrot-creators-lose-genoa-copyright-bid-over-six-chatgpt-prompts",
+    "h": 640,
+    "v": "d1bca7a4",
+    "page": "https://techcrunch.com/2026/11/25/openai-says-heavy-chatgpt-users-may-hit-limits-sooner-as-it-merges-chat-and-work/",
     "wanted": "",
-    "image": "https://ppc.land/content/images/2026/11/genoa-court-brainrot-ai-copyright-six-chatgpt-prompts-no-authorship-one-leg-two-legs-typewriter-stamp.jpg"
+    "image": "https://techcrunch.com/wp-content/uploads/2026/11/openai-chatgpt.jpg?resize=1200,800"
+  },
+  "character-ai-private-chats-auction": {
+    "src": "assets/img/news/character-ai-private-chats-auction.jpg",
+    "w": 960,
+    "h": 539,
+    "v": "f680f7db",
+    "page": "https://www.engadget.com/2328630/state-ags-are-trying-to-stop-characterai-from-auctioning-off-users-chat-histories/",
+    "wanted": "",
+    "image": "https://www.engadget.com/img/gallery/state-ags-are-trying-to-stop-character-ai-from-auctioning-off-users-chat-histories/l-intro-1795637016.jpg"
   }
 };
