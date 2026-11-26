@@ -2,14 +2,14 @@ window.SD_NEWS = {
   "updated": "2026-11-27T06:41:23+08:00",
   "stories": [
     {
-      "id": "midjourney-niji-8-anime-model",
+      "id": "canva-video-inside-claude-chatgpt",
       "kind": "update",
-      "category": "Image tools",
-      "title": "Midjourney's Niji 8 keeps an anime character looking the same from scene to scene",
-      "summary": "The new anime model is faster and follows prompts more closely. Its edit tool puts a character into new poses and backgrounds, and it can lay out simple comic pages. Short prompts now give more varied results than before.",
-      "source": "Niji Journey",
-      "url": "https://nijijourney.com/blog/niji-8",
-      "date": "2026-11-24"
+      "category": "Video",
+      "title": "Canva can now make an editable video from a brief inside Claude and ChatGPT",
+      "summary": "Describe the video, add product shots or brand assets, and approve a timed plan before anything is made. The draft opens in Canva for trims and captions. Video is in select markets only. Flat images can become editable designs.",
+      "source": "Canva",
+      "url": "https://www.canva.com/newsroom/news/canva-mcp-video-generation/",
+      "date": "2026-11-23"
     },
     {
       "id": "academy-rules-ai-film-out-of-animation-oscar",
