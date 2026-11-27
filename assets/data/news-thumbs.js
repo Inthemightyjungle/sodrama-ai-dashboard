@@ -1,10 +1,13 @@
 window.SD_NEWS_THUMBS = {
-  "_for": "dabd7949b81f0d3e",
+  "_for": "8edd5839af816a5d",
   "nyt-photoshop-2027-hidden-ai": {
-    "src": null,
-    "error": "the site answered 403 Forbidden",
-    "page": "https://www.dpreview.com/news/new-york-times-adobe-photoshop-2027-restriction-ai",
-    "wanted": ""
+    "src": "assets/img/news/nyt-photoshop-2027-hidden-ai.jpg",
+    "w": 960,
+    "h": 499,
+    "v": "2b49ab8b",
+    "page": "https://www.theverge.com/ai-artificial-intelligence/1041227/the-new-york-times-warns-photographers-not-to-update-photoshop-over-ai-features",
+    "wanted": "",
+    "image": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/11/gettyimages-2289911637.jpg?quality=90&strip=all&crop=0%2C10.232235952618%2C100%2C79.535528094764&w=1200"
   },
   "magi-2-video-model-30-second-clips": {
     "src": "assets/img/news/magi-2-video-model-30-second-clips.jpg",
@@ -15,11 +18,14 @@ window.SD_NEWS_THUMBS = {
     "wanted": "",
     "image": "https://cms-image.pandaily.com/1/magi_editorial_5165708cec.png"
   },
-  "midjourney-niji-8-consistent-characters": {
-    "src": null,
-    "error": "the site answered 403 Forbidden",
-    "page": "https://nijijourney.com/blog/niji-8",
-    "wanted": ""
+  "claude-artifacts-install-as-desktop-apps": {
+    "src": "assets/img/news/claude-artifacts-install-as-desktop-apps.jpg",
+    "w": 960,
+    "h": 540,
+    "v": "2291e06e",
+    "page": "https://www.zdnet.com/innovation/claude-artifacts-desktop-apps-mac-windows/",
+    "wanted": "",
+    "image": "https://www.zdnet.com/wp-content/uploads/sites/3/How-to-turn-Claude-artifact-into-desktop-app-on-Mac-or-Windows-computer.jpg"
   },
   "tidal-removes-fully-ai-made-songs": {
     "src": "assets/img/news/tidal-removes-fully-ai-made-songs.jpg",
