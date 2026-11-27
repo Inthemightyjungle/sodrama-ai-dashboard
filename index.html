@@ -3,6 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Privacy and safety: the page only runs its own files (the one inline script below is allowed by its
+     fingerprint: tools/check_csp.py checks it), sites opened from here are not told where the visitor came
+     from, and search engines are asked to leave the dashboard out of their results. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-DQKTXXqPQG35mc7TqnBgEEip1pyJeydIysDvJq51eHc='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; media-src 'self'; worker-src 'self'; manifest-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex, nofollow">
 <title>AI Solutions Dashboard · So Drama! Entertainment</title>
 <meta name="description" content="Catch up on AI news, open the apps we have built, and see how to declare the AI tools you use.">
 <meta name="theme-color" content="#0c0a10">

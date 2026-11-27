@@ -16,6 +16,8 @@ Live: https://inthemightyjungle.github.io/sodrama-ai-dashboard/
   - `update()` in `site.js` runs on every scroll frame. It must not read the layout (`getBoundingClientRect`, `offsetTop` and friends belong in `measure()`), and it must not set a CSS variable on `<html>` or `<body>`: either one makes the browser re-work the whole page on every frame.
   - Animate only `transform` and `opacity`. No `backdrop-filter` or `mix-blend-mode` on anything that sits over the 3D stage, apart from the top bar.
   - New lights, or materials of a new kind, in one bay only mean a second set of shaders: add them to the rehearsal.
+- **App identity.** `manifest.webmanifest` has `"id": "/sodrama-ai-dashboard/"`. Never change it to `"./"`: browsers read a relative id from the root of inthemightyjungle.github.io, which other apps on the same site (Lion Strike, Little Log) also used, and Chrome then treated them as one app (opening a game replaced the dashboard's desktop shortcut and icon).
+- **Privacy and safety.** The page loads only its own files, sends no referrer to sites opened from it, asks search engines not to index it, and stores nothing but the `sd-intro-seen` flag. A content security policy in `index.html` enforces this; it allows the one inline `<head>` script by its fingerprint, so after editing that script run `python3 tools/check_csp.py --fix`. Don't add analytics, outside fonts or scripts.
 - Only `main` is published. `news-draft` is a scratch branch for the daily news job and gets overwritten; `tools-draft` is the same for checking tool icons before they go live.
 
 ## What the owner has asked for (keep to these)
