@@ -1,5 +1,5 @@
 window.SD_NEWS = {
-  "updated": "2026-11-28T06:41:03+08:00",
+  "updated": "2026-11-28T06:42:34+08:00",
   "stories": [
     {
       "id": "nyt-photoshop-2027-hidden-ai",
@@ -7,9 +7,9 @@ window.SD_NEWS = {
       "category": "Photography",
       "title": "New York Times tells freelance photographers not to use the newest Photoshop",
       "summary": "The paper says some tools in Photoshop 2027 use generative AI without making it obvious, so a photo can end up labelled as AI-made. Lesson: know which tools in your editing app use AI before you send work to a client.",
-      "source": "DPReview",
-      "url": "https://www.dpreview.com/news/new-york-times-adobe-photoshop-2027-restriction-ai",
-      "date": "2026-11-25"
+      "source": "The Verge",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1041227/the-new-york-times-warns-photographers-not-to-update-photoshop-over-ai-features",
+      "date": "2026-11-24"
     },
     {
       "id": "magi-2-video-model-30-second-clips",
@@ -22,14 +22,14 @@ window.SD_NEWS = {
       "date": "2026-11-25"
     },
     {
-      "id": "midjourney-niji-8-consistent-characters",
+      "id": "claude-artifacts-install-as-desktop-apps",
       "kind": "update",
-      "category": "Image tools",
-      "title": "Midjourney's Niji 8 keeps an anime character looking the same from scene to scene",
-      "summary": "The new anime model has an edit tool that takes a character from a reference sheet and puts it in new poses and backgrounds. It can also lay out simple comic pages. Useful for storyboards and pitch art.",
-      "source": "Niji Journey",
-      "url": "https://nijijourney.com/blog/niji-8",
-      "date": "2026-11-24"
+      "category": "Assistants",
+      "title": "Claude can now turn the tools it builds for you into apps on your Mac or Windows PC",
+      "summary": "A tool Claude makes in a chat, such as a tracker or a meeting prep page, can be installed with its own icon and window. It is in beta on every plan and needs you signed in. Think twice before giving an app full access to files.",
+      "source": "ZDNET",
+      "url": "https://www.zdnet.com/innovation/claude-artifacts-desktop-apps-mac-windows/",
+      "date": "2026-11-25"
     },
     {
       "id": "tidal-removes-fully-ai-made-songs",
