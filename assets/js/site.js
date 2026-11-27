@@ -15,6 +15,11 @@
   var ARROW = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"></path></svg>';
   var WARN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4 2.8 20h18.4L12 4zM12 10v4.5M12 17.6v.2"></path></svg>';
 
+  // What the page shows: news, apps, approved tools and links. It arrives from the
+  // database once the person has signed in (see account.js), and start() fills the page.
+  var content = {};
+  var started = false;
+
   function esc(value) {
     return String(value == null ? '' : value).replace(/[&<>"']/g, function (ch) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch];
@@ -29,10 +34,10 @@
   }
 
   function renderNews() {
-    var data = window.SD_NEWS;
+    var data = content.news;
     var host = $('[data-news]');
     if (!host || !data || !data.stories) return;
-    var thumbs = window.SD_NEWS_THUMBS || {};
+    var thumbs = content.newsThumbs || {};
 
     host.innerHTML = data.stories.map(function (s, i) {
       var lead = i === 0;
@@ -77,7 +82,7 @@
   }
 
   function renderApps() {
-    var apps = window.SD_APPS;
+    var apps = content.apps;
     var grid = $('[data-apps]');
     var tabs = $('[data-tabs]');
     if (!apps || !grid) return;
@@ -195,11 +200,11 @@
   function byName(a, b) { return a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }); }
 
   function renderTools() {
-    var data = window.SD_TOOLS;
+    var data = content.tools;
     var host = $('[data-tools]');
     var tabs = $('[data-tool-tabs]');
     if (!data || !data.tools || !data.groups || !host) return;
-    var icons = window.SD_TOOL_ICONS || {};
+    var icons = content.toolIcons || {};
 
     // One heading and list per group, in the order "groups" gives, each sorted by name.
     var rows = [];
@@ -392,10 +397,18 @@
   var placeAppTabs = null;                                 // set by renderApps
   var placeToolTabs = null;                                // set by renderTools
 
+  var extraViews = {};                                     // pages added after sign-in: People, for admins
+
   function viewOf(hash) {
-    if (hash === 'news' || hash === 'apps' || hash === 'tools') return hash;
+    if (hash === 'news' || hash === 'apps' || hash === 'tools' || extraViews[hash]) return hash;
     return HOW_LINKS.test(hash) ? 'how' : '';
   }
+
+  // account.js adds the People page for admins. Its address is #people.
+  window.SD_ADD_VIEW = function (name, onEnter) {
+    extraViews[name] = onEnter || function () {};
+    if (started && location.hash.slice(1) === name) route();
+  };
 
   // What has to happen whenever a page comes on screen, including the first one.
   function enter(name) {
@@ -411,6 +424,7 @@
     }
     if (name === 'apps' && placeAppTabs) placeAppTabs();
     if (name === 'tools' && placeToolTabs) placeToolTabs();
+    if (extraViews[name]) extraViews[name]();
   }
 
   function show(name, anchor) {
@@ -432,6 +446,7 @@
   }
 
   function route() {
+    if (!started) return;                    // still behind the sign-in screen
     var hash = location.hash.slice(1);
     var name = hash ? viewOf(hash) : home;
     if (!name) return;                       // an ordinary link to somewhere on the page
@@ -806,6 +821,29 @@
       return { el: el, row: $('.ticker-row', el), dir: parseFloat(el.getAttribute('data-ticker')) || -1, top: 0, loop: 0, on: false };
     });
 
+    safely(setupInstall);
+    safely(registerWorker);
+    safely(setupWindows);
+
+    // The rest waits until the person has signed in and the content has arrived.
+    if (window.SD_DATA) start(window.SD_DATA);
+    else document.addEventListener('sd-data', function () { start(window.SD_DATA); });
+  }
+
+  // Fills in the links that are not written into index.html, such as the declaration form.
+  function fillLinks(links) {
+    $$('[data-link]').forEach(function (link) {
+      var href = links && links[link.getAttribute('data-link')];
+      if (typeof href === 'string' && /^https:\/\//.test(href)) link.href = href;
+    });
+  }
+
+  function start(data) {
+    if (started || !data) return;
+    started = true;
+    content = data;
+
+    safely(function () { fillLinks(data.links); });
     safely(renderNews);
     safely(renderApps);
     safely(renderTools);
@@ -813,9 +851,6 @@
     safely(function () { enter(view); });
     safely(measure);
     safely(watchTickers);
-    safely(setupInstall);
-    safely(registerWorker);
-    safely(setupWindows);
 
     window.addEventListener('hashchange', route);
     els.nav.forEach(function (link) {

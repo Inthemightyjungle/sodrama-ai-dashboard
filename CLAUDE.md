@@ -1,12 +1,12 @@
 # Working on the AI Solutions Dashboard
 
-This is So Drama! Entertainment's internal AI page, hosted on GitHub Pages from `main`.
-Live: https://inthemightyjungle.github.io/sodrama-ai-dashboard/
+This is So Drama! Entertainment's internal AI page. It is private: people sign in with an email address and password, and only those on the list the owner keeps can see anything. `.github/workflows/deploy.yml` publishes `main` to Firebase.
+Live: https://PROJECT_ID.web.app/ (filled in after the first deploy). The old GitHub Pages address is being retired.
 
 ## Ground rules
 
 - **No build step.** Plain HTML, CSS and JavaScript. Do not add frameworks, bundlers or package files.
-- **Nothing from other servers.** Fonts, three.js and news thumbnails are all in this repository. Never hotlink an image, script or font.
+- **Nothing from other servers.** Fonts, three.js, the Firebase sign-in library and news thumbnails are all in this repository. Never hotlink an image, script or font. The only outside addresses the page talks to are Google's sign-in and database services (`identitytoolkit`, `securetoken` and `firestore.googleapis.com`), named in the content security policy.
 - **Commits:** author `Claude <noreply@anthropic.com>`. Never put the repository owner's personal email in a commit, a file or a request to another service.
 - **Pictures of people:** never use a photo of a public figure (politician, executive, celebrity, presenter) as a thumbnail or anywhere else on the site.
 - **Words:** plain, short sentences for staff who are not technical. Summaries are written in our own words, never copied from the source.
@@ -17,12 +17,14 @@ Live: https://inthemightyjungle.github.io/sodrama-ai-dashboard/
   - Animate only `transform` and `opacity`. No `backdrop-filter` or `mix-blend-mode` on anything that sits over the 3D stage, apart from the top bar.
   - New lights, or materials of a new kind, in one bay only mean a second set of shaders: add them to the rehearsal.
 - **App identity.** `manifest.webmanifest` has `"id": "/sodrama-ai-dashboard/"`. Never change it to `"./"`: browsers read a relative id from the root of inthemightyjungle.github.io, which other apps on the same site (Lion Strike, Little Log) also used, and Chrome then treated them as one app (opening a game replaced the dashboard's desktop shortcut and icon).
-- **Privacy and safety.** The page loads only its own files, sends no referrer to sites opened from it, asks search engines not to index it, and stores nothing but the `sd-intro-seen` flag. A content security policy in `index.html` enforces this; it allows the one inline `<head>` script by its fingerprint, so after editing that script run `python3 tools/check_csp.py --fix`. Don't add analytics, outside fonts or scripts.
+- **Privacy and safety.** The page loads only its own files, sends no referrer to sites opened from it, asks search engines not to index it, and stores nothing but the sign-in session (kept by the Firebase library in the browser's storage for this site) and the `sd-intro-seen` flag. A content security policy in `index.html` enforces this; it allows the one inline `<head>` script by its fingerprint, so after editing that script run `python3 tools/check_csp.py --fix`. Don't add analytics, outside fonts or scripts.
+- **The content is not in the published files.** News, thumbnails list, apps, approved tools, tool icons and form links live in `assets/data/` in the repository, and the Deploy workflow copies them into the database (`content/site`), which only signed-in people on the list can read (`firestore.rules`). Never put a file from `assets/data/` in the published folder, write a form or app link into `index.html`, or load data any other way. Links that need filling in carry `data-link="…"` and come from `assets/data/links.js`. The page's design, the "How it works" words and the pictures (thumbnails, icons, posters) are public files.
 - Only `main` is published. `news-draft` is a scratch branch for the daily news job and gets overwritten; `tools-draft` is the same for checking tool icons before they go live.
 
 ## What the owner has asked for (keep to these)
 
 - **The name is "AI Solutions Dashboard".** It was briefly renamed "AI Sandbox" and the owner asked to go back. The app icon is a 3D scene (curtain, lit stage, gold 3D letters reading "AI Dashboard") with the So Drama logo laid on top **exactly as it is**: never redraw, recolour or add effects to the logo.
+- **Private, with sign-in (Firebase, email and password).** Until someone is signed in, has confirmed their email address and is on the list, the page shows only the sign-in screen (the stage behind a velvet rope) and holds no content. People on the list set their own password the first time ("First time here?"). Admins manage the list on the **People** page (account menu, `#people`): add someone as Staff or Admin, a switch to make someone an admin, send a password link, remove (asks first). The owner, from the `OWNER_EMAIL` repository secret, is always an admin and can never be removed or demoted. The owner asked for People only on the admin page; add other settings only when asked.
 - **Four pages, in this order: AI news, Apps, How it works, Approved tools.** The four steps on the 3D stage ("How it works") are the front page only the first time someone opens the site. From the second visit on, the site opens on AI news and the steps are the third tab. The same four tabs sit in the top bar on wide screens and in a bar along the bottom on phones (where the fourth is labelled "Approved").
 - **Approved tools** lists the approved AI tools from the **AI Tool Register** the owner supplied (a CSV of staff declarations, 26 Nov 2026). Each tool appears once, with its icon, full name, what it is for, and how it is used: **Company**, **Personal** or **Both** (declared both ways). Tools are grouped by function, with a search box and an All / Company / Personal filter (a "Both" tool shows under both). The list is `assets/data/tools.js`. **Never publish staff names or email addresses from the register**, and never commit the CSV. When the owner sends a newer register, rebuild the list the same way: merge spellings of the same tool (e.g. "Magnific.com", "Magnific"), split rows that name two tools ("Deepseek & Qwen"), and fold Adobe's AI entries into Adobe Firefly.
 - The look is a theatre with the house lights down: a real 3D revolving stage, velvet curtains, warm spotlight. Flat, hard-edged vector drawings were rejected as looking "like MS Paint".
@@ -36,10 +38,15 @@ Live: https://inthemightyjungle.github.io/sodrama-ai-dashboard/
 
 | Path | What it is |
 | --- | --- |
-| `index.html` | All four pages (`#news`, `#apps`, `#how`, `#tools`). The small script in its `<head>` picks the page to open on before the first paint. |
-| `manifest.webmanifest`, `sw.js`, `assets/img/app/` | Make the site installable as an app. `sw.js` always asks the network first and keeps a copy only for offline use, so new news shows straight away; change its `VERSION` only when its `SHELL` list changes. |
+| `index.html` | The sign-in screen, the four pages (`#news`, `#apps`, `#how`, `#tools`) and People (`#people`, admins only). The small script in its `<head>` picks the page to open on before the first paint. |
+| `assets/js/account.js` | Sign-in screen, account menu and People page. Fills the page (`window.SD_DATA` and the `sd-data` event) only once the person is signed in and on the list. |
+| `assets/js/backend.js` | Firebase: signing in (the library in `assets/vendor/firebase/`) and the database through its plain web address. Reads `assets/js/firebase-config.js`, which the deploy writes; it is not in the repository. |
+| `firestore.rules` | Who may read the content and see or change the list. Tested by `tests/rules.test.mjs` and `tests/e2e_emulator.py` in `.github/workflows/test-signin.yml`. |
+| `firebase.json`, `.github/workflows/deploy.yml`, `tools/publish_content.mjs` | The deploy, on every push to `main` and after the thumbnail and icon jobs: page files to Firebase Hosting, content to the database, rules, and the owner kept on the list. Needs the `FIREBASE_SERVICE_ACCOUNT` and `OWNER_EMAIL` secrets. |
+| `assets/data/links.js` | The declaration form's address, filled into every `data-link="declare"` link after sign-in. |
+| `manifest.webmanifest`, `sw.js`, `assets/img/app/` | Make the site installable as an app. `sw.js` always asks the network first and keeps a copy of the site's own files only for offline use; it never touches the database. Change its `VERSION` only when its `SHELL` list changes. |
 | `assets/css/site.css` | All styles. |
-| `assets/js/site.js` | News, app and approved-tool lists, switching between the four pages, scroll indicators, starts the stage. |
+| `assets/js/site.js` | News, app and approved-tool lists, switching between the pages, scroll indicators, starts the stage. Waits for the content from `account.js` before filling anything in. |
 | `assets/js/stage3d.js` | The 3D revolving stage (three.js). `stage-boot.js` loads it. |
 | `assets/js/pace.js` | Softens the stage on devices that cannot keep up, and asks for still pictures if that is not enough. Tested by `node tools/test_pace.mjs`. |
 | `assets/data/news.js` | The five stories. **Strict JSON** inside `window.SD_NEWS = …;`. |
@@ -118,7 +125,7 @@ Ways to fix, best first: choose another reputable source for the same story (cha
 git -c push.negotiate=true push origin news-draft:main
 ```
 
-This moves `main` forward to the checked commit and GitHub Pages rebuilds within a minute or two. If the push is refused because `main` has moved, run `git fetch origin main && git rebase origin/main`, push `news-draft` again (force), wait for the workflow, then publish.
+This moves `main` forward to the checked commit. The **Deploy** workflow then publishes it to Firebase, usually within two minutes: check `gh run list --repo Inthemightyjungle/sodrama-ai-dashboard --workflow deploy.yml --limit 1` shows it succeeded, and say so in the report if it did not. If the push is refused because `main` has moved, run `git fetch origin main && git rebase origin/main`, push `news-draft` again (force), wait for the workflow, then publish.
 
 If the workflow never ran, publish anyway (stories without a thumbnail show stage artwork) and say so in your report.
 

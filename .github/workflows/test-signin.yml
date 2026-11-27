@@ -1,0 +1,57 @@
+name: Test sign-in
+
+# Tests the database rules, and signs in to the dashboard in a real browser,
+# against the Firebase emulators on GitHub's machine (no real project needed).
+on:
+  push:
+    branches: [main, signin]
+    paths:
+      - firestore.rules
+      - firebase.json
+      - index.html
+      - assets/js/account.js
+      - assets/js/backend.js
+      - assets/js/site.js
+      - tools/publish_content.mjs
+      - tests/**
+      - .github/workflows/test-signin.yml
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Install the test tools
+        run: |
+          mkdir -p "$RUNNER_TEMP/t" && cd "$RUNNER_TEMP/t" && npm init -y >/dev/null
+          npm install --no-audit --no-fund --loglevel=error firebase-tools@14 firebase-admin@13
+          cd "$GITHUB_WORKSPACE"
+          npm install --no-save --no-audit --no-fund --loglevel=error @firebase/rules-unit-testing firebase || \
+            npm install --no-save --no-audit --no-fund --loglevel=error --legacy-peer-deps @firebase/rules-unit-testing firebase
+          cp tools/publish_content.mjs "$RUNNER_TEMP/t/"
+          python3 -m pip install --quiet playwright
+          python3 -m playwright install --with-deps chromium
+
+      - name: Rules, then the browser test
+        env:
+          OWNER_EMAIL: owner@sodrama.test
+          GCLOUD_PROJECT: demo-dashboard
+        run: |
+          "$RUNNER_TEMP/t/node_modules/.bin/firebase" emulators:exec --only auth,firestore --project demo-dashboard \
+            "node --test tests/rules.test.mjs && node $RUNNER_TEMP/t/publish_content.mjs _site_test && python3 tests/e2e_emulator.py"

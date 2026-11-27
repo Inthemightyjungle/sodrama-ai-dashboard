@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="en" class="no-js" data-locked>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Privacy and safety: the page only runs its own files (the one inline script below is allowed by its
      fingerprint: tools/check_csp.py checks it), sites opened from here are not told where the visitor came
      from, and search engines are asked to leave the dashboard out of their results. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-DQKTXXqPQG35mc7TqnBgEEip1pyJeydIysDvJq51eHc='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; media-src 'self'; worker-src 'self'; manifest-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-DQKTXXqPQG35mc7TqnBgEEip1pyJeydIysDvJq51eHc='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://firestore.googleapis.com; media-src 'self'; worker-src 'self'; manifest-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex, nofollow">
 <title>AI Solutions Dashboard · So Drama! Entertainment</title>
@@ -79,16 +79,91 @@
     }
   })();
 </script>
-<script defer src="assets/data/news.js"></script>
-<script defer src="assets/data/news-thumbs.js"></script>
-<script defer src="assets/data/apps.js"></script>
-<script defer src="assets/data/tools.js"></script>
-<script defer src="assets/data/tool-icons.js"></script>
 <script defer src="assets/js/site.js"></script>
+<!-- Sign-in. Nothing on the page is filled in until the person is signed in and on the list (see account.js). -->
+<script type="module" src="assets/js/account.js"></script>
 <script type="module" src="assets/js/stage-boot.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+
+<!-- The sign-in screen: the velvet rope in front of the stage. account.js shows one panel at a time. -->
+<section class="gate" data-gate aria-label="Sign in">
+  <div class="gate-side">
+    <p class="gate-brand"><img src="assets/img/logo-white.png" alt="So Drama! Entertainment" width="648" height="296"><span>AI Solutions Dashboard</span></p>
+
+    <div class="gate-panel" data-panel="wait" aria-live="polite">
+      <h1 class="gate-title" tabindex="-1">Opening the dashboard</h1>
+      <p class="gate-lede"><span class="gate-dots" aria-hidden="true"><i></i><i></i><i></i></span>Checking who you are.</p>
+      <noscript><p class="gate-lede">The dashboard needs JavaScript to sign you in. Turn it on, then reload the page.</p></noscript>
+    </div>
+
+    <form class="gate-panel" data-panel="signin" hidden novalidate>
+      <h1 class="gate-title" tabindex="-1">Sign in</h1>
+      <p class="gate-lede">The dashboard is open to people on its list.</p>
+      <label class="field"><span>Email</span><input type="email" name="email" autocomplete="username" inputmode="email" autocapitalize="off" spellcheck="false" required></label>
+      <label class="field"><span>Password</span><span class="field-box"><input type="password" name="password" autocomplete="current-password" required><button class="field-peek" type="button" data-peek aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6.5 9.5-6.5 9.5 6.5 9.5 6.5-3.5 6.5-9.5 6.5S2.5 12 2.5 12z"></path><circle cx="12" cy="12" r="2.8"></circle></svg><span class="sr-only">Show password</span></button></span></label>
+      <p class="gate-error" data-error role="alert" hidden></p>
+      <button class="btn gate-go" type="submit">Sign in</button>
+      <p class="gate-links"><button type="button" data-go="setup">First time here? Set your password</button><button type="button" data-go="reset">Forgot your password?</button></p>
+    </form>
+
+    <form class="gate-panel" data-panel="setup" hidden novalidate>
+      <h1 class="gate-title" tabindex="-1">Set your password</h1>
+      <p class="gate-lede">Use the email address the dashboard owner added. We will send a link to check it is yours.</p>
+      <label class="field"><span>Email</span><input type="email" name="email" autocomplete="username" inputmode="email" autocapitalize="off" spellcheck="false" required></label>
+      <label class="field"><span>New password</span><span class="field-box"><input type="password" name="password" autocomplete="new-password" minlength="8" required aria-describedby="new-password-hint"><button class="field-peek" type="button" data-peek aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6.5 9.5-6.5 9.5 6.5 9.5 6.5-3.5 6.5-9.5 6.5S2.5 12 2.5 12z"></path><circle cx="12" cy="12" r="2.8"></circle></svg><span class="sr-only">Show password</span></button></span><small id="new-password-hint">At least 8 characters. A short phrase is easy to remember.</small></label>
+      <p class="gate-error" data-error role="alert" hidden></p>
+      <button class="btn gate-go" type="submit">Set password</button>
+      <p class="gate-links"><button type="button" data-go="signin">I already have a password</button></p>
+    </form>
+
+    <form class="gate-panel" data-panel="reset" hidden novalidate>
+      <h1 class="gate-title" tabindex="-1">Choose a new password</h1>
+      <p class="gate-lede">We will email you a link to choose a new one.</p>
+      <label class="field"><span>Email</span><input type="email" name="email" autocomplete="username" inputmode="email" autocapitalize="off" spellcheck="false" required></label>
+      <p class="gate-error" data-error role="alert" hidden></p>
+      <button class="btn gate-go" type="submit">Email me a link</button>
+      <p class="gate-links"><button type="button" data-go="signin">Back to sign in</button></p>
+    </form>
+
+    <div class="gate-panel" data-panel="reset-sent" hidden>
+      <h1 class="gate-title" tabindex="-1">Check your email</h1>
+      <p class="gate-lede">If <strong data-email></strong> can sign in, a link to choose a new password is on its way. It can take a few minutes, so look in your junk folder too.</p>
+      <button class="btn gate-go" type="button" data-go="signin">Back to sign in</button>
+    </div>
+
+    <div class="gate-panel" data-panel="verify" hidden>
+      <h1 class="gate-title" tabindex="-1">Confirm your email</h1>
+      <p class="gate-lede">We sent a link to <strong data-email></strong>. Open it, then come back here.</p>
+      <p class="gate-error" data-error role="alert" hidden></p>
+      <p class="gate-note" data-note role="status" hidden></p>
+      <button class="btn gate-go" type="button" data-do="recheck">I have opened the link</button>
+      <p class="gate-links"><button type="button" data-do="resend">Send the link again</button><button type="button" data-do="leave">Use a different email</button></p>
+    </div>
+
+    <div class="gate-panel" data-panel="not-listed" hidden>
+      <h1 class="gate-title" tabindex="-1">You are not on the list yet</h1>
+      <p class="gate-lede"><strong data-email></strong> cannot open the dashboard. Ask the dashboard owner to add it, then try again.</p>
+      <p class="gate-error" data-error role="alert" hidden></p>
+      <button class="btn gate-go" type="button" data-do="retry">Try again</button>
+      <p class="gate-links"><button type="button" data-do="leave">Sign in with a different email</button></p>
+    </div>
+
+    <div class="gate-panel" data-panel="trouble" hidden>
+      <h1 class="gate-title" tabindex="-1">The dashboard did not open</h1>
+      <p class="gate-lede" data-trouble>Something went wrong.</p>
+      <button class="btn gate-go" type="button" data-do="retry">Try again</button>
+      <p class="gate-links"><button type="button" data-do="leave">Sign out</button></p>
+    </div>
+
+    <p class="gate-foot">
+      <button class="btn btn-ghost btn-install" type="button" data-install><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>Install the app</button>
+      <span>For So Drama! Entertainment staff.</span>
+    </p>
+  </div>
+  <figure class="gate-art" aria-hidden="true"><img src="assets/img/posters/bay-0.webp" alt="" width="1200" height="1200" decoding="async"></figure>
+</section>
 
 <canvas class="stage" data-stage aria-hidden="true"></canvas>
 <div class="stage-scrim" aria-hidden="true"></div>
@@ -110,7 +185,15 @@
     <a href="#tools" data-nav="tools">Approved tools</a>
   </nav>
   <button class="btn btn-install btn-install-top" type="button" data-install title="Install app"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg><span class="btn-install-label">Install app</span></button>
-  <a class="btn btn-mini" data-mini-cta href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=rcy329-Y_kaUIVobvsyr0TBFYZVJ-u1FmQ3PZtT_HmlUNFlVNjJPVjcwTFJTTjVITE5IQVpZUTNYOSQlQCN0PWcu" target="_blank" rel="noopener">Declare a tool<span class="sr-only"> (opens the form in a new window)</span></a>
+  <a class="btn btn-mini" data-mini-cta href="#how" data-link="declare" target="_blank" rel="noopener">Declare a tool<span class="sr-only"> (opens the form in a new window)</span></a>
+  <div class="account" data-account hidden>
+    <button class="account-btn" type="button" aria-expanded="false" aria-controls="account-menu" data-account-btn><span data-account-initial aria-hidden="true"></span><span class="sr-only">Your account</span></button>
+    <div class="account-menu" id="account-menu" data-account-menu hidden>
+      <p class="account-who"><span class="account-email" data-account-email></span><span class="account-role" data-account-role></span></p>
+      <button class="account-item" type="button" data-open-people hidden><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.5" r="3.2"></circle><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5M15.5 5.6a3.2 3.2 0 0 1 0 5.8M17.5 14.3c1.6.6 2.7 2.1 3 4.7"></path></svg>People</button>
+      <button class="account-item" type="button" data-sign-out><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h4.5A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5H14M10 8l-4 4 4 4M6 12h10"></path></svg>Sign out</button>
+    </div>
+  </div>
 </header>
 
 <!-- Only shown beside the four steps. -->
@@ -147,7 +230,7 @@
           </div>
         </header>
         <div class="news-grid" data-news></div>
-        <noscript><p class="plain-note">The news list needs JavaScript. It lives in <a href="assets/data/news.js">assets/data/news.js</a>.</p></noscript>
+        <noscript><p class="plain-note">The news needs JavaScript.</p></noscript>
       </div>
     </section>
   </div>
@@ -168,7 +251,7 @@
           </div>
         </header>
         <div class="app-grid" data-apps></div>
-        <noscript><p class="plain-note">The app list needs JavaScript. It lives in <a href="assets/data/apps.js">assets/data/apps.js</a>.</p></noscript>
+        <noscript><p class="plain-note">The apps need JavaScript.</p></noscript>
       </div>
     </section>
   </div>
@@ -183,7 +266,7 @@
             <h1 class="hero-title">Got a new <span class="nowrap">AI tool?</span></h1>
             <p class="hero-lede">Declare it first. AAGB checks the security risk, then you can buy it and start using it.</p>
             <div class="hero-actions">
-              <a class="cta" data-cta href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=rcy329-Y_kaUIVobvsyr0TBFYZVJ-u1FmQ3PZtT_HmlUNFlVNjJPVjcwTFJTTjVITE5IQVpZUTNYOSQlQCN0PWcu" target="_blank" rel="noopener">
+              <a class="cta" data-cta href="#how" data-link="declare" target="_blank" rel="noopener">
                 <span class="cta-label">Declare an AI tool</span>
                 <span class="cta-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"></path></svg></span>
                 <span class="sr-only"> (opens the form in a new window)</span>
@@ -209,7 +292,7 @@
               <h3 class="step-title">Declare your AI tools</h3>
               <p class="step-desc">Fill in the form for every AI tool you use, or want to use.</p>
               <p class="step-who"><span class="who who-you">You do this</span></p>
-              <a class="btn btn-ghost" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=rcy329-Y_kaUIVobvsyr0TBFYZVJ-u1FmQ3PZtT_HmlUNFlVNjJPVjcwTFJTTjVITE5IQVpZUTNYOSQlQCN0PWcu" target="_blank" rel="noopener">Open the form<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"></path></svg><span class="sr-only"> (opens in a new window)</span></a>
+              <a class="btn btn-ghost" href="#how" data-link="declare" target="_blank" rel="noopener">Open the form<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"></path></svg><span class="sr-only"> (opens in a new window)</span></a>
             </div>
             <figure class="poster" aria-hidden="true"><img src="assets/img/posters/bay-1.webp" alt="" width="1200" height="1200" loading="lazy" decoding="async"></figure>
           </div>
@@ -262,7 +345,7 @@
             <h2 class="section-title" id="next-title" data-reveal>What’s next</h2>
             <div class="section-side" data-reveal>
               <p class="section-lede">That’s all four steps. Catch up on today’s AI news, or open the apps we’ve built.</p>
-              <a class="btn btn-solid" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=rcy329-Y_kaUIVobvsyr0TBFYZVJ-u1FmQ3PZtT_HmlUNFlVNjJPVjcwTFJTTjVITE5IQVpZUTNYOSQlQCN0PWcu" target="_blank" rel="noopener">Declare an AI tool<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"></path></svg><span class="sr-only"> (opens the form in a new window)</span></a>
+              <a class="btn btn-solid" href="#how" data-link="declare" target="_blank" rel="noopener">Declare an AI tool<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"></path></svg><span class="sr-only"> (opens the form in a new window)</span></a>
             </div>
           </header>
           <div class="doors">
@@ -313,9 +396,67 @@
         <div class="tool-foot" data-reveal>
           <p class="tool-checked" data-tools-checked></p>
           <p class="tool-ask">Need a tool that isn’t here? Declare it first, then wait for approval.</p>
-          <a class="btn btn-ghost" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=rcy329-Y_kaUIVobvsyr0TBFYZVJ-u1FmQ3PZtT_HmlUNFlVNjJPVjcwTFJTTjVITE5IQVpZUTNYOSQlQCN0PWcu" target="_blank" rel="noopener">Declare an AI tool<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"></path></svg><span class="sr-only"> (opens the form in a new window)</span></a>
+          <a class="btn btn-ghost" href="#how" data-link="declare" target="_blank" rel="noopener">Declare an AI tool<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"></path></svg><span class="sr-only"> (opens the form in a new window)</span></a>
         </div>
-        <noscript><p class="plain-note">The list needs JavaScript. It lives in <a href="assets/data/tools.js">assets/data/tools.js</a>.</p></noscript>
+        <noscript><p class="plain-note">The list needs JavaScript.</p></noscript>
+      </div>
+    </section>
+  </div>
+
+  <!-- Page 5, for admins only: who can open the dashboard. Reached from the account menu (see account.js). -->
+  <div class="view view-page" id="people">
+    <div class="ticker" data-ticker="-1" aria-hidden="true">
+      <div class="ticker-row"><span>The guest list</span><span>Who can come in</span><span>The guest list</span><span>Who can come in</span><span>The guest list</span><span>Who can come in</span><span>The guest list</span><span>Who can come in</span></div>
+    </div>
+
+    <section class="people">
+      <div class="wrap">
+        <header class="section-head">
+          <h2 class="section-title" tabindex="-1" data-people-title>People</h2>
+          <div class="section-side">
+            <p class="section-lede">Everyone here can sign in to the dashboard. Admins can also open this page and change the list.</p>
+          </div>
+        </header>
+
+        <form class="people-add" data-people-add novalidate>
+          <h3 class="people-sub">Add someone</h3>
+          <div class="people-add-row">
+            <label class="field people-add-email"><span>Email address</span><input type="email" name="email" autocomplete="off" inputmode="email" autocapitalize="off" spellcheck="false" placeholder="name@sodrama.com" required></label>
+            <fieldset class="seg">
+              <legend>Role</legend>
+              <span class="seg-box"><label><input type="radio" name="role" value="staff" checked><span>Staff</span></label><label><input type="radio" name="role" value="admin"><span>Admin</span></label></span>
+            </fieldset>
+            <button class="btn gate-go" type="submit">Add to the list</button>
+          </div>
+          <p class="gate-error" data-error role="alert" hidden></p>
+        </form>
+
+        <div class="invite" data-invite hidden>
+          <p class="invite-head"><strong data-invite-email></strong> is on the list. Send them this, so they know how to sign in:</p>
+          <pre class="invite-text" data-invite-text></pre>
+          <p class="invite-actions">
+            <button class="btn btn-solid" type="button" data-invite-copy>Copy the message</button>
+            <a class="btn btn-ghost" href="#people" data-invite-mail>Write an email</a>
+            <span class="invite-done" data-invite-done role="status"></span>
+          </p>
+        </div>
+
+        <div class="people-bar">
+          <h3 class="people-sub"><span data-people-count>On the list</span></h3>
+          <div class="tool-search people-filter" role="search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg>
+            <label class="sr-only" for="people-filter">Find someone on the list</label>
+            <input id="people-filter" type="search" data-people-filter placeholder="Find someone" autocomplete="off" spellcheck="false" enterkeyhint="search">
+          </div>
+        </div>
+        <p class="people-status" data-people-status role="status"></p>
+        <ul class="people-list" data-people-list></ul>
+
+        <div class="people-help">
+          <p><strong>Admin</strong> lets someone open this page and change the list. <strong>Staff</strong> can use the rest of the dashboard.</p>
+          <p><strong>Removing</strong> someone stops them opening the dashboard the next time it loads. The owner cannot be removed or changed.</p>
+          <p><strong>Forgotten passwords:</strong> “Send a password link” emails them a link to choose a new one. People who have not signed in yet set their own password with “First time here?” on the sign-in page.</p>
+        </div>
       </div>
     </section>
   </div>

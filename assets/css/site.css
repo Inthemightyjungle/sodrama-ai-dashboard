@@ -399,6 +399,146 @@ html[data-view]:not([data-view="how"]) .cues, html[data-view]:not([data-view="ho
 .ios-install .install-hint { display: block; }
 .install-hint strong { color: var(--ivory); font-weight: 700; }
 
+/* ---------- the sign-in screen ---------- */
+
+/* Until someone is signed in and on the list, the page shows only this
+   (data-locked on <html>, which account.js takes away). */
+.gate { display: none; }
+html[data-locked] .gate { display: grid; }
+html[data-locked] main, html[data-locked] .top, html[data-locked] .tabbar, html[data-locked] .progress, html[data-locked] .cues,
+html[data-locked] .chip, html[data-locked] .stage, html[data-locked] .stage-scrim, html[data-locked] .skip { display: none !important; }
+
+.gate { position: relative; grid-template-columns: minmax(0, 620px) minmax(0, 1fr); min-height: 100vh; min-height: 100svh; background: var(--house); }
+.gate-side { position: relative; z-index: 1; display: flex; flex-direction: column; gap: clamp(32px, 5vh, 56px); padding: clamp(26px, 3.6vw, 52px) var(--gutter); }
+.gate-brand { display: flex; align-items: center; gap: 14px; font-weight: 600; font-size: 14.5px; line-height: 1.2; color: var(--dim); }
+.gate-brand img { width: auto; height: 34px; }
+.gate-brand span { padding-left: 14px; border-left: 1px solid var(--line-2); }
+.gate-panel { display: grid; gap: 18px; width: 100%; max-width: 440px; margin-block: auto; }
+.gate-panel[hidden] { display: none; }
+.js:not(.calm) .gate-panel { animation: panel-in .5s var(--ease) both; }
+@keyframes panel-in { from { opacity: 0; transform: translate3d(0, 14px, 0); } }
+.gate-title { font: 800 clamp(46px, 5vw, 78px)/.94 var(--display); letter-spacing: -.026em; text-wrap: balance; }
+.gate-title:focus { outline: none; }
+.gate-lede { margin-bottom: 6px; font-size: 18px; line-height: 1.5; color: var(--dim); }
+.gate-lede strong { color: var(--ivory); font-weight: 700; overflow-wrap: anywhere; }
+.gate-dots { display: inline-flex; gap: 5px; margin-right: 12px; vertical-align: middle; }
+.gate-dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--tungsten); animation: pulse 1.2s ease-in-out infinite; }
+.gate-dots i:nth-child(2) { animation-delay: .2s; }
+.gate-dots i:nth-child(3) { animation-delay: .4s; }
+.gate-go { justify-content: center; width: 100%; min-height: 56px; margin-top: 4px; background: var(--tungsten); color: var(--coal); font-size: 16px; }
+.gate-go:hover { background: var(--tungsten-hi); }
+.gate-go:disabled { opacity: .62; cursor: progress; }
+.gate-links { display: flex; flex-wrap: wrap; gap: 6px 24px; }
+.gate-links button { padding: 6px 0; border: 0; background: none; color: var(--dim); font: 600 15px/1.35 var(--text); text-align: left; text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 4px; cursor: pointer; transition: color .2s, text-decoration-color .2s; }
+.gate-links button:hover { color: var(--tungsten); text-decoration-color: currentColor; }
+.gate-links button[hidden] { display: none; }
+.gate-error, .gate-note { padding: 12px 16px; border-radius: 14px; font-size: 15px; line-height: 1.45; }
+.gate-error { border: 1px solid rgba(255, 130, 140, .4); background: rgba(225, 69, 82, .14); color: #ffbcc1; }
+.gate-note { border: 1px solid rgba(95, 214, 140, .36); background: rgba(95, 214, 140, .1); color: #b4f0c9; }
+.gate-error[hidden], .gate-note[hidden] { display: none; }
+.gate-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; font-size: 13.5px; color: var(--faint); }
+.gate-art { position: relative; margin: 0; overflow: hidden; background: #3a0d14; }
+.gate-art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; }
+.gate-art::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, var(--house) 0%, rgba(12, 10, 16, .5) 16%, rgba(12, 10, 16, 0) 40%), linear-gradient(0deg, rgba(12, 10, 16, .65), rgba(12, 10, 16, 0) 32%); }
+/* The one moment of motion: the stage comes up out of the dark as the page opens. */
+.js:not(.calm) .gate-art img { animation: gate-in 2.4s var(--ease) both; }
+@keyframes gate-in { from { opacity: 0; transform: scale(1.08); } }
+
+/* Form fields, on the sign-in screen and the People page. */
+.field { display: grid; gap: 8px; font-weight: 600; font-size: 14px; line-height: 1.3; color: var(--dim); }
+.field input { width: 100%; height: 54px; margin: 0; padding: 0 18px; border: 1px solid var(--line-2); border-radius: 16px; background: rgba(255, 255, 255, .06); color: var(--ivory); font: 500 17px/1 var(--text); -webkit-appearance: none; appearance: none; transition: border-color .2s, background-color .2s, box-shadow .2s; }
+.field input::placeholder { color: var(--faint); opacity: 1; }
+.field input:hover { border-color: rgba(246, 239, 226, .34); }
+.field input:focus { outline: none; border-color: var(--tungsten); background: rgba(255, 255, 255, .09); box-shadow: 0 0 0 3px rgba(255, 194, 74, .22); }
+.field input:-webkit-autofill { -webkit-text-fill-color: var(--ivory); caret-color: var(--ivory); box-shadow: 0 0 0 60px #221c2b inset; }
+.field input:-webkit-autofill:focus { box-shadow: 0 0 0 60px #221c2b inset, 0 0 0 3px rgba(255, 194, 74, .22); }
+.field small { font-weight: 500; font-size: 13.5px; color: var(--faint); }
+.field-box { position: relative; display: flex; align-items: center; }
+.field-box input { padding-right: 58px; }
+.field-peek { position: absolute; right: 8px; display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 12px; background: none; color: var(--faint); cursor: pointer; transition: color .2s, background-color .2s; }
+.field-peek:hover { color: var(--ivory); background: rgba(255, 255, 255, .08); }
+.field-peek[aria-pressed="true"] { color: var(--tungsten); }
+.field-peek svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- the account button and menu, in the top bar ---------- */
+
+.account { position: relative; flex: none; }
+.account[hidden] { display: none; }
+.account-btn { display: grid; place-items: center; width: 42px; height: 42px; padding: 0; border: 1px solid var(--line-2); border-radius: 50%; background: rgba(255, 255, 255, .06); color: var(--ivory); font: 700 19px/1 var(--display); cursor: pointer; transition: border-color .2s, color .2s; }
+.account-btn:hover, .account-btn[aria-expanded="true"] { border-color: var(--tungsten); color: var(--tungsten); }
+.account-menu { position: absolute; right: 0; top: calc(100% + 10px); z-index: 70; display: grid; gap: 2px; width: min(300px, calc(100vw - 32px)); padding: 8px; border: 1px solid var(--line-2); border-radius: 20px; background: var(--house-3); box-shadow: 0 24px 60px rgba(0, 0, 0, .6); }
+.account-menu[hidden] { display: none; }
+.account-who { display: grid; gap: 4px; margin-bottom: 6px; padding: 12px 14px 14px; border-bottom: 1px solid var(--line); line-height: 1.3; }
+.account-email { font-weight: 700; font-size: 15px; overflow-wrap: anywhere; }
+.account-role { font-size: 13.5px; color: var(--faint); }
+.account-item { display: flex; align-items: center; gap: 12px; width: 100%; padding: 12px 14px; border: 0; border-radius: 13px; background: none; color: var(--ivory); font: 600 15px/1.2 var(--text); text-align: left; cursor: pointer; transition: background-color .2s, color .2s; }
+.account-item:hover { background: rgba(255, 255, 255, .08); color: var(--tungsten); }
+.account-item[hidden] { display: none; }
+.account-item svg { flex: none; width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- People: who can open the dashboard (admins only) ---------- */
+
+html[data-view="people"] #people { display: block; }
+.ticker + .people { border-top: 1px solid var(--line); }
+.people { padding: clamp(64px, 8vw, 128px) 0 clamp(72px, 9vw, 140px); background: radial-gradient(900px 520px at 88% 0%, rgba(225, 69, 82, .1), transparent 70%); }
+.section-title:focus { outline: none; }
+.people-sub { font: 700 clamp(24px, 2.2vw, 32px)/1.1 var(--display); letter-spacing: -.01em; }
+.people-add { display: grid; gap: 18px; padding: clamp(22px, 2.6vw, 36px); border: 1px solid var(--line); border-radius: 28px; background: var(--house-3); }
+.people-add-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px 18px; }
+.people-add-email { flex: 1 1 300px; }
+.people-add .gate-go { width: auto; min-height: 54px; margin: 0; padding-inline: 26px; }
+.seg { margin: 0; padding: 0; border: 0; }
+.seg legend { margin-bottom: 8px; padding: 0; font-weight: 600; font-size: 14px; line-height: 1.3; color: var(--dim); }
+.seg-box { display: inline-flex; padding: 5px; border: 1px solid var(--line-2); border-radius: 16px; background: rgba(255, 255, 255, .06); }
+.seg-box label { position: relative; }
+.seg-box input { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.seg-box span { display: grid; place-items: center; min-width: 86px; height: 42px; padding: 0 16px; border-radius: 12px; font-weight: 700; font-size: 15px; color: var(--dim); transition: background-color .2s, color .2s; }
+.seg-box input:checked + span { background: var(--ivory); color: var(--house); }
+.seg-box input:focus-visible + span { outline: 3px solid var(--tungsten); outline-offset: 2px; }
+
+.invite { display: grid; gap: 14px; margin-top: 18px; padding: clamp(20px, 2.4vw, 32px); border: 1px solid rgba(95, 214, 140, .36); border-radius: 24px; background: rgba(95, 214, 140, .07); }
+.invite[hidden] { display: none; }
+.invite-head { font-size: 17px; line-height: 1.5; }
+.invite-head strong { overflow-wrap: anywhere; }
+.invite-text { margin: 0; padding: 16px 18px; border-radius: 16px; background: rgba(0, 0, 0, .28); color: var(--ivory); font: 500 15px/1.6 var(--text); white-space: pre-wrap; overflow-wrap: anywhere; }
+.invite-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 14px; }
+.invite-done { font-weight: 600; font-size: 14px; color: #b4f0c9; }
+
+.people-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px; margin-top: clamp(40px, 4.6vw, 64px); padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+.people-bar .people-sub { font: 700 19px/1.3 var(--text); letter-spacing: 0; }
+.people-filter { flex: 0 1 340px; }
+.people-status { min-height: 1.55em; margin-top: 12px; font-size: 15px; color: var(--dim); }
+.people-list { margin: 0; padding: 0; list-style: none; }
+.person { display: grid; grid-template-columns: 46px minmax(0, 1fr) auto auto; align-items: center; gap: 8px 20px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.person.is-confirming { background: linear-gradient(90deg, rgba(225, 69, 82, .12), transparent 72%); }
+.person-badge { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: var(--house-4); color: var(--tungsten); font: 700 20px/1 var(--display); }
+.person-email { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-weight: 700; font-size: 17px; line-height: 1.3; overflow-wrap: anywhere; }
+.person-flag { padding: 4px 9px; border-radius: 999px; background: rgba(255, 255, 255, .08); font-weight: 600; font-size: 12px; line-height: 1.2; color: var(--dim); }
+.person-flag.is-owner { background: rgba(255, 194, 74, .14); color: var(--tungsten); }
+.person-seen { margin-top: 3px; font-size: 14px; color: var(--faint); }
+.person-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; }
+.person-btn { padding: 10px 14px; border-color: var(--line-2); background: rgba(255, 255, 255, .05); color: var(--ivory); font-size: 14px; }
+.person-btn:hover { border-color: var(--tungsten); color: var(--tungsten); }
+.person-btn:hover svg { transform: none; }
+.person-btn.is-danger { border-color: var(--red); background: var(--red); color: #fff; }
+.person-btn.is-danger:hover { border-color: #ff6f7b; background: #ff6f7b; color: #fff; }
+.person-btn:disabled { opacity: .6; cursor: progress; }
+.person-confirm { margin-right: 4px; font-weight: 600; font-size: 14.5px; }
+.person-msg { grid-column: 2 / -1; font-size: 14px; color: var(--tungsten); }
+.person-msg:empty { display: none; }
+.person-none { padding: 28px 0; color: var(--dim); }
+/* The admin switch: a slider that is gold when on. */
+.switch { display: inline-flex; align-items: center; gap: 10px; padding: 6px 2px; border: 0; background: none; color: var(--dim); font: 600 14.5px/1 var(--text); cursor: pointer; }
+.switch-track { position: relative; width: 50px; height: 30px; border-radius: 999px; background: rgba(255, 255, 255, .12); box-shadow: inset 0 0 0 1px var(--line-2); transition: background-color .25s, box-shadow .25s; }
+.switch-knob { position: absolute; left: 3px; top: 3px; width: 24px; height: 24px; border-radius: 50%; background: var(--ivory); box-shadow: 0 2px 6px rgba(0, 0, 0, .45); transition: transform .3s var(--ease); }
+.switch[aria-checked="true"] { color: var(--ivory); }
+.switch[aria-checked="true"] .switch-track { background: var(--tungsten); box-shadow: none; }
+.switch[aria-checked="true"] .switch-knob { transform: translateX(20px); background: #fffaf0; }
+.switch:disabled { cursor: not-allowed; opacity: .45; }
+.switch:focus-visible { outline-offset: 2px; }
+.people-help { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px clamp(20px, 3vw, 48px); margin-top: clamp(40px, 4.6vw, 64px); padding-top: clamp(24px, 2.6vw, 36px); border-top: 1px solid var(--line); font-size: 15px; line-height: 1.55; color: var(--dim); }
+.people-help strong { color: var(--ivory); }
+
 /* ---------- things that arrive as you scroll ---------- */
 
 .js:not(.calm) [data-reveal] { opacity: 0; transform: translate3d(0, 38px, 0); transition: opacity .55s var(--ease) var(--rd, 0s), transform .7s var(--ease) var(--rd, 0s); }
@@ -488,6 +628,25 @@ html[data-view]:not([data-view="how"]) .cues, html[data-view]:not([data-view="ho
   .brand-logo { height: 24px; }
   .brand-text { padding-left: 10px; }
   .brand-title { max-width: 7.2em; font-size: 12.5px; line-height: 1.15; white-space: normal; }
+}
+
+/* Sign-in screen and People page on smaller screens. */
+@media (max-width: 860px) {
+  .gate { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr; }
+  .gate-art { order: -1; height: 32vh; height: 32svh; min-height: 190px; }
+  .gate-art::after { background: linear-gradient(0deg, var(--house) 0%, rgba(12, 10, 16, .35) 45%, rgba(12, 10, 16, 0) 75%); }
+  .gate-side { margin-top: -64px; padding-top: 0; }
+  .gate-panel { margin-block: 0 auto; }
+  .gate-title { font-size: clamp(40px, 11vw, 60px); }
+  .account-btn { width: 38px; height: 38px; font-size: 17px; }
+}
+@media (max-width: 720px) {
+  .person { grid-template-columns: 40px minmax(0, 1fr); gap: 10px 14px; }
+  .person-badge { width: 40px; height: 40px; font-size: 18px; }
+  .person-role, .person-actions { grid-column: 2; justify-content: flex-start; }
+  .people-help { grid-template-columns: minmax(0, 1fr); }
+  .people-add .gate-go { width: 100%; }
+  .people-filter { flex-basis: 100%; }
 }
 
 /* ---------- for people who prefer less motion ---------- */

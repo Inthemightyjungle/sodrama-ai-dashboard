@@ -1,0 +1,129 @@
+name: Deploy
+
+# Publishes the dashboard to Firebase whenever main changes:
+#   - the page's own files (no news, apps or tools in them) to Firebase Hosting,
+#   - the news, apps, approved tools and links to the database, where only
+#     signed-in people on the list can read them,
+#   - the database rules in firestore.rules.
+# It also makes sure the owner is on the list as an admin.
+#
+# Needs two repository secrets (Settings > Secrets and variables > Actions):
+#   FIREBASE_SERVICE_ACCOUNT  the key file (JSON) from Firebase: Project settings > Service accounts
+#   OWNER_EMAIL               the owner's email address
+# Until they exist, the job does nothing.
+on:
+  push:
+    branches: [main]
+  # The thumbnail and icon jobs commit to main with the built-in token, which
+  # does not start other workflows, so deploy again when they finish.
+  workflow_run:
+    workflows: ["News thumbnails", "Tool icons"]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    steps:
+      - name: Check that Firebase is set up
+        id: ready
+        env:
+          KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          OWNER: ${{ secrets.OWNER_EMAIL }}
+        run: |
+          if [ -z "$KEY" ] || [ -z "$OWNER" ]; then
+            echo "::notice::The FIREBASE_SERVICE_ACCOUNT and OWNER_EMAIL secrets are not both set yet, so nothing was deployed."
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.ready.outputs.ok == 'true'
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v4
+        if: steps.ready.outputs.ok == 'true'
+        with:
+          node-version: 22
+
+      - name: Check the content
+        if: steps.ready.outputs.ok == 'true'
+        run: |
+          python3 tools/check_news.py
+          python3 tools/check_apps.py
+          python3 tools/check_tools.py
+          python3 tools/check_csp.py
+
+      - name: Install the Firebase tools
+        if: steps.ready.outputs.ok == 'true'
+        run: |
+          mkdir -p "$RUNNER_TEMP/deploy"
+          cd "$RUNNER_TEMP/deploy"
+          npm init -y >/dev/null
+          npm install --no-audit --no-fund --loglevel=error firebase-admin@13 firebase-tools@14
+          cp "$GITHUB_WORKSPACE/tools/publish_content.mjs" .
+
+      - name: Use the key
+        if: steps.ready.outputs.ok == 'true'
+        env:
+          KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+          umask 077
+          printf '%s' "$KEY" > "$RUNNER_TEMP/key.json"
+          PROJECT=$(jq -r '.project_id // empty' "$RUNNER_TEMP/key.json" 2>/dev/null || true)
+          if [ -z "$PROJECT" ]; then
+            echo "::error::FIREBASE_SERVICE_ACCOUNT does not look like a Firebase key file. Paste the whole JSON file into the secret."
+            exit 1
+          fi
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/key.json" >> "$GITHUB_ENV"
+          echo "PROJECT=$PROJECT" >> "$GITHUB_ENV"
+
+      - name: Build the folder to publish
+        if: steps.ready.outputs.ok == 'true'
+        run: |
+          # Only the page's own files. Not assets/data (it goes to the database),
+          # and nothing from tools/, extension/, .github/ or the notes.
+          rm -rf _site && mkdir -p _site
+          cp index.html manifest.webmanifest sw.js _site/
+          cp -R assets _site/assets
+          rm -rf _site/assets/data _site/assets/js/firebase-config.js
+          printf 'User-agent: *\nDisallow: /\n' > _site/robots.txt
+          sed -i "s#https://inthemightyjungle.github.io/sodrama-ai-dashboard/#https://${PROJECT}.web.app/#g" _site/index.html
+
+      - name: Publish the content and keep the owner on the list
+        if: steps.ready.outputs.ok == 'true'
+        env:
+          OWNER_EMAIL: ${{ secrets.OWNER_EMAIL }}
+        run: node "$RUNNER_TEMP/deploy/publish_content.mjs" _site
+
+      - name: Deploy the site and the database rules
+        if: steps.ready.outputs.ok == 'true'
+        run: |
+          FB="$RUNNER_TEMP/deploy/node_modules/.bin/firebase"
+          # A new project may not have its web address (the default Hosting site) yet.
+          SITES=$("$FB" hosting:sites:list --project "$PROJECT" --json 2>/dev/null | jq -r '[.result.sites[]?.name] | length' 2>/dev/null || echo "?")
+          if [ "$SITES" = "0" ]; then
+            echo "Creating the web address ${PROJECT}.web.app"
+            "$FB" hosting:sites:create "$PROJECT" --project "$PROJECT" --non-interactive || true
+          fi
+          if ! "$FB" deploy --only hosting,firestore:rules --project "$PROJECT" --non-interactive; then
+            echo "::error::The deploy was refused. If the message above mentions permission, open the Google Cloud console > IAM, find the firebase-adminsdk service account and give it the role \"Firebase Admin\"."
+            exit 1
+          fi
+          echo "Live at https://${PROJECT}.web.app" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Forget the key
+        if: always()
+        run: rm -f "$RUNNER_TEMP/key.json"

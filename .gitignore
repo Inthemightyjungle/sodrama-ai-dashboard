@@ -1,3 +1,12 @@
 __pycache__/
 *.pyc
 .DS_Store
+
+# Written at deploy time (tools/publish_content.mjs); never commit it.
+assets/js/firebase-config.js
+_site/
+node_modules/
+# Never commit a Firebase key or the AI Tool Register.
+*firebase-adminsdk*.json
+service-account*.json
+*.csv

@@ -1,0 +1,91 @@
+rules_version = '2';
+
+// Who can read and change what in the dashboard's database.
+//
+//   people/{email}   one record per person allowed in:
+//                    { email, role: "admin" | "staff", added, addedBy, changed?, changedBy?, seen?, owner? }
+//   content/site     news, apps, approved tools and links; written only by the deploy job
+//
+// A person can see the dashboard only when they are signed in, have confirmed
+// their email address, and have a record in people/. Only admins can add,
+// change or remove people. No admin can remove or demote themselves, or the
+// owner (the record the deploy job makes from the OWNER_EMAIL secret), so the
+// dashboard always keeps its owner as an admin.
+// The one thing people may change on their own record is "seen", the time they
+// last opened the dashboard, which the People page shows.
+// The deploy job writes content/ and the owner's record with a service account,
+// which these rules do not limit; no one using the website can write content/.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null
+        && request.auth.token.email is string
+        && request.auth.token.email_verified == true;
+    }
+    function me() {
+      return request.auth.token.email.lower();
+    }
+    function myRecord() {
+      return /databases/$(database)/documents/people/$(me());
+    }
+    function isMember() {
+      return signedIn() && exists(myRecord());
+    }
+    function isAdmin() {
+      return isMember() && get(myRecord()).data.role == 'admin';
+    }
+    function isEmail(email) {
+      return email.matches('^[a-z0-9._%+-]+@[a-z0-9.-]+[.][a-z]{2,}$');
+    }
+    function isOwner() {
+      return resource.data.get('owner', false) == true;
+    }
+    function changed() {
+      return request.resource.data.diff(resource.data).affectedKeys();
+    }
+
+    match /content/{name} {
+      allow read: if isMember();
+      allow write: if false;
+    }
+
+    match /people/{email} {
+      // Everyone signed in may check their own record (to learn whether they are in);
+      // only admins may see the whole list.
+      allow get: if signedIn() && (email == me() || isAdmin());
+      allow list: if isAdmin();
+
+      allow create: if isAdmin()
+        && isEmail(email)
+        && request.resource.data.keys().hasOnly(['email', 'role', 'added', 'addedBy'])
+        && request.resource.data.email == email
+        && request.resource.data.role in ['admin', 'staff']
+        && request.resource.data.addedBy == me()
+        && request.resource.data.added == request.time;
+
+      // An admin changing someone else's role ...
+      allow update: if isAdmin()
+        && email != me()
+        && !isOwner()
+        && changed().hasOnly(['role', 'changed', 'changedBy'])
+        && request.resource.data.role in ['admin', 'staff']
+        && request.resource.data.changedBy == me()
+        && request.resource.data.changed == request.time;
+
+      // ... or anyone noting when they last opened the dashboard.
+      allow update: if isMember()
+        && email == me()
+        && changed().hasOnly(['seen'])
+        && request.resource.data.seen == request.time;
+
+      allow delete: if isAdmin() && email != me() && !isOwner();
+    }
+
+    // Anything else is closed.
+    match /{everything=**} {
+      allow read, write: if false;
+    }
+  }
+}

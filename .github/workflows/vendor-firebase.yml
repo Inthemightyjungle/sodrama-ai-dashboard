@@ -1,17 +1,16 @@
 name: Vendor Firebase
 
-# Copies the Firebase browser library (app, sign-in and database parts) into
+# Copies the Firebase browser library (the app and sign-in parts) into
 # assets/vendor/firebase/, so the site never loads code from another server.
-# Run it by hand to move to a newer Firebase release.
+# The database is read through its plain web address (assets/js/backend.js),
+# so the much larger database part is not needed.
+# Run it by hand (Actions > Vendor Firebase > Run workflow) to move to a newer release.
 on:
   workflow_dispatch:
     inputs:
       version:
         description: Firebase version (empty = latest)
         required: false
-  push:
-    branches: [signin]
-    paths: [.github/workflows/vendor-firebase.yml]
 
 permissions:
   contents: write
@@ -35,7 +34,7 @@ jobs:
           ls package | grep -E '^firebase-[a-z-]+\.js$' | head -40
           cd "$GITHUB_WORKSPACE"
           rm -rf assets/vendor/firebase && mkdir -p assets/vendor/firebase
-          for part in app auth firestore; do
+          for part in app auth; do
             cp "/tmp/fb/package/firebase-$part.js" "assets/vendor/firebase/firebase-$part.js"
           done
           cp /tmp/fb/package/LICENSE assets/vendor/firebase/LICENSE 2>/dev/null || true

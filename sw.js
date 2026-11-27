@@ -1,25 +1,23 @@
 /*
   Lets the dashboard be installed as an app, and open without a connection.
 
-  When online, every request goes to the network first, so the AI news is
-  always today's and a new version of the site shows straight away. A copy of
-  what arrives is kept, and used only when the network cannot be reached.
+  When online, every request goes to the network first, so a new version of
+  the site shows straight away. A copy of the site's own files is kept, and
+  used only when the network cannot be reached. The news, apps and tools are
+  not among them: they come from the database after sign-in, on another
+  address, and this worker never touches or keeps them.
 
   The daily news job never needs to touch this file. Change VERSION only when
   the list in SHELL changes.
 */
-const VERSION = 'v2';
+const VERSION = 'v3';
 const CACHE = 'sd-dashboard-' + VERSION;
 const SHELL = [
   './',
   'assets/css/site.css',
   'assets/js/site.js',
   'assets/js/stage-boot.js',
-  'assets/data/news.js',
-  'assets/data/news-thumbs.js',
-  'assets/data/apps.js',
-  'assets/data/tools.js',
-  'assets/data/tool-icons.js',
+  'assets/js/account.js',
   'assets/fonts/bodonimoda-var.woff',
   'assets/fonts/bodonimoda-italic-var.woff',
   'assets/fonts/archivo-var.woff',
