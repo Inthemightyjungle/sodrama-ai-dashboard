@@ -22,7 +22,8 @@ before(async () => {
   });
 });
 
-after(async () => { await env.cleanup(); });
+// Leave the emulator empty for the browser test that runs next.
+after(async () => { await env.clearFirestore(); await env.cleanup(); });
 
 beforeEach(async () => {
   await env.clearFirestore();
