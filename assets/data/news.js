@@ -1,54 +1,54 @@
 window.SD_NEWS = {
-  "updated": "2026-11-27T06:41:23+08:00",
+  "updated": "2026-11-28T06:41:03+08:00",
   "stories": [
     {
-      "id": "canva-video-inside-claude-chatgpt",
+      "id": "nyt-photoshop-2027-hidden-ai",
+      "kind": "caution",
+      "category": "Photography",
+      "title": "New York Times tells freelance photographers not to use the newest Photoshop",
+      "summary": "The paper says some tools in Photoshop 2027 use generative AI without making it obvious, so a photo can end up labelled as AI-made. Lesson: know which tools in your editing app use AI before you send work to a client.",
+      "source": "DPReview",
+      "url": "https://www.dpreview.com/news/new-york-times-adobe-photoshop-2027-restriction-ai",
+      "date": "2026-11-25"
+    },
+    {
+      "id": "magi-2-video-model-30-second-clips",
       "kind": "update",
       "category": "Video",
-      "title": "Canva now makes editable designs and short videos inside ChatGPT and Claude",
-      "summary": "Ask in the chat for a social post or a short product video and you get a real Canva file to edit, in your brand's colours and fonts. Flat images can become layered designs. Canva says video is in select markets only for now.",
-      "source": "The Next Web",
-      "url": "https://thenextweb.com/news/canva-mcp-ai-agents-developers",
+      "title": "New video model MAGI-2 makes 30-second clips with sound in one go",
+      "summary": "Sand.ai's MAGI-2 makes clips up to 30 seconds long in 1080p with matching sound, guided by up to 20 reference pictures, videos and audio clips. It is on Higgsfield now. The maker says fast action can still go wrong.",
+      "source": "Pandaily",
+      "url": "https://pandaily.com/sand-ai-full-magi-2-video-model-open-weights-planned",
+      "date": "2026-11-25"
+    },
+    {
+      "id": "midjourney-niji-8-consistent-characters",
+      "kind": "update",
+      "category": "Image tools",
+      "title": "Midjourney's Niji 8 keeps an anime character looking the same from scene to scene",
+      "summary": "The new anime model has an edit tool that takes a character from a reference sheet and puts it in new poses and backgrounds. It can also lay out simple comic pages. Useful for storyboards and pitch art.",
+      "source": "Niji Journey",
+      "url": "https://nijijourney.com/blog/niji-8",
       "date": "2026-11-24"
     },
     {
-      "id": "academy-rules-ai-film-out-of-animation-oscar",
+      "id": "tidal-removes-fully-ai-made-songs",
       "kind": "update",
-      "category": "Film",
-      "title": "Academy leaves a fully AI-made film off its list for the animated feature Oscar",
-      "summary": "\"Gods Don't Give Gifts\" is not among the 38 eligible films. IndieWire reports the animation branch found it does not fit a rule that movement be made \"by any human means\". Its makers will appeal. It opens on 4 December.",
-      "source": "IndieWire",
-      "url": "https://www.indiewire.com/news/breaking-news/ai-film-gods-dont-give-gifts-ineligible-oscars-1235230159/",
-      "date": "2026-11-23"
-    },
-    {
-      "id": "cornwall-christmas-market-ai-adverts",
-      "kind": "caution",
-      "category": "Marketing",
-      "title": "Christmas market cancels bookings after its AI-made adverts looked nothing like the event",
-      "summary": "Adverts for a market in Cornwall, UK showed a hall full of lights, trees and stalls. Visitors found it almost bare. The organisers are now refunding stallholders. Lesson: an AI picture in an advert must match what people get.",
-      "source": "BBC News",
-      "url": "https://www.bbc.com/news/articles/cm0qjglj3ejlo",
-      "date": "2026-11-25"
-    },
-    {
-      "id": "chatgpt-shared-limit-chat-and-work",
-      "kind": "update",
-      "category": "Assistants",
-      "title": "ChatGPT will count Chat and Work against one shared usage limit from December",
-      "summary": "OpenAI is joining the two tabs and their allowances on paid plans. It says most people will see no change, but the heaviest users may hit the limit sooner. The Instant model stays unlimited, so keep bigger models for bigger jobs.",
+      "category": "Music",
+      "title": "Tidal will remove more than 29 million songs made entirely by AI",
+      "summary": "From 9 December the music streaming service will delete and refuse tracks made fully by AI. They were 43% of its uploads in the past 90 days. Music made with some AI help can stay. Worth knowing before you release AI-made music.",
       "source": "TechCrunch",
-      "url": "https://techcrunch.com/2026/11/25/openai-says-heavy-chatgpt-users-may-hit-limits-sooner-as-it-merges-chat-and-work/",
-      "date": "2026-11-25"
+      "url": "https://techcrunch.com/2026/11/24/tidal-to-ban-and-remove-millions-of-ai-generated-tracks-as-ai-slop-inundates-music-streaming/",
+      "date": "2026-11-24"
     },
     {
-      "id": "character-ai-private-chats-auction",
+      "id": "urban-vpn-ai-chats-harvested-claims",
       "kind": "caution",
       "category": "Privacy",
-      "title": "Bankrupt chatbot firm Character.AI plans to auction its users' private chats",
-      "summary": "42 US state attorneys general want a court to block the 1 December sale, which covers chats from over 21 million accounts. Lesson: what you type into a chatbot is kept and can change hands. Leave private and work details out.",
-      "source": "Engadget",
-      "url": "https://www.engadget.com/2328630/state-ags-are-trying-to-stop-characterai-from-auctioning-off-users-chat-histories/",
+      "title": "Free VPN add-on accused of recording what people typed into ChatGPT, Claude and Gemini",
+      "summary": "US lawyers are weighing a group lawsuit over claims that Urban VPN's browser add-ons collected and shared AI chats of over 8 million users. No court has ruled. Lesson: an add-on can read your chats, so install only approved ones.",
+      "source": "TechRadar",
+      "url": "https://www.techradar.com/vpn/vpn-services/urban-vpn-under-legal-scrutiny-over-claims-it-harvested-users-private-ai-prompts",
       "date": "2026-11-25"
     }
   ]
