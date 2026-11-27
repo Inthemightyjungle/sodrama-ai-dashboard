@@ -1,6 +1,8 @@
 # So Drama! Entertainment: AI Solutions Dashboard
 
-**Open the dashboard: <https://inthemightyjungle.github.io/sodrama-ai-dashboard/>**
+**Open the dashboard: <https://PROJECT_ID.web.app/>**
+
+The dashboard is private. Sign in with your email address and password; the first time, choose **First time here? Set your password**. If it says you are not on the list, ask the dashboard owner to add you.
 
 Everything AI at So Drama!, in four tabs:
 
@@ -13,7 +15,14 @@ The first time someone opens the site, **How it works** is the front page. From 
 
 Each tab has its own address: add `#news`, `#apps`, `#how` or `#tools` to the link (`#step-2` goes straight to step 2).
 
-It is a plain static site (HTML, CSS and JavaScript, no build step), hosted on GitHub Pages. Nothing is loaded from other servers: fonts, the 3D library and news thumbnails all live in this repository.
+It is a plain static site (HTML, CSS and JavaScript, no build step), hosted on Firebase. Nothing is loaded from other servers: fonts, the 3D library, the sign-in library and news thumbnails all live in this repository. The page talks only to Google's Firebase sign-in and database services.
+
+## Sign-in and who can see it
+
+- Until someone is signed in, has confirmed their email address and is on the list, the page shows only the sign-in screen. The news, apps, approved tools and form links are not in the published files at all: they are kept in the database, and only people on the list can read them ([`firestore.rules`](firestore.rules)).
+- **People** (in the account menu, top right, for admins): add someone as Staff or Admin, switch someone to Admin and back, send a link to choose a new password, or remove someone. After adding someone, the page gives you a short message to send them.
+- The **owner** is the address in the `OWNER_EMAIL` secret. The owner is always an admin and cannot be removed or demoted, so the list can never lock its owner out.
+- What is still public: the page's design, the "How it works" words and the pictures (thumbnails, tool icons, posters). There are no names, links or lists in them.
 
 ## Install it as an app
 
@@ -22,7 +31,7 @@ The dashboard can sit on a computer or phone like an app, with its own icon and 
 - **Chrome or Edge, on a computer or Android:** click **Install app** in the top bar (or at the bottom of any page), or use the install icon in the address bar.
 - **iPhone or iPad:** open the link in Safari, tap **Share**, then **Add to Home Screen**.
 
-Once installed it opens even without a connection, showing the news and apps from the last visit. When online it always fetches the latest news first.
+Once installed it opens like an app and stays signed in. It needs a connection to show the news, apps and tools, which are never stored on the device.
 
 How it works: [`manifest.webmanifest`](manifest.webmanifest) names the app and its icons (`assets/img/app/`), and [`sw.js`](sw.js) keeps a copy of the site for offline use. Neither needs touching when the news or apps change.
 
@@ -90,13 +99,20 @@ Edit [`assets/data/tools.js`](assets/data/tools.js): each tool has a full name, 
 python3 -m http.server 8000
 ```
 
-Then open http://localhost:8000.
+Then open http://localhost:8000. Signing in needs `assets/js/firebase-config.js`, which the deploy writes and which is not in the repository: copy it from the live site (`/assets/js/firebase-config.js`) into `assets/js/`. Git ignores it. `localhost` is allowed to sign in by default.
+
+The sign-in screens and the People page are tested against the Firebase emulators by `.github/workflows/test-signin.yml` (`tests/rules.test.mjs`, `tests/e2e_emulator.py`).
 
 ## Hosting
 
-GitHub Pages serves the `main` branch from the repository root (Settings → Pages → Deploy from a branch → `main`, `/ (root)`).
+Every push to `main` runs the **Deploy** workflow ([`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)). It publishes the page's own files to Firebase Hosting, copies the content from `assets/data/` into the database, deploys `firestore.rules`, and keeps the owner on the list. It needs two repository secrets (Settings → Secrets and variables → Actions):
 
-To show the site inside a Microsoft Teams channel: in the channel choose **+** (Add a tab) → **Website**, then paste the live site address.
+- `FIREBASE_SERVICE_ACCOUNT`: the key file from Firebase (Project settings → Service accounts → Generate new private key), pasted whole. Never commit it or send it to anyone.
+- `OWNER_EMAIL`: the owner's email address.
+
+If the deploy says it is not allowed to do something, give the `firebase-adminsdk` service account the role **Firebase Admin** in the Google Cloud console (IAM).
+
+The site refuses to be shown inside other websites (only Chrome extensions may), so a Microsoft Teams **Website** tab will not display it. Post the link in the channel instead.
 
 ## Credits
 
